@@ -1,4 +1,13 @@
-"use client"
+import { Reveal } from "@/components/reveal"
+import { SectionHeading } from "@/components/section-heading"
+
+const alsoShipping = [
+  "Chrome Extensions (Manifest V3)",
+  "JavaScript",
+  "HTML & CSS",
+  "AI-assisted coding",
+  "Mobile game dev",
+]
 
 const skillCategories = [
   {
@@ -48,23 +57,14 @@ export function SkillsSection() {
       <div className="pointer-events-none absolute bottom-0 left-1/4 w-[500px] h-[500px] rounded-full bg-accent/[0.02] blur-[120px]" />
 
       <div className="mx-auto max-w-6xl">
-        <div className="mb-20">
-          <div className="flex items-center gap-4 mb-6">
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-              Tech Stack
-            </span>
-            <span className="h-px flex-1 max-w-[100px] bg-primary/30" />
-          </div>
-          <h2 className="text-3xl font-bold text-foreground md:text-5xl leading-[1.1]">
-            Skills & Tools
-          </h2>
-        </div>
+        <SectionHeading kicker="Tech Stack" zh="技能" title="Skills & Tools" />
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {skillCategories.map((category) => (
-            <div
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          {skillCategories.map((category, i) => (
+            <Reveal
               key={category.category}
-              className="rounded-2xl border border-border bg-card/50 p-6 transition-all duration-300 hover:border-primary/20"
+              delay={i * 100}
+              className="rounded-2xl border border-border bg-card/50 p-6 transition-colors duration-300 hover:border-primary/20"
             >
               <h3 className="mb-6 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
                 {category.category}
@@ -82,7 +82,7 @@ export function SkillsSection() {
                     </div>
                     <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
                       <div
-                        className="h-full rounded-full transition-all duration-700"
+                        className="skill-fill h-full rounded-full"
                         style={{
                           width: `${skill.level}%`,
                           backgroundImage: "linear-gradient(90deg, var(--primary), var(--accent))",
@@ -92,9 +92,25 @@ export function SkillsSection() {
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-8 rounded-2xl border border-border bg-card/50 p-6">
+          <h3 className="mb-4 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
+            Also shipping with
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {alsoShipping.map((item) => (
+              <span
+                key={item}
+                className="rounded-lg border border-primary/20 bg-primary/5 px-3 py-1.5 font-mono text-xs text-foreground/90"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </section>
   )

@@ -84,30 +84,27 @@ export function CustomCursor() {
     document.addEventListener("mouseleave", onLeave)
     document.addEventListener("mouseenter", onEnter)
 
-    // Add hover listeners to interactive elements
+    // Delegate hover detection so elements added later (carousel, counters) need no re-wiring
     const interactiveSelector = "a, button, [role='button'], input, textarea, select"
-    const addHoverListeners = () => {
-      document.querySelectorAll(interactiveSelector).forEach((el) => {
-        el.addEventListener("mouseenter", onOverInteractive)
-        el.addEventListener("mouseleave", onOutInteractive)
-      })
+    const onOver = (e: MouseEvent) => {
+      const target = e.target as Element | null
+      if (target?.closest?.(interactiveSelector)) onOverInteractive()
     }
-    addHoverListeners()
-
-    // Re-apply on DOM changes
-    const observer = new MutationObserver(addHoverListeners)
-    observer.observe(document.body, { childList: true, subtree: true })
+    const onOut = (e: MouseEvent) => {
+      const from = (e.target as Element | null)?.closest?.(interactiveSelector)
+      const to = (e.relatedTarget as Element | null)?.closest?.(interactiveSelector)
+      if (from && from !== to) onOutInteractive()
+    }
+    document.addEventListener("mouseover", onOver)
+    document.addEventListener("mouseout", onOut)
 
     return () => {
       cancelAnimationFrame(raf)
       document.removeEventListener("mousemove", onMove)
       document.removeEventListener("mouseleave", onLeave)
       document.removeEventListener("mouseenter", onEnter)
-      observer.disconnect()
-      document.querySelectorAll(interactiveSelector).forEach((el) => {
-        el.removeEventListener("mouseenter", onOverInteractive)
-        el.removeEventListener("mouseleave", onOutInteractive)
-      })
+      document.removeEventListener("mouseover", onOver)
+      document.removeEventListener("mouseout", onOut)
     }
   }, [])
 

@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { asset } from "@/lib/asset"
 
 export function Footer() {
   return (
@@ -6,7 +7,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
         <div className="flex items-center gap-2.5 text-muted-foreground">
           <Image
-            src="/images/studio-logo.png"
+            src={asset("/images/studio-logo.png")}
             alt="Cycle's Studios"
             width={20}
             height={20}
@@ -16,8 +17,13 @@ export function Footer() {
             Cycle<span className="text-primary">01</span>{" / Cycle's Studios"}
           </span>
         </div>
+        <a href="#for-mom" className="group flex items-center gap-2 text-muted-foreground/70 transition-colors hover:text-primary">
+          <span lang="zh-Hans" className="font-brush text-lg leading-none text-primary/80 group-hover:text-primary">
+            妈妈，一路平安
+          </span>
+        </a>
         <p className="font-mono text-[11px] text-muted-foreground/60 tracking-wide">
-          {"Built with passion. All rights reserved."}
+          {`© ${new Date().getFullYear()} · Built with passion. All rights reserved.`}
         </p>
       </div>
     </footer>
