@@ -1,35 +1,27 @@
-import { Navigation } from "@/components/navigation"
-import { HeroSection } from "@/components/hero-section"
-import { Marquee } from "@/components/marquee"
-import { AboutSection } from "@/components/about-section"
-import { SundownSpotlight } from "@/components/sundown-spotlight"
-import { AnnouncementsSection } from "@/components/announcements-section"
-import { ProjectsSection } from "@/components/projects-section"
-import { FlingItSection } from "@/components/fling-it-section"
-import { VibeCodingSection } from "@/components/vibe-coding-section"
-import { ArchiveSection } from "@/components/archive-section"
-import { DedicationSection } from "@/components/dedication-section"
-import { ContactSection } from "@/components/contact-section"
-import { Footer } from "@/components/footer"
-import { CustomCursor } from "@/components/custom-cursor"
+import { StudioNav } from "@/components/studio/studio-nav"
+import { StudioHero } from "@/components/studio/studio-hero"
+import { Ticker } from "@/components/studio/ticker"
+import { SundownFeature } from "@/components/studio/sundown-feature"
+import { YoursTeaser } from "@/components/studio/yours-teaser"
+import { GamesIndex } from "@/components/studio/games-index"
+import { StudioAbout } from "@/components/studio/studio-about"
+import { StudioContact } from "@/components/studio/studio-contact"
+import { HashRedirect } from "@/components/studio/hash-redirect"
 
-export default function HomePage() {
+export default function StudioPage() {
   return (
-    <main>
-      <CustomCursor />
-      <Navigation />
-      <HeroSection />
-      <Marquee />
-      <AboutSection />
-      <AnnouncementsSection />
-      <SundownSpotlight />
-      <ProjectsSection />
-      <FlingItSection />
-      <VibeCodingSection />
-      <ArchiveSection />
-      <DedicationSection />
-      <ContactSection />
-      <Footer />
-    </main>
+    <div className="studio-theme relative min-h-screen">
+      <HashRedirect />
+      <StudioNav />
+      <main>
+        <StudioHero />
+        <Ticker />
+        <SundownFeature />
+        <YoursTeaser />
+        <GamesIndex />
+        <StudioAbout />
+      </main>
+      <StudioContact />
+    </div>
   )
 }

@@ -129,7 +129,7 @@ export function HeroSection() {
               className="relative inline-block text-transparent bg-clip-text text-glow"
               style={{ backgroundImage: "linear-gradient(135deg, var(--primary), var(--accent))" }}
             >
-              Studios
+              Studio
             </span>
             <span className="absolute -right-10 -top-6 hidden rotate-[8deg] sm:block">
               <Seal text="循环" size={40} />
@@ -145,7 +145,7 @@ export function HeroSection() {
         </p>
 
         <p className="mx-auto mb-12 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          {"I'm Cycle01. I make horror games in Unreal Engine 5, plus whatever else I get curious about. Seven games released so far, and Secrets of Sundown 2 is next."}
+          {"I'm Cycle01. I make horror games in Unreal Engine 5, plus whatever else I get curious about. Six games released so far, Fling It is coming to mobile, and Secrets of Sundown 2 is next."}
         </p>
 
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
