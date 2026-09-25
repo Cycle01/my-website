@@ -6,12 +6,12 @@ import { asset } from "@/lib/asset"
 
 const navLinks = [
   { href: "#about", label: "About", zh: "关于" },
+  { href: "#news", label: "Announcements", zh: "公告" },
   { href: "#sundown-2", label: "Sundown 2", zh: "新作" },
   { href: "#projects", label: "Games", zh: "游戏" },
   { href: "#fling-it", label: "Fling It", zh: "手游" },
   { href: "#vibe-coding", label: "Tools", zh: "工具" },
   { href: "#archive", label: "Archive", zh: "档案" },
-  { href: "#news", label: "News", zh: "公告" },
   { href: "#contact", label: "Contact", zh: "联系" },
 ]
 
@@ -107,24 +107,24 @@ export function Navigation() {
 
       {/* Menu overlay */}
       {open && (
-        <div id="site-menu" className="border-t border-primary/10">
+        <div id="site-menu" className="border-t border-primary/10 bg-background">
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-2 px-6 py-6 sm:grid-cols-4">
             {navLinks.map((link, i) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`group flex items-baseline justify-between rounded-xl border px-4 py-3 transition-colors ${
+                className={`group flex min-w-0 items-baseline justify-between gap-2 rounded-xl border px-3 py-3 transition-colors sm:px-4 ${
                   active === link.href
                     ? "border-primary/50 bg-primary/10 text-primary"
                     : "border-border bg-card/40 text-foreground hover:border-primary/40 hover:text-primary"
                 }`}
               >
-                <span className="font-mono text-xs uppercase tracking-[0.15em]">
-                  <span className="mr-2 text-primary/50">0{i + 1}</span>
+                <span className="truncate font-mono text-[11px] uppercase tracking-[0.08em] sm:text-xs sm:tracking-[0.15em]">
+                  <span className="mr-1.5 text-primary/50 sm:mr-2">0{i + 1}</span>
                   {link.label}
                 </span>
-                <span lang="zh-Hans" className="font-brush text-lg text-accent/60 group-hover:text-accent">
+                <span lang="zh-Hans" className="hidden shrink-0 font-brush text-lg text-accent/60 group-hover:text-accent sm:inline">
                   {link.zh}
                 </span>
               </a>
