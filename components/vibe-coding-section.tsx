@@ -63,7 +63,7 @@ export function VibeCodingSection() {
     <section id="vibe-coding" className="relative overflow-hidden px-6 py-32">
       <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-border" />
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-primary/50" />
-      <div className="pointer-events-none absolute left-1/2 top-40 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-violet-500/[0.04] blur-[140px]" />
+      <div className="pointer-events-none absolute left-1/2 top-40 h-[500px] w-[900px] -translate-x-1/2 glow text-violet-500/[0.04]" />
 
       <div className="relative mx-auto max-w-6xl">
         <SectionHeading
@@ -160,7 +160,7 @@ export function VibeCodingSection() {
 
                 <Reveal variant="zoom" delay={150} className={flip ? "lg:order-1" : ""}>
                   <div className="relative">
-                    <div className={`pointer-events-none absolute -inset-6 rounded-[2rem] ${accent.bg} blur-3xl`} />
+                    <div className={`glow pointer-events-none absolute -inset-10 opacity-20 ${accent.text}`} />
                     <div className="relative">
                       <ExtensionVisual extension={ext} />
                     </div>

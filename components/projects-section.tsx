@@ -49,7 +49,7 @@ export function ProjectsSection() {
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-primary/50" />
 
       {/* Background glow */}
-      <div className="pointer-events-none absolute top-1/3 right-0 w-[600px] h-[600px] rounded-full bg-primary/[0.02] blur-[150px]" />
+      <div className="pointer-events-none absolute top-1/3 right-0 w-[600px] h-[600px] glow text-primary/[0.02]" />
 
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">

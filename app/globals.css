@@ -163,7 +163,6 @@ html {
 .js [data-reveal] {
   opacity: 0;
   transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
 }
 .js [data-reveal="up"] { transform: translateY(32px); }
 .js [data-reveal="left"] { transform: translateX(-40px); }
@@ -172,6 +171,14 @@ html {
 .js [data-reveal][data-visible="true"] {
   opacity: 1;
   transform: none;
+}
+
+/* Soft glow drawn as a gradient. Same look as a blurred disc, but far cheaper
+   to paint than filter: blur(), which matters a lot on phones. Colour comes from
+   the text-* utility (currentColor). */
+.glow {
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, currentColor 0%, currentColor 25%, transparent 100%);
 }
 
 /* Section heading rules draw in when revealed. */
@@ -197,13 +204,21 @@ html {
 .btn-shine:hover::after { transform: skewX(-20deg) translateX(420%); }
 
 /* 3D tilt cards (components/tilt.tsx). */
-.tilt { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); transform-style: preserve-3d; will-change: transform; }
+.tilt { transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); transform-style: preserve-3d; }
+.tilt:hover { will-change: transform; }
 .tilt-glare {
   opacity: 0;
   transition: opacity 0.4s ease;
   background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 220, 170, 0.12), transparent 45%);
 }
 .tilt:hover .tilt-glare { opacity: 1; }
+
+/* Hero entrance runs from first paint, no JavaScript needed. */
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-hero-in { animation: hero-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
 
 @keyframes letter-rise {
   from { opacity: 0; transform: translateY(0.6em) rotate(6deg); filter: blur(8px); }
@@ -271,8 +286,8 @@ html {
 }
 
 @keyframes moon-glow {
-  0%, 100% { box-shadow: 0 0 60px 10px oklch(0.9 0.08 85 / 0.25), 0 0 160px 40px oklch(0.8 0.16 80 / 0.12); }
-  50% { box-shadow: 0 0 80px 18px oklch(0.9 0.08 85 / 0.35), 0 0 200px 60px oklch(0.8 0.16 80 / 0.18); }
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
 @keyframes twinkle {
@@ -295,7 +310,17 @@ html {
 .animate-radar { animation: radar-sweep 4s linear infinite; }
 .animate-blip { animation: blip 2.4s ease-in-out infinite; }
 .animate-cloud { animation: cloud-drift 22s ease-in-out infinite alternate; }
-.animate-moon { animation: moon-glow 6s ease-in-out infinite; }
+/* Moon halo: static shadow plus a pulsing layer that only animates opacity. */
+.animate-moon { box-shadow: 0 0 60px 10px oklch(0.9 0.08 85 / 0.25), 0 0 160px 40px oklch(0.8 0.16 80 / 0.12); }
+.animate-moon::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, oklch(0.9 0.08 85 / 0.18), transparent);
+  animation: moon-glow 6s ease-in-out infinite;
+  pointer-events: none;
+}
 .animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
 .animate-shimmer {
   background-size: 200% 100%;
@@ -327,8 +352,8 @@ html {
   .js [data-reveal] .heading-line { transform: none; }
   .btn-shine::after { display: none; }
   .animate-lantern, .animate-lantern-glow, .animate-petal, .animate-marquee, .animate-word-in,
-  .animate-ken-burns, .animate-rec, .animate-radar, .animate-blip, .animate-cloud, .animate-moon,
-  .animate-twinkle, .animate-shimmer, .animate-float, .animate-letter, .animate-pulse-glow, .animate-scanline,
+  .animate-ken-burns, .animate-rec, .animate-radar, .animate-blip, .animate-cloud, .animate-moon::after,
+  .animate-twinkle, .animate-shimmer, .animate-float, .animate-letter, .animate-hero-in, .animate-pulse-glow, .animate-scanline,
   .animate-grain, .animate-bounce, .animate-ping, .animate-pulse {
     animation: none !important;
   }
