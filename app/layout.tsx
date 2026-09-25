@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Space_Mono, Ma_Shan_Zheng } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { asset } from '@/lib/asset'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -17,19 +18,19 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: asset('/icon-light-32x32.png'),
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: asset('/icon-dark-32x32.png'),
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: asset('/icon.svg'),
         type: 'image/svg+xml',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: asset('/apple-icon.png'),
   },
 }
 
@@ -50,7 +51,7 @@ export default function RootLayout({
       </head>
       <body className={`${_inter.variable} ${_spaceMono.variable} ${_maShanZheng.variable} font-sans antialiased`}>
         {children}
-        <Analytics />
+        {process.env.NEXT_PUBLIC_BASE_PATH ? null : <Analytics />}
       </body>
     </html>
   )

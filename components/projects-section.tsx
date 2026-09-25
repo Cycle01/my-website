@@ -21,7 +21,7 @@ export function ProjectsSection() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <SectionHeading kicker="My Games" zh="游戏" title="Released games" />
           <Reveal className="mb-16 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Every game built solo from the ground up. Available on itch.io.
+            Every game built from the ground up. Available on itch.io and Steam.
           </Reveal>
         </div>
 
@@ -83,34 +83,45 @@ export function ProjectsSection() {
         </div>
 
         {/* Other released games */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {others.map((project, i) => (
             <Reveal key={project.title} delay={i * 120}>
               <a
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-500 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_0_40px_rgba(180,50,20,0.08)] md:flex-row"
+                className={`group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border bg-card transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(180,50,20,0.08)] ${
+                  project.store === "Steam" ? "border-sky-400/25 hover:border-sky-400/50" : "border-border hover:border-primary/30"
+                }`}
               >
-                <div className="relative aspect-[16/9] overflow-hidden md:aspect-auto md:w-2/5">
+                <div className="relative aspect-[16/9] overflow-hidden">
                   <Image
                     src={project.image}
                     alt={`Screenshot of ${project.title}`}
                     fill
-                    sizes="(min-width: 768px) 25vw, 100vw"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover transition-all duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent opacity-70 md:bg-gradient-to-l" />
-                  <div className="absolute left-3 top-3 rounded-md bg-background/70 px-2.5 py-1 backdrop-blur-md border border-border/50">
+                  <div className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent opacity-70" />
+                  <div className="absolute right-3 top-3 rounded-md bg-background/70 px-2.5 py-1 backdrop-blur-md border border-border/50">
                     <span className="font-mono text-[10px] text-foreground">{project.year}</span>
+                  </div>
+                  <div
+                    className={`absolute left-3 top-3 rounded-md px-2.5 py-1 backdrop-blur-md border ${
+                      project.store === "Steam" ? "border-sky-400/40 bg-sky-500/20" : "border-primary/30 bg-primary/15"
+                    }`}
+                  >
+                    <span className={`font-mono text-[10px] font-bold ${project.store === "Steam" ? "text-sky-200" : "text-primary"}`}>
+                      {project.store === "Steam" ? "On Steam" : "itch.io"}
+                    </span>
                   </div>
                 </div>
 
-                <div className="flex-1 p-5">
+                <div className="flex flex-1 flex-col p-5">
                   <h3 className="mb-2 text-base font-bold text-card-foreground group-hover:text-primary transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="mb-4 text-xs leading-relaxed text-muted-foreground line-clamp-3">{project.description}</p>
+                  <p className="mb-4 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-3">{project.description}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {project.tags.slice(0, 3).map((tag) => (
                       <span

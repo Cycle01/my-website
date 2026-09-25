@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
+import { asset } from "@/lib/asset"
 
 const navLinks = [
   { href: "#about", label: "About" },
@@ -55,7 +56,7 @@ export function Navigation() {
         <a href="#" className="group flex items-center gap-3">
           <div className="relative overflow-hidden rounded-lg">
             <Image
-              src="/images/studio-logo-transparent.png"
+              src={asset("/images/studio-logo-transparent.png")}
               alt="Cycle's Studios logo"
               width={36}
               height={36}

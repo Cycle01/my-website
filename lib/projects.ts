@@ -1,3 +1,5 @@
+import { asset } from "@/lib/asset"
+
 export interface Game {
   title: string
   description: string
@@ -5,6 +7,7 @@ export interface Game {
   tags: string[]
   year: string
   link: string
+  store: "itch.io" | "Steam"
   rating?: string
   featured?: boolean
 }
@@ -39,10 +42,11 @@ export const releasedGames: Game[] = [
     title: "Secrets of Sundown",
     description:
       "A first-person psychological horror game set in the strange suburb of Sundown. Explore a semi-open world, make choice-driven decisions, and uncover sinister secrets. Features VHS-style graphics, stalker mechanics, and dynamic environments.",
-    image: "/images/secrets-of-sundown.jpg",
+    image: asset("/images/secrets-of-sundown.jpg"),
     tags: ["Unreal Engine 5", "C++", "Blueprints", "Horror"],
     year: "2025",
     link: "https://cycle01.itch.io/secrets-of-sundown",
+    store: "itch.io",
     rating: "4.5/5",
     featured: true,
   },
@@ -50,10 +54,11 @@ export const releasedGames: Game[] = [
     title: "IronMade",
     description:
       "An action-packed medieval adventure. Play as a nameless knight escaping a dungeon with one goal: finding his daughter Sara. Fight through twisted creatures and haunting ruins in a tale of love, survival, and redemption.",
-    image: "/images/ironmade-screenshot.jpg",
+    image: asset("/images/ironmade-screenshot.jpg"),
     tags: ["Unreal Engine 5", "C++", "Action", "Medieval"],
     year: "2024",
     link: "https://cycle01.itch.io/ironmade",
+    store: "itch.io",
     rating: "5.0/5",
     featured: true,
   },
@@ -61,25 +66,37 @@ export const releasedGames: Game[] = [
     title: "VORE",
     description:
       "A slick, retro-style zombie shooter. Simple, fast, and fun. Jump in and blast through waves of the undead in this arcade-inspired action game with stylized visuals.",
-    image: "/images/vore.jpg",
+    image: asset("/images/vore.jpg"),
     tags: ["Unreal Engine 5", "Blueprints", "Shooter", "Retro"],
     year: "2026",
     link: "https://cycle01.itch.io",
+    store: "itch.io",
   },
   {
     title: "Safe Place",
     description:
       "Play as a time traveler stuck in the wrong dimension -- a gray, lifeless place crawling with patrolling robots. Solve five puzzles, avoid traps, and get your travel system back online with help from Bobbie, your AI companion.",
-    image: "/images/safe-place.jpg",
+    image: asset("/images/safe-place.jpg"),
     tags: ["Unreal Engine 5", "Blueprints", "Puzzle", "Sci-Fi"],
     year: "2025",
     link: "https://cycle01.itch.io/safe-place",
+    store: "itch.io",
+  },
+  {
+    title: "Moonfall: Protocol",
+    description:
+      "A co-op survival horror for 1 to 4 players. A dream mission to walk on the moon turns into a nightmare: a hidden base, strange astronauts, and a portal into a twisted dimension. Work together to gather evidence, power ten control points and get the generator running to go home.",
+    image: asset("/images/moonfall-protocol.jpg"),
+    tags: ["Unreal Engine 5", "Co-op", "Survival Horror", "Sci-Fi"],
+    year: "2025",
+    link: "https://store.steampowered.com/app/3973560/Moonfall_Protocol/",
+    store: "Steam",
   },
 ]
 
 export const sundown2 = {
   title: "Secrets of Sundown 2",
-  image: "/images/secrets-of-sundown-2.jpg",
+  image: asset("/images/secrets-of-sundown-2.jpg"),
   original: releasedGames[0],
   facts: [
     { label: "Engine", value: "Unreal Engine 5" },
@@ -94,22 +111,15 @@ export const archiveProjects: ArchiveProject[] = [
     title: "Spidey Game",
     description:
       "One very large spider in a checkered test room. A creature experiment built to see how unsettling eight legs could look, and nothing more.",
-    image: "/images/spidey-game.jpg",
+    image: asset("/images/spidey-game.jpg"),
     tags: ["Unreal Engine 5", "Blueprints", "Creature"],
   },
   {
     title: "Finding the Moose Man",
     description:
       "A foggy cryptid hunt through dense wilderness. Abandoned campsites, unsettling encounters, and a legend that may or may not be real.",
-    image: "/images/finding-the-moose-man.jpg",
+    image: asset("/images/finding-the-moose-man.jpg"),
     tags: ["Unreal Engine 5", "C++", "Exploration"],
-  },
-  {
-    title: "Moonfall Protocol",
-    description:
-      "An action-horror experiment set in a collapsing lunar facility, built around survival and a colonization mission gone wrong.",
-    image: "/images/moonfall-protocol.jpg",
-    tags: ["Unreal Engine 5", "C++", "Sci-Fi Horror"],
   },
 ]
 
@@ -117,11 +127,11 @@ export const flingIt = {
   title: "Fling It",
   tagline: "Small ship. Big distances.",
   screenshots: [
-    { src: "/images/fling-it/menu.webp", alt: "Fling It main menu with the Neon planet selected", caption: "Pick a planet, hit play" },
-    { src: "/images/fling-it/launch.webp", alt: "Astronaut standing on the launch ramp on the Dunes", caption: "Pull back and let go" },
-    { src: "/images/fling-it/flight.webp", alt: "Astronaut boosting through the Exosphere", caption: "Boost through the Exosphere" },
-    { src: "/images/fling-it/results.webp", alt: "Flight complete screen showing a 21.8 km run", caption: "Cash out every run" },
-    { src: "/images/fling-it/upgrades.webp", alt: "Upgrades screen with eight upgrade tracks and Rebirth", caption: "Upgrade, rebirth, go further" },
+    { src: asset("/images/fling-it/menu.webp"), alt: "Fling It main menu with the Neon planet selected", caption: "Pick a planet, hit play" },
+    { src: asset("/images/fling-it/launch.webp"), alt: "Astronaut standing on the launch ramp on the Dunes", caption: "Pull back and let go" },
+    { src: asset("/images/fling-it/flight.webp"), alt: "Astronaut boosting through the Exosphere", caption: "Boost through the Exosphere" },
+    { src: asset("/images/fling-it/results.webp"), alt: "Flight complete screen showing a 21.8 km run", caption: "Cash out every run" },
+    { src: asset("/images/fling-it/upgrades.webp"), alt: "Upgrades screen with eight upgrade tracks and Rebirth", caption: "Upgrade, rebirth, go further" },
   ] satisfies Screenshot[],
   upgrades: [
     "Launch Power",
@@ -151,7 +161,7 @@ export const extensions: Extension[] = [
       "Custom filter rules, whitelist and settings backup",
     ],
     link: "https://chromewebstore.google.com/detail/adblock-pro-%E2%80%94-advanced-ad/klpcajkjnlgfnjkhndbcjiahoceehhff",
-    icon: "/images/extensions/adblock-pro-icon.png",
+    icon: asset("/images/extensions/adblock-pro-icon.png"),
     screenshots: [],
   },
   {
@@ -168,15 +178,15 @@ export const extensions: Extension[] = [
       "Time tracker, weekly report and heatmap",
     ],
     link: "https://chromewebstore.google.com/detail/ai-tab-grouper-pro/ggodahlklmpabghiadjdfoaieidpklhg",
-    icon: "/images/extensions/tab-grouper-icon.png",
+    icon: asset("/images/extensions/tab-grouper-icon.png"),
     screenshots: [
       {
-        src: "/images/extensions/tab-grouper-groups.webp",
+        src: asset("/images/extensions/tab-grouper-groups.webp"),
         alt: "AI Tab Grouper Pro popup after grouping 12 tabs into 5 groups",
         caption: "12 tabs, 5 groups, one click",
       },
       {
-        src: "/images/extensions/tab-grouper-pro-tools.webp",
+        src: asset("/images/extensions/tab-grouper-pro-tools.webp"),
         alt: "AI Tab Grouper Pro tools: AI Group, Smart Group, Auto-Group, Focus Mode and analytics",
         caption: "Pro tools",
       },

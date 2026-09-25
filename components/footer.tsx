@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { asset } from "@/lib/asset"
 
 export function Footer() {
   return (
@@ -6,7 +7,7 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
         <div className="flex items-center gap-2.5 text-muted-foreground">
           <Image
-            src="/images/studio-logo.png"
+            src={asset("/images/studio-logo.png")}
             alt="Cycle's Studios"
             width={20}
             height={20}
