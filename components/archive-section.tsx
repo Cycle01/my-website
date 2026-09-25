@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-import { Play, X as Close, ExternalLink } from "lucide-react"
+import { Play, ExternalLink } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { Seal } from "@/components/chinese-decor"
@@ -14,16 +14,26 @@ function Preview({ project }: { project: ArchiveProject }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   // Only reveal the clip once it actually loads, so a missing file keeps the still.
   const [ready, setReady] = useState(false)
-  const play = () => videoRef.current?.play().catch(() => {})
-  const stop = () => {
+  // Play while the pointer is anywhere over the card, not just the image.
+  useEffect(() => {
     const v = videoRef.current
-    if (!v) return
-    v.pause()
-    v.currentTime = 0
-  }
+    const card = v?.closest(".group")
+    if (!v || !card) return
+    const play = () => v.play().catch(() => {})
+    const stop = () => {
+      v.pause()
+      v.currentTime = 0
+    }
+    card.addEventListener("mouseenter", play)
+    card.addEventListener("mouseleave", stop)
+    return () => {
+      card.removeEventListener("mouseenter", play)
+      card.removeEventListener("mouseleave", stop)
+    }
+  }, [])
 
   return (
-    <div className="relative aspect-[16/10] overflow-hidden bg-black" onMouseEnter={play} onMouseLeave={stop}>
+    <div className="relative aspect-[16/10] overflow-hidden bg-black">
       {project.image ? (
         <Image
           src={project.image}
@@ -40,14 +50,16 @@ function Preview({ project }: { project: ArchiveProject }) {
       {project.video && (
         <video
           ref={videoRef}
-          src={project.video}
           muted
           loop
           playsInline
           preload="metadata"
           onLoadedData={() => setReady(true)}
           className={`absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 ${ready ? "group-hover:opacity-100" : ""}`}
-        />
+        >
+          <source src={project.video.replace(/\.mp4$/, ".webm")} type="video/webm" />
+          <source src={project.video} type="video/mp4" />
+        </video>
       )}
       <span className="absolute right-2 top-2 rotate-[6deg] rounded-sm border-2 border-[#c8241b] bg-[#f4ede1]/80 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8241b]">
         For fun
@@ -57,25 +69,6 @@ function Preview({ project }: { project: ArchiveProject }) {
 }
 
 export function ArchiveSection() {
-  const [open, setOpen] = useState<ArchiveProject | null>(null)
-  const [videoFailed, setVideoFailed] = useState(false)
-
-  const openClip = (project: ArchiveProject) => {
-    setVideoFailed(false)
-    setOpen(project)
-  }
-
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(null)
-    document.addEventListener("keydown", onKey)
-    document.body.style.overflow = "hidden"
-    return () => {
-      document.removeEventListener("keydown", onKey)
-      document.body.style.overflow = ""
-    }
-  }, [open])
-
   return (
     <section id="archive" className="relative overflow-hidden px-6 py-32">
       <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-border" />
@@ -95,7 +88,7 @@ export function ArchiveSection() {
             title="Made just for fun"
             description={
               <p>
-                {"Not every project needs a launch date. These were built for the joy of it: to try a mechanic, learn a system, or chase a silly idea. Hit play on any of them to watch the clip."}
+                {"Not every project needs a launch date. These were built for the joy of it: to try a mechanic, learn a system, or chase a silly idea. Hover to preview, click to watch the full clip."}
               </p>
             }
           />
@@ -113,19 +106,20 @@ export function ArchiveSection() {
                 {/* Tape */}
                 <div className="absolute -top-3 left-1/2 z-10 h-6 w-24 -translate-x-1/2 rotate-[-3deg] bg-accent/40 backdrop-blur-sm" />
 
-                <button
-                  type="button"
-                  onClick={() => openClip(project)}
-                  className="relative block w-full text-left"
-                  aria-label={`Watch the ${project.title} clip`}
+                <a
+                  href={project.clip.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative block w-full"
+                  aria-label={`Watch the full ${project.title} clip on ${project.clip.source}`}
                 >
                   <Preview project={project} />
-                  <span className="absolute inset-0 flex items-center justify-center">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                  <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm">
                       <Play className="ml-0.5 h-6 w-6 fill-current" />
                     </span>
                   </span>
-                </button>
+                </a>
 
                 <div className="px-1 pt-4">
                   <h3 className="mb-2 text-lg font-bold">{project.title}</h3>
@@ -147,7 +141,7 @@ export function ArchiveSection() {
                       rel="noopener noreferrer"
                       className="ml-auto inline-flex items-center gap-1 font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-[#c8241b] hover:underline"
                     >
-                      On {project.clip.source}
+                      Full clip on {project.clip.source}
                       <ExternalLink className="h-3 w-3" />
                     </a>
                   </div>
@@ -158,52 +152,6 @@ export function ArchiveSection() {
         </div>
       </div>
 
-      {/* Clip player */}
-      {open && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${open.title} clip`}
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
-          onClick={() => setOpen(null)}
-        >
-          <div className="relative w-full max-w-[560px]" onClick={(e) => e.stopPropagation()}>
-            <div className="mb-3 flex items-center justify-between text-foreground">
-              <span className="font-mono text-xs uppercase tracking-[0.2em]">{open.title}</span>
-              <button
-                type="button"
-                onClick={() => setOpen(null)}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card hover:border-primary/50 hover:text-primary"
-                aria-label="Close"
-              >
-                <Close className="h-4 w-4" />
-              </button>
-            </div>
-            <div className="max-h-[80vh] overflow-auto rounded-xl border border-border bg-card">
-              {open.video && !videoFailed ? (
-                <video src={open.video} controls autoPlay playsInline onError={() => setVideoFailed(true)} className="w-full" />
-              ) : (
-                <iframe
-                  src={open.clip.embed}
-                  title={`${open.title} on ${open.clip.source}`}
-                  className="h-[70vh] w-full"
-                  allow="autoplay; encrypted-media; fullscreen"
-                  allowFullScreen
-                />
-              )}
-            </div>
-            <a
-              href={open.clip.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-primary"
-            >
-              Open on {open.clip.source}
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          </div>
-        </div>
-      )}
     </section>
   )
 }

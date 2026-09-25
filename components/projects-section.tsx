@@ -2,7 +2,7 @@ import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
-import { releasedGames, type Game } from "@/lib/projects"
+import { jamStory, releasedGames, type Game } from "@/lib/projects"
 
 /** Stand-in cover for games without key art yet. */
 function TitleCard({ title, tags, large = false }: { title: string; tags: string[]; large?: boolean }) {
@@ -146,6 +146,11 @@ export function ProjectsSection() {
                 </div>
 
                 <div className="flex flex-1 flex-col p-5">
+                  {project.jam && (
+                    <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-accent">
+                      {project.jam.event} · {project.jam.result}
+                    </p>
+                  )}
                   <h3 className="mb-2 text-base font-bold text-card-foreground group-hover:text-primary transition-colors duration-300">
                     {project.title}
                     {project.rating && <span className="ml-2 font-mono text-[10px] font-bold text-accent">{project.rating}</span>}
@@ -166,6 +171,34 @@ export function ProjectsSection() {
             </Reveal>
           ))}
         </div>
+
+        {/* Game jam story */}
+        <Reveal className="mt-16">
+          <div className="rounded-3xl border border-accent/20 bg-card/50 p-8 md:p-10">
+            <div className="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+              <span className="font-mono text-xs uppercase tracking-[0.3em] text-accent">Romanian game jams</span>
+              <span lang="zh-Hans" className="font-brush text-lg text-primary/70">
+                比赛
+              </span>
+              <h3 className="w-full text-2xl font-bold text-foreground md:text-3xl">From one-day build to 6th in the country</h3>
+            </div>
+            <ol className="relative grid gap-6 md:grid-cols-3">
+              <div className="pointer-events-none absolute left-0 right-0 top-[11px] hidden h-px bg-gradient-to-r from-primary/50 via-accent/50 to-primary/50 md:block" />
+              {jamStory.map((step) => (
+                <li key={step.title} className="relative">
+                  <span className="relative mb-4 flex h-6 w-6 items-center justify-center rounded-full border border-primary/50 bg-background">
+                    <span className="h-2 w-2 rounded-full bg-primary" />
+                  </span>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{step.year}</p>
+                  <p className="mt-1 font-semibold text-foreground">
+                    {step.title} <span className="ml-1 font-mono text-xs text-accent">{step.result}</span>
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

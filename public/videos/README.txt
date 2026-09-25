@@ -1,5 +1,2 @@
-Archive clips (autoplay on hover):
-  spidey.mp4
-  moose-man.mp4
-  vore.mp4
-  undercover-homefront.mp4
+Archive hover previews (12s, 480p, silent). Each clip ships as .webm (VP9) + .mp4 (H.264):
+  spidey, moose-man, vore, undercover-homefront

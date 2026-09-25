@@ -11,6 +11,8 @@ export interface Game {
   store: "itch.io" | "Steam"
   rating?: string
   featured?: boolean
+  /** Romanian game jam entry: event name and result. */
+  jam?: { event: string; result: string }
 }
 
 export interface ArchiveProject {
@@ -84,6 +86,7 @@ export const releasedGames: Game[] = [
     link: "https://cycle01.itch.io/ironmade",
     store: "itch.io",
     rating: "5.0/5",
+    jam: { event: "ROG Challenge 2024", result: "Planned entry" },
   },
   {
     title: "Safe Place",
@@ -98,20 +101,24 @@ export const releasedGames: Game[] = [
   {
     title: "CyborgDash",
     description:
-      "2099. The Republic of Gamers rules humanity. As KAEL-7, a maintenance engineer turned rebel, sprint through the ROG Citadel with the stolen Source Code, dodging elite droids and deadly traps. Made for the ROG 20-Year Coding Challenge.",
+      "2099. The Republic of Gamers rules humanity. As KAEL-7, a maintenance engineer turned rebel, sprint through the ROG Citadel with the stolen Source Code, dodging elite droids and deadly traps. Built in two weeks during my finals.",
+    image: asset("/images/cyborgdash.png"),
     tags: ["Side-scroller", "Action", "Game Jam"],
     year: "2026",
     link: "https://cycle01.itch.io/cyborgdash",
     store: "itch.io",
+    jam: { event: "ROG 20-Year Coding Challenge", result: "6th nationally" },
   },
   {
     title: "The Way Back Ball",
     description:
-      "A gust of wind blew a ball into the dark side of the Republic of Gamers city. Roll, bounce and ricochet it back to its owner through physics puzzles and tricky platforming. Made for the ROG Challenge 2024, playable in the browser.",
+      "A gust of wind blew a ball into the dark side of the Republic of Gamers city. Roll, bounce and ricochet it back to its owner through physics puzzles and tricky platforming. Made in a single day, playable in the browser.",
+    image: asset("/images/thewaybackball.png"),
     tags: ["Unreal Engine 4", "Platformer", "Browser"],
     year: "2024",
     link: "https://cycle01.itch.io/thewaybackball",
     store: "itch.io",
+    jam: { event: "ROG Challenge 2024", result: "22nd place" },
   },
 ]
 
@@ -285,5 +292,27 @@ export const announcements: Announcement[] = [
       "Thank you for sticking around through the quiet months. It means more than you know. From now on, keep an eye out for regular S2S (Secrets of Sundown 2) updates. It's going to be the biggest thing I've made.",
     ],
     signoff: "Cycle01",
+  },
+]
+
+/** The Romanian game jam run, told in order. */
+export const jamStory = [
+  {
+    year: "2024",
+    title: "IronMade",
+    result: "Planned entry",
+    text: "IronMade was meant to be my first entry to the ROG Challenge, but I couldn't port it to the web in time. I released it anyway.",
+  },
+  {
+    year: "2024",
+    title: "The Way Back Ball",
+    result: "22nd place",
+    text: "So I built a new entry in a single day. It placed 22nd out of 100+ entries.",
+  },
+  {
+    year: "2026",
+    title: "CyborgDash",
+    result: "6th nationally",
+    text: "Two years later I came back and made CyborgDash in two weeks, in the middle of my finals. It finished 6th in the country. The top five each won a laptop, so I missed one by a single place.",
   },
 ]
