@@ -225,6 +225,74 @@ html {
   }
 }
 
+/* ── Studio theme ──────────────────────────────────────────
+   The studio page is its own brand: cold graphite and bone instead of the
+   portfolio's warm red and gold, with its own typefaces. Everything is scoped
+   to .studio-theme so the portfolio is untouched. */
+.studio-theme {
+  --background: #060607;
+  --foreground: #e8e5df;
+  --card: #0d0e10;
+  --card-foreground: #e8e5df;
+  --primary: #d9e1e8;
+  --primary-foreground: #08090b;
+  --accent: #8fb0c6;
+  --accent-foreground: #06080a;
+  --muted-foreground: #8b8e94;
+  --border: #1c1e22;
+  --font-space-mono: var(--font-jetbrains);
+  background: var(--background);
+  color: var(--foreground);
+}
+body:has(.studio-theme) { background: #060607; }
+.font-display { font-family: var(--font-cormorant), "Cormorant Garamond", Georgia, serif; font-variant-numeric: lining-nums; }
+.studio-theme ::selection { background: #8fb0c6; color: #06080a; }
+
+/* Studio badge (components/studio/studio-badge.tsx). */
+.badge-stage { --badge-scale: 1; }
+@media (max-width: 640px) { .badge-stage { --badge-scale: 0.7; } }
+.badge-coin { transform-style: preserve-3d; transform: rotateX(8deg) rotateY(-18deg); }
+.badge-edge {
+  background: linear-gradient(90deg, #2b2f35, #6d737c 30%, #3a3e45 55%, #9aa1aa 75%, #2b2f35);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+.badge-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 38%, #23262b 0%, #121417 55%, #0a0b0d 100%);
+  box-shadow:
+    inset 0 0 0 3px #7b828b,
+    inset 0 0 0 5px #2a2d32,
+    inset 0 0 0 9px #5d636b,
+    inset 0 0 40px rgba(0, 0, 0, 0.8),
+    inset 0 2px 1px rgba(255, 255, 255, 0.18);
+}
+.badge-face-back {
+  background: radial-gradient(circle at 50% 38%, #1f1b14 0%, #110f0b 60%, #080706 100%);
+  box-shadow:
+    inset 0 0 0 3px #8c7a4d,
+    inset 0 0 0 5px #2b251a,
+    inset 0 0 0 9px #6c5d3a,
+    inset 0 0 40px rgba(0, 0, 0, 0.8),
+    inset 0 2px 1px rgba(255, 240, 200, 0.18);
+}
+.badge-sheen {
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.16) 48%, transparent 60%);
+  background-size: 250% 100%;
+  background-position: var(--sheen, 50%) 0;
+  mix-blend-mode: screen;
+}
+
+/* Very fine static grain for the studio page. */
+.studio-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+}
+
 /* Short fade between the studio and the portfolio (app/template.tsx). */
 @keyframes page-fade {
   from { opacity: 0; }

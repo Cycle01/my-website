@@ -8,14 +8,16 @@ export function Direction() {
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.35fr] lg:gap-20">
           {/* The audience so far */}
           <Reveal>
-            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-accent">The audience so far</p>
+            <p className="mb-6 font-mono text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
+              <span className="text-accent">IV</span> — The audience so far
+            </p>
             <div className="flex flex-wrap gap-x-12 gap-y-6">
               <div>
-                <p className="text-5xl font-bold tracking-tight text-foreground md:text-6xl">~{audience.downloads.toLocaleString("en-US")}</p>
+                <p className="font-display text-6xl font-semibold text-foreground md:text-7xl">~{audience.downloads.toLocaleString("en-US")}</p>
                 <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/55">downloads</p>
               </div>
               <div>
-                <p className="text-5xl font-bold tracking-tight text-foreground md:text-6xl">~{audience.views.toLocaleString("en-US")}</p>
+                <p className="font-display text-6xl font-semibold text-foreground md:text-7xl">~{audience.views.toLocaleString("en-US")}</p>
                 <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/55">page views</p>
               </div>
             </div>
@@ -30,14 +32,14 @@ export function Direction() {
 
           {/* Where the studio is heading */}
           <Reveal delay={120}>
-            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-accent">The next five years</p>
-            <h2 id="direction-title" className="text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.35em] text-muted-foreground">The next five years</p>
+            <h2 id="direction-title" className="font-display text-5xl font-semibold leading-[0.95] text-foreground md:text-6xl">
               Better work, made more in the open
             </h2>
             <ol className="mt-10 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2">
               {direction.map((item, i) => (
                 <li key={item.title} className="border-t border-white/10 pt-5">
-                  <p className="font-mono text-[11px] text-primary">0{i + 1}</p>
+                  <p className="font-mono text-[11px] text-accent">0{i + 1}</p>
                   <h3 className="mt-2 font-semibold text-foreground">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-foreground/65">{item.text}</p>
                 </li>

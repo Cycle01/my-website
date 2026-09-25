@@ -36,8 +36,8 @@ export function YoursTeaser() {
   return (
     <section id="yours" className="relative overflow-hidden bg-[#050404] px-5 py-28 md:px-8 md:py-40" aria-labelledby="yours-title">
       <div className="mx-auto max-w-7xl">
-        <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.35em] text-foreground/45">
-          Announcement · Atmospheric horror
+        <p className="mb-8 font-mono text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
+          <span className="text-accent">II</span> — Announcement · Atmospheric horror
         </p>
 
         <div
@@ -47,13 +47,13 @@ export function YoursTeaser() {
         >
           <h2
             id="yours-title"
-            className="text-[26vw] font-bold leading-[0.8] tracking-[-0.04em] text-[#241917] md:text-[19vw] xl:text-[15rem]"
+            className="font-display text-[30vw] font-semibold italic leading-[0.8] tracking-[-0.02em] text-[#1c1b1d] md:text-[22vw] xl:text-[17rem]"
           >
             Yours
           </h2>
           <span
             aria-hidden="true"
-            className="yours-lit pointer-events-none absolute inset-0 text-[26vw] font-bold leading-[0.8] tracking-[-0.04em] text-[#e9ddd2] md:text-[19vw] xl:text-[15rem]"
+            className="yours-lit font-display pointer-events-none absolute inset-0 text-[30vw] font-semibold italic leading-[0.8] tracking-[-0.02em] text-[#ece8e1] md:text-[22vw] xl:text-[17rem]"
           >
             Yours
           </span>
@@ -61,16 +61,16 @@ export function YoursTeaser() {
 
         <div className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-[1.2fr_1fr] md:items-end">
           <div className="max-w-xl space-y-4 text-lg leading-relaxed text-foreground/75">
-            <p className="text-2xl font-medium leading-snug text-foreground md:text-3xl">
+            <p className="font-display text-3xl font-medium leading-snug text-foreground md:text-4xl">
               An atmospheric horror game about one girl stalking another.
             </p>
             <p>It&apos;s about the feeling of being watched, and about the person doing the watching.</p>
           </div>
           <div className="md:text-right">
-            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-foreground/45">
+            <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
               Announced · No footage or release date yet
             </p>
-            <p className="mt-6 font-serif text-2xl italic text-foreground/60">— yours</p>
+            <p className="font-display mt-6 text-3xl italic text-foreground/60">— yours</p>
           </div>
         </div>
       </div>

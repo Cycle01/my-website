@@ -26,14 +26,14 @@ export function StudioNav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        scrolled ? "border-b border-white/5 bg-[#0b0706]/95 md:bg-[#0b0706]/80 md:backdrop-blur-xl" : "bg-transparent"
+        scrolled ? "border-b border-white/5 bg-[#060607]/95 md:bg-[#060607]/80 md:backdrop-blur-xl" : "bg-transparent"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8" aria-label="Studio">
         <a href="#top" className="flex items-center gap-3 rounded-md">
-          <Image src={asset("/images/studio-logo-transparent.png")} alt="" width={32} height={32} className="shrink-0" />
-          <span className="whitespace-nowrap font-mono text-xs font-bold uppercase tracking-[0.18em] text-foreground sm:text-sm sm:tracking-[0.2em]">
-            Cycle <span className="text-primary">Studios</span>
+          <Image src={asset("/images/studio/logo-mark.webp")} alt="" width={30} height={29} className="shrink-0" />
+          <span className="font-display whitespace-nowrap text-xl font-semibold text-foreground sm:text-2xl">
+            Cycle <span className="italic text-foreground/70">Studios</span>
           </span>
         </a>
 
@@ -42,7 +42,7 @@ export function StudioNav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="rounded-md px-3 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/70 transition-colors hover:text-primary"
+                className="rounded-md px-3 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/60 transition-colors hover:text-accent"
               >
                 {l.label}
               </a>
@@ -52,7 +52,7 @@ export function StudioNav() {
 
         <Link
           href="/portfolio"
-          className="whitespace-nowrap rounded-full border border-accent/40 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.1em] text-accent transition-colors hover:bg-accent hover:text-accent-foreground sm:px-4 sm:text-xs sm:tracking-[0.15em]"
+          className="whitespace-nowrap rounded-full border border-foreground/20 px-3 py-2 font-mono text-[10px] uppercase tracking-[0.1em] text-foreground transition-colors hover:border-accent hover:text-accent sm:px-4 sm:text-xs sm:tracking-[0.15em]"
         >
           Personal Portfolio
         </Link>

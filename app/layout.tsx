@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Mono } from 'next/font/google'
+import { Inter, Space_Mono, Cormorant_Garamond, JetBrains_Mono } from 'next/font/google'
 import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import { asset } from '@/lib/asset'
@@ -7,6 +7,9 @@ import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const _spaceMono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-space-mono" });
+// Studio page typefaces (only downloaded where the studio page uses them).
+const _cormorant = Cormorant_Garamond({ weight: ["500", "600", "700"], style: ["normal", "italic"], subsets: ["latin"], variable: "--font-cormorant", display: "swap" });
+const _jetbrains = JetBrains_Mono({ weight: ["400", "500"], subsets: ["latin"], variable: "--font-jetbrains", display: "swap" });
 // Brush calligraphy for the Chinese accents, subset to only the characters the
 // site uses (~28 KB instead of ~740 KB). Re-run `node scripts/subset-brush-font.mjs`
 // after adding new Chinese text.
@@ -46,7 +49,7 @@ export default function RootLayout({
         {/* Enables scroll-reveal styles only when JS runs, so content never stays hidden. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body className={`${_inter.variable} ${_spaceMono.variable} ${_maShanZheng.variable} font-sans antialiased`}>
+      <body className={`${_inter.variable} ${_spaceMono.variable} ${_maShanZheng.variable} ${_cormorant.variable} ${_jetbrains.variable} font-sans antialiased`}>
         {children}
         {process.env.NEXT_PUBLIC_BASE_PATH ? null : <Analytics />}
       </body>

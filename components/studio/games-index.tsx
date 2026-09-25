@@ -7,7 +7,7 @@ import { studioGames, type StudioGame } from "@/lib/studio"
 
 function GameLink({ link }: { link: NonNullable<StudioGame["link"]> }) {
   const cls =
-    "inline-flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-primary underline-offset-4 hover:underline"
+    "inline-flex items-center gap-1.5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-accent underline-offset-4 hover:underline"
   if (link.href.startsWith("/")) {
     return (
       <Link href={link.href} className={cls}>
@@ -45,8 +45,10 @@ export function GamesIndex() {
   return (
     <section id="games" className="relative px-5 py-24 md:px-8 md:py-32" aria-labelledby="games-title">
       <div className="mx-auto max-w-7xl">
-        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-accent">Released games</p>
-        <h2 id="games-title" className="max-w-2xl text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+        <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.35em] text-muted-foreground">
+          <span className="text-accent">III</span> — Released games
+        </p>
+        <h2 id="games-title" className="font-display max-w-2xl text-5xl font-semibold leading-[0.95] text-foreground md:text-7xl">
           What I&apos;ve shipped so far
         </h2>
 
@@ -62,13 +64,13 @@ export function GamesIndex() {
                   className="group py-7"
                 >
                   <div className="flex items-baseline gap-5">
-                    <span className={`font-mono text-xs transition-colors ${on ? "text-primary" : "text-foreground/35"}`}>
+                    <span className={`font-mono text-xs transition-colors ${on ? "text-accent" : "text-foreground/35"}`}>
                       0{i + 1}
                     </span>
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                         <h3
-                          className={`text-2xl font-bold tracking-tight transition-colors md:text-3xl ${
+                          className={`font-display text-3xl font-semibold transition-colors md:text-4xl ${
                             on ? "text-foreground" : "text-foreground/70"
                           }`}
                         >
@@ -110,7 +112,7 @@ export function GamesIndex() {
 
           {/* Desktop: one large preview that changes with the hovered or focused game. */}
           <div className="hidden lg:block">
-            <div className="sticky top-28 aspect-[4/3] overflow-hidden rounded-2xl bg-[#120c0a]">
+            <div className="sticky top-28 aspect-[4/3] overflow-hidden rounded-[20px] bg-card ring-1 ring-white/10">
               {studioGames.map((game, i) => (
                 <div
                   key={game.title}
@@ -136,7 +138,7 @@ export function GamesIndex() {
 
         <p className="mt-12 text-foreground/65">
           CyborgDash, The Way Back Ball, Safe Place and my smaller projects are in{" "}
-          <Link href="/portfolio/#projects" className="font-semibold text-accent underline-offset-4 hover:underline">
+          <Link href="/portfolio/#projects" className="font-medium text-accent underline-offset-4 hover:underline">
             my portfolio
           </Link>
           .
