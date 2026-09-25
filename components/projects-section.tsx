@@ -55,7 +55,7 @@ export function ProjectsSection() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <SectionHeading kicker="My Games" zh="游戏" title="Released games" />
           <Reveal className="mb-16 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            {`${releasedGames.length} on PC, one on mobile. Secrets of Sundown and Moonfall: Protocol are the biggest so far.`}
+            {`${releasedGames.length} on PC, with Fling It coming to mobile later this year. Secrets of Sundown and Moonfall: Protocol are the biggest so far.`}
           </Reveal>
         </div>
 

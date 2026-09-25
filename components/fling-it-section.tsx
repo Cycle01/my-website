@@ -123,7 +123,7 @@ export function FlingItSection() {
                 </div>
                 <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                   <Smartphone className="h-4 w-4 text-cyan-300" />
-                  Portrait · Built solo
+                  Portrait · Built solo · Out later this year
                 </div>
                 {flingIt.storeLinks.map((store) => (
                   <a

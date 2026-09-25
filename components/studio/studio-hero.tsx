@@ -4,7 +4,7 @@ const facts = [
   { label: "Founded by", value: "Bogdan (Cycle01)" },
   { label: "Focus", value: "Atmospheric horror" },
   { label: "Platforms", value: "PC & mobile" },
-  { label: "Released", value: "7 games" },
+  { label: "Released", value: "6 games" },
 ]
 
 export function StudioHero() {

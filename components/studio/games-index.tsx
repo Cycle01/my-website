@@ -71,11 +71,11 @@ export function GamesIndex() {
     <section className="px-5 pt-32 md:px-10 md:pt-48" aria-labelledby="games-title">
       <div className="mx-auto max-w-[1440px]">
         <div className="mb-6 flex items-baseline justify-between font-mono text-[12px] uppercase tracking-[0.08em] text-muted-foreground">
-          <span>Released games</span>
+          <span>Games</span>
           <span>03</span>
         </div>
         <h2 id="games-title" className="mb-12 max-w-3xl text-4xl font-medium leading-[0.95] tracking-[-0.04em] text-foreground md:mb-16 md:text-6xl">
-          What I&apos;ve shipped so far
+          What I&apos;ve made so far
         </h2>
 
         <div ref={listRef} onPointerLeave={() => setActive(null)}>

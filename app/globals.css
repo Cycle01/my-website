@@ -214,14 +214,20 @@ html {
 .tilt:hover .tilt-glare { opacity: 1; }
 
 /* "Yours" teaser: the lit copy of the title only shows inside a small light. */
-.yours-lit {
-  -webkit-mask-image: radial-gradient(circle at var(--lx, 38%) var(--ly, 55%), #000 0, rgba(0, 0, 0, 0.55) 9%, transparent 22%);
-  mask-image: radial-gradient(circle at var(--lx, 38%) var(--ly, 55%), #000 0, rgba(0, 0, 0, 0.55) 9%, transparent 22%);
+/* Yours key art: dimmed scene with a flashlight that follows the pointer.
+   Touch and reduced-motion visitors see the art fully lit instead. */
+.yours-art-lit {
+  -webkit-mask-image: radial-gradient(circle at var(--lx, 50%) var(--ly, 32%), #000 0, #000 12%, rgba(0, 0, 0, 0.5) 22%, transparent 36%);
+  mask-image: radial-gradient(circle at var(--lx, 50%) var(--ly, 32%), #000 0, #000 12%, rgba(0, 0, 0, 0.5) 22%, transparent 36%);
 }
-@media (pointer: coarse) {
-  .yours-lit {
-    -webkit-mask-image: radial-gradient(ellipse 60% 90% at 40% 55%, #000 0, rgba(0, 0, 0, 0.5) 40%, transparent 75%);
-    mask-image: radial-gradient(ellipse 60% 90% at 40% 55%, #000 0, rgba(0, 0, 0, 0.5) 40%, transparent 75%);
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .yours-art-base {
+    filter: brightness(0.3) saturate(0.75);
+  }
+}
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .yours-art-lit {
+    display: none;
   }
 }
 

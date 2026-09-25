@@ -145,7 +145,7 @@ export function HeroSection() {
         </p>
 
         <p className="mx-auto mb-12 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          {"I'm Cycle01. I make horror games in Unreal Engine 5, plus whatever else I get curious about. Seven games released so far, and Secrets of Sundown 2 is next."}
+          {"I'm Cycle01. I make horror games in Unreal Engine 5, plus whatever else I get curious about. Six games released so far, Fling It is coming to mobile, and Secrets of Sundown 2 is next."}
         </p>
 
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

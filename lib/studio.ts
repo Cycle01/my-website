@@ -69,13 +69,13 @@ export const studioGames: StudioGame[] = [
   },
   {
     title: "Fling It",
-    year: "",
+    year: "2026",
     platform: "Mobile",
     summary:
       "My first mobile game. Pull back, let go, and fling a tiny astronaut as far as your upgrades allow. A lighter game, and my start on mobile.",
     image: asset("/images/fling-it/menu.webp"),
     shape: "portrait",
-    status: "Released",
+    status: "Coming later this year",
     link: { label: "See it in my portfolio", href: "/portfolio/#fling-it" },
   },
 ]
