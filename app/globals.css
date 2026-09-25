@@ -264,7 +264,48 @@ body:has(.studio-theme) { background: #0a0a0a; }
 .kinetic-wave .kinetic-letter { animation: weight-wave 3.2s ease-in-out infinite; }
 
 /* Cursor-following preview in the games list. */
-.cursor-preview { transition: opacity 0.25s ease, transform 0.25s ease; }
+
+/* Studio badge (components/studio/studio-badge.tsx): moonlit silver. */
+.badge-stage { --badge-scale: 1; }
+@media (max-width: 640px) { .badge-stage { --badge-scale: 0.6; } }
+.badge-coin { transform-style: preserve-3d; transform: rotateX(6deg) rotateY(-20deg); }
+.badge-edge {
+  background: linear-gradient(90deg, #3a3f47, #9aa3ae 28%, #4a5059 52%, #c9d0d8 74%, #3a3f47);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+.badge-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  background: radial-gradient(circle at 42% 34%, #2a3038 0%, #151a20 55%, #0b0e12 100%);
+  box-shadow:
+    inset 0 0 0 3px #aab3be,
+    inset 0 0 0 5px #2c3139,
+    inset 0 0 0 9px #7d8792,
+    inset 0 0 44px rgba(0, 0, 0, 0.8),
+    inset 0 2px 1px rgba(255, 255, 255, 0.22);
+}
+.badge-emboss { filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.9)) drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.14)); }
+.badge-sheen {
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgba(220, 232, 255, 0.18) 48%, transparent 60%);
+  background-size: 250% 100%;
+  background-position: var(--sheen, 50%) 0;
+  mix-blend-mode: screen;
+}
+
+/* Studio ticker strip. */
+@keyframes ticker { to { transform: translateX(-50%); } }
+.animate-ticker { animation: ticker 40s linear infinite; }
+
+/* Headings rise out of a mask when they scroll into view (components/studio/rise.tsx). */
+.rise-line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.rise-inner { display: block; transform: translateY(105%); transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1); }
+.rise-in .rise-inner { transform: none; }
+
+/* Content fades up on reveal. */
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.fade-up.is-in { opacity: 1; transform: none; }
 
 /* Short fade between the studio and the portfolio (app/template.tsx). */
 @keyframes page-fade {
@@ -413,9 +454,13 @@ body:has(.studio-theme) { background: #0a0a0a; }
   .btn-shine::after { display: none; }
   .animate-lantern, .animate-lantern-glow, .animate-petal, .animate-marquee, .animate-word-in,
   .animate-ken-burns, .animate-rec, .animate-radar, .animate-blip, .animate-cloud, .animate-moon::after,
-  .animate-twinkle, .animate-shimmer, .animate-float, .animate-letter, .animate-hero-in, .animate-page-fade, .kinetic-wave .kinetic-letter, .animate-pulse-glow, .animate-scanline,
+  .animate-twinkle, .animate-shimmer, .animate-float, .animate-letter, .animate-hero-in, .animate-page-fade, .kinetic-wave .kinetic-letter, .animate-ticker, .animate-pulse-glow, .animate-scanline,
   .animate-grain, .animate-bounce, .animate-ping, .animate-pulse {
     animation: none !important;
   }
   .animate-petal { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-inner, .fade-up { opacity: 1; transform: none; transition: none; }
 }

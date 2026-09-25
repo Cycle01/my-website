@@ -2,11 +2,13 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { asset } from "@/lib/asset"
 import { LocalTime } from "@/components/studio/local-time"
 import { Scramble } from "@/components/studio/scramble"
 
 const links = [
   { href: "#work", label: "Work" },
+  { href: "#games", label: "Games" },
   { href: "#studio", label: "Studio" },
   { href: "#contact", label: "Contact" },
 ]
@@ -28,8 +30,10 @@ export function StudioNav() {
       }`}
     >
       <nav className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-4 md:px-10" aria-label="Studio">
-        <a href="#top" className="text-[15px] font-semibold tracking-[-0.02em] text-foreground">
-          Cycle Studios
+        <a href="#top" className="flex items-center gap-2.5 text-[15px] font-semibold tracking-[-0.02em] text-foreground">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={asset("/images/studio/logo-figure.webp")} alt="" width={133} height={281} className="h-7 w-auto" />
+          Cycle&apos;s Studios
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">

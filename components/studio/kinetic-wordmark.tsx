@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 
 /**
- * "Cycle Studios" set in Geist's variable weight axis. On desktop each letter
+ * "Cycle's Studios" set in Geist's variable weight axis. On desktop each letter
  * gets heavier as the pointer gets closer; on touch devices a slow weight wave
  * runs through the word instead. Static for reduced motion.
  */
@@ -51,15 +51,18 @@ export function KineticWordmark({ lines }: { lines: string[] }) {
     <h1
       ref={ref}
       aria-label={lines.join(" ")}
-      className="select-none text-[17vw] leading-[0.86] tracking-[-0.055em] text-foreground md:text-[13.5vw] xl:text-[12.5rem]"
+      className="select-none text-[18vw] leading-[0.86] tracking-[-0.055em] text-foreground md:text-[11vw] xl:text-[11rem]"
     >
       {lines.map((line) => (
         <span key={line} className="block whitespace-nowrap" aria-hidden="true">
           {line.split("").map((ch, i) => {
             const idx = n++
             return (
-              <span key={i} className="kinetic-letter" style={{ animationDelay: `${idx * 0.12}s` }}>
-                {ch === " " ? " " : ch}
+              // Outer span: entrance rise. Inner span: the weight effect.
+              <span key={i} className="animate-letter" style={{ animationDelay: `${0.15 + idx * 0.04}s` }}>
+                <span className="kinetic-letter" style={{ animationDelay: `${idx * 0.12}s` }}>
+                  {ch === " " ? " " : ch}
+                </span>
               </span>
             )
           })}

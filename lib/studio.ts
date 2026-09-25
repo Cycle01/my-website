@@ -24,11 +24,12 @@ export interface StudioGame {
   note?: { label: string; text: string }
   meta?: string
   status: string
+  /** Flagship games get the large cards. */
+  flagship?: boolean
 }
 
 const sundown = game("Secrets of Sundown")
 const moonfall = game("Moonfall: Protocol")
-const ironmade = game("IronMade")
 
 export const studioGames: StudioGame[] = [
   {
@@ -40,6 +41,7 @@ export const studioGames: StudioGame[] = [
     image: sundown.image!,
     meta: `Rated ${sundown.rating} on itch.io`,
     status: "Released",
+    flagship: true,
     link: { label: "Play on itch.io", href: sundown.link },
   },
   {
@@ -50,22 +52,12 @@ export const studioGames: StudioGame[] = [
       "Co-op survival horror for 1 to 4 players. A mission to walk on the moon leads to a hidden base, strange astronauts and a portal into somewhere worse.",
     image: moonfall.image!,
     status: "No further updates planned",
+    flagship: true,
     link: { label: "View on Steam", href: moonfall.link },
     note: {
       label: "No further updates planned",
       text: "Moonfall: Protocol was released, but I didn't finish it the way I intended. When my final year of school began, I had to put my studies first, and the game wasn't the success I hoped for. I'm not currently planning further updates. It stays part of my history, and I'd rather be upfront with anyone thinking of playing it.",
     },
-  },
-  {
-    title: ironmade.title,
-    year: ironmade.year,
-    platform: "PC",
-    summary:
-      "A nameless knight escapes a dungeon to find his daughter, Sara. Built for a Romanian game jam; I couldn't port it to the web in time, so I released it on its own.",
-    image: ironmade.image!,
-    meta: `Rated ${ironmade.rating} on itch.io`,
-    status: "Released",
-    link: { label: "Play on itch.io", href: ironmade.link },
   },
   {
     title: "Fling It",

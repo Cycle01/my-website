@@ -1,4 +1,6 @@
 import Link from "next/link"
+import { CountUp } from "@/components/studio/count-up"
+import { Rise } from "@/components/studio/rise"
 import { audience, direction } from "@/lib/studio"
 import { announcements } from "@/lib/projects"
 
@@ -13,14 +15,14 @@ export function StudioAbout() {
         </div>
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-[1.2fr_2fr] md:gap-16">
-          <h2 id="studio-heading" className="text-4xl font-medium leading-[0.95] tracking-[-0.04em] text-foreground md:text-6xl">
-            One developer.
-            <br />
-            <span className="text-muted-foreground">No team behind the name.</span>
-          </h2>
+          <Rise
+            id="studio-heading"
+            lines={["One developer.", <span key="n" className="text-muted-foreground">No team behind the name.</span>]}
+            className="text-4xl font-medium leading-[0.95] tracking-[-0.04em] text-foreground md:text-6xl"
+          />
           <div className="max-w-2xl space-y-5 text-[17px] leading-relaxed text-foreground/80">
             <p>
-              Cycle Studios is me, Bogdan. I design, program and build every game myself, mostly in Unreal Engine 5, alongside my
+              Cycle&apos;s Studios is me, Bogdan. I design, program and build every game myself, mostly in Unreal Engine 5, alongside my
               studies. Some releases went well, some didn&apos;t go the way I planned, and I&apos;d rather be upfront about both.
             </p>
             <p>
@@ -39,11 +41,11 @@ export function StudioAbout() {
           <div>
             <div className="grid grid-cols-2 gap-8">
               <div>
-                <p className="text-5xl font-light tracking-[-0.05em] text-foreground md:text-8xl">~{audience.downloads.toLocaleString("en-US")}</p>
+                <p className="text-5xl font-light tracking-[-0.05em] text-foreground md:text-8xl"><CountUp to={audience.downloads} prefix="~" /></p>
                 <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">Downloads</p>
               </div>
               <div>
-                <p className="text-5xl font-light tracking-[-0.05em] text-foreground md:text-8xl">~{audience.views.toLocaleString("en-US")}</p>
+                <p className="text-5xl font-light tracking-[-0.05em] text-foreground md:text-8xl"><CountUp to={audience.views} prefix="~" /></p>
                 <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">Page views</p>
               </div>
             </div>

@@ -82,7 +82,7 @@ export function StudioContact() {
         </div>
 
         <div className="mt-16 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-          <span>© {new Date().getFullYear()} Cycle Studios</span>
+          <span>© {new Date().getFullYear()} Cycle&apos;s Studios</span>
           <span>A one-person studio</span>
         </div>
       </div>

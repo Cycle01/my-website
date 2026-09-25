@@ -21,9 +21,9 @@ const _maShanZheng = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Cycle Studios — Atmospheric horror games for PC and mobile",
+  title: "Cycle's Studios — Atmospheric horror games for PC and mobile",
   description:
-    "Cycle Studios is a one-person game studio run by Bogdan (Cycle01), making atmospheric horror games for PC and mobile. Now building Secrets of Sundown 2.",
+    "Cycle's Studios is a one-person game studio run by Bogdan (Cycle01), making atmospheric horror games for PC and mobile. Now building Secrets of Sundown 2.",
   generator: 'v0.app',
   icons: {
     icon: [

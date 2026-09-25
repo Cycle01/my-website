@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import { asset } from "@/lib/asset"
+import { FadeUp, Rise } from "@/components/studio/rise"
 
 export function YoursTeaser() {
   const stageRef = useRef<HTMLDivElement>(null)
@@ -51,7 +52,7 @@ export function YoursTeaser() {
             <source media="(max-width: 768px)" srcSet={asset("/images/studio/yours-key-art-mobile.webp")} />
             <img
               src={asset("/images/studio/yours-key-art.webp")}
-              alt="Yours key art: a hillside suburb at sunset, a lone car driving up a dark forest road. Title text reads Yours, coming in 2027."
+              alt="Yours key art: a hillside town at sunset, a lone car driving up a dark forest road. Title text reads Yours, coming in 2027."
               width={1672}
               height={941}
               loading="lazy"
@@ -71,29 +72,58 @@ export function YoursTeaser() {
           />
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-10 md:mt-10 md:grid-cols-[1.2fr_2fr] md:gap-16">
-          <h2 id="yours-title" className="text-4xl font-medium leading-[0.95] tracking-[-0.04em] text-foreground md:text-6xl">
-            Yours
-          </h2>
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1.3fr_1fr]">
-            <div className="space-y-4 text-[17px] leading-relaxed text-foreground/80">
-              <p className="text-2xl leading-snug tracking-[-0.02em] text-foreground md:text-3xl">
-                An atmospheric horror game about one girl stalking another.
-              </p>
-              <p>It&apos;s about the feeling of being watched, and about the person doing the watching.</p>
-            </div>
-            <dl className="self-start divide-y divide-white/[0.08] border-y border-white/[0.08]">
+        <div className="mt-10 grid grid-cols-1 gap-12 md:mt-14 md:grid-cols-[1.2fr_2fr] md:gap-16">
+          <div>
+            <Rise
+              id="yours-title"
+              lines={["Yours"]}
+              className="text-6xl font-medium leading-[0.9] tracking-[-0.05em] text-foreground md:text-8xl"
+            />
+            <dl className="mt-8 max-w-sm divide-y divide-white/[0.08] border-y border-white/[0.08]">
               {[
-                { label: "Genre", value: "Atmospheric horror" },
+                { label: "Genre", value: "First-person psychological horror" },
+                { label: "You play as", value: "Maya" },
                 { label: "Status", value: "In development" },
                 { label: "Release", value: "2027" },
               ].map((f) => (
                 <div key={f.label} className="flex items-baseline justify-between gap-4 py-3">
-                  <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{f.label}</dt>
+                  <dt className="shrink-0 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{f.label}</dt>
                   <dd className="text-right text-[15px] text-foreground">{f.value}</dd>
                 </div>
               ))}
             </dl>
+          </div>
+
+          <div className="max-w-2xl">
+            <FadeUp>
+              <p className="text-2xl leading-snug tracking-[-0.02em] text-foreground md:text-3xl">
+                A game about friendship, obsession, and the unsettling line between caring about someone and needing to possess them.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.08} className="mt-8 space-y-4 text-[17px] leading-relaxed text-foreground/75">
+              <p>
+                You play as Maya, a young woman whose closest friend, Amy, leaves for a quiet trip in the mountains. But Maya isn&apos;t
+                ready to be apart.
+              </p>
+            </FadeUp>
+
+            <Rise
+              as="p"
+              lines={["Follow Amy from a distance.", "Watch where she goes.", "Learn her routine."]}
+              className="my-12 text-3xl font-light leading-[1.15] tracking-[-0.03em] text-foreground md:my-16 md:text-5xl"
+            />
+
+            <FadeUp className="space-y-4 text-[17px] leading-relaxed text-foreground/75">
+              <p>
+                Follow her into restaurants, linger outside her hotel, and find ways into places you were never invited to. All the while,
+                Amy still talks to you.
+              </p>
+              <p>
+                Through messages and conversations, you&apos;ll experience two versions of the same friendship: the one Amy believes she has,
+                and the one you&apos;re secretly creating around her.
+              </p>
+              <p className="text-foreground">The further you go, the harder it becomes to justify your actions.</p>
+            </FadeUp>
           </div>
         </div>
       </div>

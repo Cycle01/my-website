@@ -65,7 +65,7 @@ export function Navigation() {
         <a href="#" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
           <Image
             src={asset("/images/studio-logo-transparent.png")}
-            alt="Cycle's Studios logo"
+            alt="Cycle's Studio logo"
             width={36}
             height={36}
             className="transition-transform duration-300 group-hover:scale-110"
@@ -75,7 +75,7 @@ export function Navigation() {
               Cycle<span className="text-primary">01</span>
             </span>
             <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground leading-tight">
-              {"Cycle's Studios"}
+              {"Cycle's Studio"}
             </span>
           </div>
         </a>

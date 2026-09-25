@@ -129,7 +129,7 @@ export function HeroSection() {
               className="relative inline-block text-transparent bg-clip-text text-glow"
               style={{ backgroundImage: "linear-gradient(135deg, var(--primary), var(--accent))" }}
             >
-              Studios
+              Studio
             </span>
             <span className="absolute -right-10 -top-6 hidden rotate-[8deg] sm:block">
               <Seal text="循环" size={40} />

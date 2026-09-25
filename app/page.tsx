@@ -1,5 +1,6 @@
 import { StudioNav } from "@/components/studio/studio-nav"
 import { StudioHero } from "@/components/studio/studio-hero"
+import { Ticker } from "@/components/studio/ticker"
 import { SundownFeature } from "@/components/studio/sundown-feature"
 import { YoursTeaser } from "@/components/studio/yours-teaser"
 import { GamesIndex } from "@/components/studio/games-index"
@@ -14,6 +15,7 @@ export default function StudioPage() {
       <StudioNav />
       <main>
         <StudioHero />
+        <Ticker />
         <SundownFeature />
         <YoursTeaser />
         <GamesIndex />

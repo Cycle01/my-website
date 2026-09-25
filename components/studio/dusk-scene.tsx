@@ -1,63 +1,14 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
 import { asset } from "@/lib/asset"
+import { ShaderScene } from "@/components/studio/shader-scene"
 
 /*
-  The studio's hero scene: a fire lookout tower on a forest ridge at sundown,
-  with one light left on. Drawn in a single fragment shader (no 3D library):
-  four parallax ridgelines of pines, a low sun, drifting fog and a lit cabin
-  window. The poster images are frames of this same shader, used as the
-  static fallback and as the placeholder while WebGL starts.
+  Secrets of Sundown 2's scene: a fire lookout tower on a forest ridge at
+  sundown, with one light left on. Four parallax ridgelines of pines, a low
+  sun, drifting fog and a lit cabin window, all in one fragment shader.
+  The poster images are frames of this same shader.
 */
 
-const VERT = `
-attribute vec2 aPos;
-void main() { gl_Position = vec4(aPos, 0.0, 1.0); }
-`
-
 const FRAG = `
-precision mediump float;
-uniform vec2 uRes;
-uniform float uTime;
-uniform vec2 uMouse;
-
-float hash(float n) { return fract(sin(n) * 43758.5453); }
-float hash2(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
-float noise(float x) {
-  float i = floor(x); float f = fract(x);
-  return mix(hash(i), hash(i + 1.0), f * f * (3.0 - 2.0 * f));
-}
-float noise2(vec2 p) {
-  vec2 i = floor(p); vec2 f = fract(p); vec2 u = f * f * (3.0 - 2.0 * f);
-  return mix(mix(hash2(i), hash2(i + vec2(1.0, 0.0)), u.x),
-             mix(hash2(i + vec2(0.0, 1.0)), hash2(i + vec2(1.0, 1.0)), u.x), u.y);
-}
-float fbm(vec2 p) {
-  float v = 0.0; float a = 0.5;
-  for (int i = 0; i < 4; i++) { v += a * noise2(p); p *= 2.03; a *= 0.5; }
-  return v;
-}
-
-// Height of a ridge of pines at x: soft hills plus overlapping triangular trees.
-float ridge(float x, float seed, float dens, float treeH) {
-  float hills = noise(x * 1.3 + seed) * 0.06 + noise(x * 3.7 + seed * 2.0) * 0.02;
-  float cx = x * dens;
-  float c = floor(cx);
-  float top = 0.0;
-  for (int k = -1; k <= 1; k++) {
-    float ci = c + float(k);
-    float center = ci + 0.5 + (hash(ci + seed) - 0.5) * 0.6;
-    float h = treeH * mix(0.35, 1.0, hash(ci * 1.7 + seed * 3.0));
-    float w = mix(0.28, 0.46, hash(ci * 2.3 + seed));
-    float d = abs(cx - center) / w;
-    // Slightly ragged edges so the pines read as branches, not paper triangles.
-    float tiers = 0.12 * (1.0 - d) * abs(sin((1.0 - d) * 9.0 + ci));
-    top = max(top, h * (1.0 - d) * (1.0 - tiers));
-  }
-  return hills + max(top, 0.0);
-}
-
 float sdSeg(vec2 p, vec2 a, vec2 b) {
   vec2 pa = p - a; vec2 ba = b - a;
   float h = clamp(dot(pa, ba) / dot(ba, ba), 0.0, 1.0);
@@ -162,160 +113,14 @@ void main() {
 }
 `
 
-function compile(gl: WebGLRenderingContext, type: number, src: string) {
-  const sh = gl.createShader(type)
-  if (!sh) return null
-  gl.shaderSource(sh, src)
-  gl.compileShader(sh)
-  if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
-    gl.deleteShader(sh)
-    return null
-  }
-  return sh
-}
-
 export function DuskScene({ className = "" }: { className?: string }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [live, setLive] = useState(false)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const finePointer = window.matchMedia("(pointer: fine)").matches
-    const small = window.matchMedia("(max-width: 768px)").matches
-    let raf = 0
-    let running = false
-    let onScreen = true
-    let disposed = false
-    let cleanupGl = () => {}
-
-    const start = () => {
-      if (disposed) return
-      const gl = canvas.getContext("webgl", { antialias: false, alpha: false, powerPreference: "low-power" })
-      if (!gl) return // poster stays
-
-      const vs = compile(gl, gl.VERTEX_SHADER, VERT)
-      const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG)
-      if (!vs || !fs) return
-      const prog = gl.createProgram()!
-      gl.attachShader(prog, vs)
-      gl.attachShader(prog, fs)
-      gl.linkProgram(prog)
-      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return
-      gl.useProgram(prog)
-
-      const buf = gl.createBuffer()
-      gl.bindBuffer(gl.ARRAY_BUFFER, buf)
-      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
-      const loc = gl.getAttribLocation(prog, "aPos")
-      gl.enableVertexAttribArray(loc)
-      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0)
-
-      const uRes = gl.getUniformLocation(prog, "uRes")
-      const uTime = gl.getUniformLocation(prog, "uTime")
-      const uMouse = gl.getUniformLocation(prog, "uMouse")
-
-      // Render below native resolution: the scene is soft by design, and phones
-      // get the lightest setting.
-      const scale = small ? 0.5 : Math.min(window.devicePixelRatio || 1, 1.5) * 0.75
-      const resize = () => {
-        const w = Math.max(1, Math.round(canvas.clientWidth * scale))
-        const h = Math.max(1, Math.round(canvas.clientHeight * scale))
-        if (canvas.width !== w || canvas.height !== h) {
-          canvas.width = w
-          canvas.height = h
-          gl.viewport(0, 0, w, h)
-        }
-      }
-
-      const mouse = { x: 0, y: 0, tx: 0, ty: 0 }
-      const onPointer = (e: PointerEvent) => {
-        mouse.tx = (e.clientX / window.innerWidth) * 2 - 1
-        mouse.ty = -((e.clientY / window.innerHeight) * 2 - 1)
-      }
-      if (finePointer && !reduced) window.addEventListener("pointermove", onPointer, { passive: true })
-
-      const t0 = performance.now()
-      const draw = (now: number) => {
-        resize()
-        mouse.x += (mouse.tx - mouse.x) * 0.05
-        mouse.y += (mouse.ty - mouse.y) * 0.05
-        gl.uniform2f(uRes, canvas.width, canvas.height)
-        gl.uniform1f(uTime, reduced ? 12 : 12 + (now - t0) / 1000)
-        gl.uniform2f(uMouse, mouse.x, mouse.y)
-        gl.drawArrays(gl.TRIANGLES, 0, 3)
-      }
-
-      const loop = (now: number) => {
-        draw(now)
-        raf = running ? requestAnimationFrame(loop) : 0
-      }
-      const setRunning = (on: boolean) => {
-        if (reduced) return
-        if (on && !running) {
-          running = true
-          raf = requestAnimationFrame(loop)
-        } else if (!on && running) {
-          running = false
-          cancelAnimationFrame(raf)
-          raf = 0
-        }
-      }
-
-      draw(performance.now())
-      setLive(true)
-      setRunning(onScreen && !document.hidden)
-
-      // Pause when scrolled away or the tab is hidden.
-      const io = new IntersectionObserver(([entry]) => {
-        onScreen = entry.isIntersecting
-        setRunning(onScreen && !document.hidden)
-      })
-      io.observe(canvas)
-      const onVis = () => setRunning(onScreen && !document.hidden)
-      document.addEventListener("visibilitychange", onVis)
-      const onResize = () => reduced && draw(performance.now())
-      window.addEventListener("resize", onResize)
-
-      cleanupGl = () => {
-        setRunning(false)
-        io.disconnect()
-        document.removeEventListener("visibilitychange", onVis)
-        window.removeEventListener("resize", onResize)
-        window.removeEventListener("pointermove", onPointer)
-        gl.getExtension("WEBGL_lose_context")?.loseContext()
-      }
-    }
-
-    // Let the page's text and images load first; the poster covers the wait.
-    const hasIdle = typeof window.requestIdleCallback === "function"
-    const idle = hasIdle ? window.requestIdleCallback(start, { timeout: 1200 }) : window.setTimeout(start, 300)
-
-    return () => {
-      disposed = true
-      if (hasIdle) window.cancelIdleCallback(idle)
-      else window.clearTimeout(idle)
-      cleanupGl()
-    }
-  }, [])
-
   return (
-    <div className={`absolute inset-0 overflow-hidden bg-[#0d0706] ${className}`} aria-hidden="true">
-      <picture>
-        <source media="(max-width: 768px)" srcSet={asset("/images/studio/dusk-poster-mobile.webp")} />
-        <img
-          src={asset("/images/studio/dusk-poster.webp")}
-          alt=""
-          fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-      </picture>
-      <canvas
-        ref={canvasRef}
-        className={`absolute inset-0 h-full w-full transition-opacity duration-700 ${live ? "opacity-100" : "opacity-0"}`}
-      />
-    </div>
+    <ShaderScene
+      frag={FRAG}
+      poster={asset("/images/studio/dusk-poster.webp")}
+      posterMobile={asset("/images/studio/dusk-poster-mobile.webp")}
+      background="#0d0706"
+      className={className}
+    />
   )
 }
