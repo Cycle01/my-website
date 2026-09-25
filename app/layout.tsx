@@ -24,21 +24,10 @@ export const metadata: Metadata = {
   generator: 'v0.app',
   icons: {
     icon: [
-      {
-        url: asset('/icon-light-32x32.png'),
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: asset('/icon-dark-32x32.png'),
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: asset('/icon.png'),
-        type: 'image/png',
-        sizes: '192x192',
-      },
+      { url: asset('/favicon-gold-32.png'), type: 'image/png', sizes: '32x32' },
+      { url: asset('/favicon-gold-192.png'), type: 'image/png', sizes: '192x192' },
     ],
-    apple: asset('/apple-icon.png'),
+    apple: asset('/apple-touch-icon-gold.png'),
   },
 }
 
