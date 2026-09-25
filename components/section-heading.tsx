@@ -24,7 +24,7 @@ export function SectionHeading({ kicker, zh, title, description, align = "left",
         <span lang="zh-Hans" className="font-brush text-lg leading-none text-accent/70">
           {zh}
         </span>
-        <span className={`h-px ${centered ? "w-8" : "max-w-[100px] flex-1"} ${toneLine}`} />
+        <span className={`heading-line h-px ${centered ? "w-8" : "max-w-[100px] flex-1"} ${toneLine}`} />
       </div>
       <h2 className="text-3xl font-bold leading-[1.1] text-foreground text-balance md:text-5xl">{title}</h2>
       {description && <div className="mt-6 text-lg leading-relaxed text-muted-foreground">{description}</div>}

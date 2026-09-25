@@ -11,7 +11,7 @@ const items: { text: string; zh?: boolean }[] = [
   { text: "Moonfall: Protocol" },
   { text: "Unreal Engine 5" },
   { text: "平安", zh: true },
-  { text: "Godot" },
+  { text: "CyborgDash" },
   { text: "Vibe Coding" },
 ]
 

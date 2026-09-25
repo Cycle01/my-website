@@ -4,7 +4,7 @@ name: Deploy to GitHub Pages
 # served at https://cycle01.github.io/my-website/.
 on:
   push:
-    branches: [main, claude/fervent-brown-y1eqv2]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

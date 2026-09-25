@@ -8,7 +8,6 @@ import { ProjectsSection } from "@/components/projects-section"
 import { FlingItSection } from "@/components/fling-it-section"
 import { VibeCodingSection } from "@/components/vibe-coding-section"
 import { ArchiveSection } from "@/components/archive-section"
-import { SkillsSection } from "@/components/skills-section"
 import { DedicationSection } from "@/components/dedication-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
@@ -28,7 +27,6 @@ export default function HomePage() {
       <FlingItSection />
       <VibeCodingSection />
       <ArchiveSection />
-      <SkillsSection />
       <DedicationSection />
       <ContactSection />
       <Footer />

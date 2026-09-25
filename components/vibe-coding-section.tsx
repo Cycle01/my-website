@@ -83,7 +83,10 @@ export function VibeCodingSection() {
           description={
             <>
               <p>
-                {"Outside the game engine, I build with vibe coding. I describe what I want in plain language, pair with AI to write and refactor the code, and spend my own time on what actually matters: the idea, how it feels, testing it in a real browser, and polishing it until it's worth publishing."}
+                {"I started vibe coding because I want to stay in step with where the industry is going. AI is changing how software gets made, and I'd rather learn it by shipping real things than watch from the side."}
+              </p>
+              <p className="mt-4">
+                {"Outside the game engine, this is how I build now. I describe what I want in plain language, pair with AI to write and refactor the code, and spend my own time on what actually matters: the idea, how it feels, testing it in a real browser, and polishing it until it's worth publishing."}
               </p>
               <p className="mt-4">
                 {"It turns \"I wish this existed\" into a shipped tool in a fraction of the time. Three of them are live right now."}
@@ -148,7 +151,7 @@ export function VibeCodingSection() {
                     href={ext.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group inline-flex items-center gap-2 rounded-xl px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white transition-all ${accent.button}`}
+                    className={`btn-shine group inline-flex items-center gap-2 rounded-xl px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white transition-all ${accent.button}`}
                   >
                     Get it on the Chrome Web Store
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

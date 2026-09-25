@@ -1,7 +1,7 @@
 "use client"
 
 import { ArrowDown, ArrowRight } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { FallingPetals, Lantern, Seal } from "@/components/chinese-decor"
 
 const roles = ["horror games", "a mobile game", "Chrome extensions", "playful prototypes"]
@@ -9,6 +9,39 @@ const roles = ["horror games", "a mobile game", "Chrome extensions", "playful pr
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
   const [roleIndex, setRoleIndex] = useState(0)
+  const sectionRef = useRef<HTMLElement>(null)
+  const spotRef = useRef<HTMLDivElement>(null)
+
+  // Warm light that trails the mouse across the hero (mouse/trackpad only).
+  useEffect(() => {
+    const section = sectionRef.current
+    const spot = spotRef.current
+    if (!section || !spot || !window.matchMedia("(pointer: fine)").matches) return
+    let raf = 0
+    let x = 0
+    let y = 0
+    const apply = () => {
+      raf = 0
+      spot.style.transform = `translate3d(${x - 300}px, ${y - 300}px, 0)`
+      spot.style.opacity = "1"
+    }
+    const onMove = (e: PointerEvent) => {
+      const r = section.getBoundingClientRect()
+      x = e.clientX - r.left
+      y = e.clientY - r.top
+      if (!raf) raf = requestAnimationFrame(apply)
+    }
+    const onLeave = () => {
+      spot.style.opacity = "0"
+    }
+    section.addEventListener("pointermove", onMove)
+    section.addEventListener("pointerleave", onLeave)
+    return () => {
+      cancelAnimationFrame(raf)
+      section.removeEventListener("pointermove", onMove)
+      section.removeEventListener("pointerleave", onLeave)
+    }
+  }, [])
 
   useEffect(() => {
     setMounted(true)
@@ -17,7 +50,14 @@ export function HeroSection() {
   }, [])
 
   return (
-    <section id="home" className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-32">
+    <section ref={sectionRef} id="home" className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-32">
+      <div
+        ref={spotRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 top-0 h-[600px] w-[600px] rounded-full opacity-0 transition-opacity duration-700"
+        style={{ background: "radial-gradient(circle, oklch(0.63 0.22 25 / 0.12), transparent 60%)" }}
+      />
+
       {/* Large radial glow */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-primary/[0.06] blur-[150px]" />
       <div className="pointer-events-none absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-accent/[0.05] blur-[120px]" />
@@ -81,7 +121,13 @@ export function HeroSection() {
 
         {/* Title */}
         <h1 className="mb-8 text-5xl font-bold leading-[1.1] tracking-tight text-foreground md:text-7xl lg:text-8xl text-balance">
-          <span>{"Cycle's "}</span>
+          <span aria-label="Cycle's" className="whitespace-nowrap">
+            {"Cycle's".split("").map((ch, i) => (
+              <span key={i} aria-hidden="true" className="animate-letter" style={{ animationDelay: `${150 + i * 60}ms` }}>
+                {ch}
+              </span>
+            ))}
+          </span>{" "}
           <span className="relative inline-block">
             <span
               className="relative inline-block text-transparent bg-clip-text text-glow"
@@ -109,7 +155,7 @@ export function HeroSection() {
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
             href="#projects"
-            className="group relative inline-flex items-center gap-2 overflow-hidden bg-primary px-8 py-3.5 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_40px_rgba(180,50,20,0.4)] rounded-lg"
+            className="btn-shine group relative inline-flex items-center gap-2 overflow-hidden bg-primary px-8 py-3.5 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_40px_rgba(180,50,20,0.4)] rounded-lg"
           >
             <span className="relative z-10">Explore My Work</span>
             <div className="absolute inset-0 bg-accent/30 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
