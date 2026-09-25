@@ -20,7 +20,7 @@ export interface ArchiveProject {
   tags: string[]
   /** Post with the clip (X or Reddit). Opens in an in-page player. */
   clip: { url: string; embed: string; source: "X" | "Reddit" }
-  /** Local .mp4 in /public/videos. When present it autoplays on hover. */
+  /** Local .mp4 in /public/videos. Autoplays on hover once the file exists; ignored if missing. */
   video?: string
   note?: string
 }
@@ -117,7 +117,7 @@ export const releasedGames: Game[] = [
 
 export const sundown2 = {
   title: "Secrets of Sundown 2",
-  image: asset("/images/secrets-of-sundown-2.jpg"),
+  image: asset("/images/secrets-of-sundown-2-promo.jpg"),
   original: releasedGames[0],
   facts: [
     { label: "Engine", value: "Unreal Engine 5" },
@@ -130,6 +130,7 @@ export const sundown2 = {
 export const archiveProjects: ArchiveProject[] = [
   {
     title: "Spidey Game",
+    video: asset("/videos/spidey.mp4"),
     description:
       "One very large spider in a checkered test room. A creature experiment built to see how unsettling eight legs could look, and nothing more.",
     image: asset("/images/spidey-game.jpg"),
@@ -142,6 +143,7 @@ export const archiveProjects: ArchiveProject[] = [
   },
   {
     title: "Finding the Moose Man",
+    video: asset("/videos/moose-man.mp4"),
     description:
       "A foggy cryptid hunt through dense wilderness. Abandoned campsites, unsettling encounters, and a legend that may or may not be real.",
     image: asset("/images/finding-the-moose-man.jpg"),
@@ -154,6 +156,7 @@ export const archiveProjects: ArchiveProject[] = [
   },
   {
     title: "VORE",
+    video: asset("/videos/vore.mp4"),
     description:
       "A slick, retro-style zombie shooter: fast, simple, arcade-style waves of the undead.",
     image: asset("/images/vore.jpg"),
@@ -167,6 +170,7 @@ export const archiveProjects: ArchiveProject[] = [
   },
   {
     title: "Undercover: Homefront",
+    video: asset("/videos/undercover-homefront.mp4"),
     description:
       "Born from playing around with ideas in the engine and seeing what stuck. A small experiment that got shared with the IndieDev community.",
     tags: ["Unreal Engine 5", "Experiment"],

@@ -12,6 +12,8 @@ const tilts = ["-rotate-2", "rotate-[1.5deg]", "-rotate-1", "rotate-[2deg]"]
 
 function Preview({ project }: { project: ArchiveProject }) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  // Only reveal the clip once it actually loads, so a missing file keeps the still.
+  const [ready, setReady] = useState(false)
   const play = () => videoRef.current?.play().catch(() => {})
   const stop = () => {
     const v = videoRef.current
@@ -43,7 +45,8 @@ function Preview({ project }: { project: ArchiveProject }) {
           loop
           playsInline
           preload="metadata"
-          className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          onLoadedData={() => setReady(true)}
+          className={`absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 ${ready ? "group-hover:opacity-100" : ""}`}
         />
       )}
       <span className="absolute right-2 top-2 rotate-[6deg] rounded-sm border-2 border-[#c8241b] bg-[#f4ede1]/80 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8241b]">
@@ -55,6 +58,12 @@ function Preview({ project }: { project: ArchiveProject }) {
 
 export function ArchiveSection() {
   const [open, setOpen] = useState<ArchiveProject | null>(null)
+  const [videoFailed, setVideoFailed] = useState(false)
+
+  const openClip = (project: ArchiveProject) => {
+    setVideoFailed(false)
+    setOpen(project)
+  }
 
   useEffect(() => {
     if (!open) return
@@ -106,7 +115,7 @@ export function ArchiveSection() {
 
                 <button
                   type="button"
-                  onClick={() => setOpen(project)}
+                  onClick={() => openClip(project)}
                   className="relative block w-full text-left"
                   aria-label={`Watch the ${project.title} clip`}
                 >
@@ -171,8 +180,8 @@ export function ArchiveSection() {
               </button>
             </div>
             <div className="max-h-[80vh] overflow-auto rounded-xl border border-border bg-card">
-              {open.video ? (
-                <video src={open.video} controls autoPlay playsInline className="w-full" />
+              {open.video && !videoFailed ? (
+                <video src={open.video} controls autoPlay playsInline onError={() => setVideoFailed(true)} className="w-full" />
               ) : (
                 <iframe
                   src={open.clip.embed}
