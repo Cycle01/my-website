@@ -18,9 +18,9 @@ const _maShanZheng = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Cycle's Studios - Cycle01 Game Dev Portfolio",
+  title: "Cycle Studios — Atmospheric horror games for PC and mobile",
   description:
-    "Cycle01 is the solo indie developer behind Cycle's Studios: horror games in Unreal Engine 5, the mobile game Fling It, and vibe-coded Chrome extensions. Now building Secrets of Sundown 2.",
+    "Cycle Studios is a one-person game studio run by Bogdan (Cycle01), making atmospheric horror games for PC and mobile. Now building Secrets of Sundown 2.",
   generator: 'v0.app',
   icons: {
     icon: [

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { asset } from "@/lib/asset"
 
 const navLinks = [
@@ -80,6 +81,12 @@ export function Navigation() {
         </a>
 
         <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="hidden whitespace-nowrap rounded-full border border-border px-4 py-2 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary sm:inline-flex"
+          >
+            <span aria-hidden="true">←&nbsp;</span>Back to Studio
+          </Link>
           <button
             type="button"
             onClick={() => setOpen(!open)}
@@ -109,6 +116,12 @@ export function Navigation() {
       {open && (
         <div id="site-menu" className="border-t border-primary/10 bg-background">
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-2 px-6 py-6 sm:grid-cols-4">
+            <Link
+              href="/"
+              className="col-span-2 rounded-xl border border-accent/40 bg-accent/10 px-4 py-3 text-center font-mono text-xs uppercase tracking-[0.15em] text-accent sm:hidden"
+            >
+              <span aria-hidden="true">←&nbsp;</span>Back to Studio
+            </Link>
             {navLinks.map((link, i) => (
               <a
                 key={link.href}
