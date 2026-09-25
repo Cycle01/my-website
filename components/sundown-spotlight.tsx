@@ -79,7 +79,7 @@ export function SundownSpotlight() {
                 href={sundown2.original.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_40px_rgba(180,50,20,0.4)]"
+                className="btn-shine group inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-mono text-xs font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_40px_rgba(180,50,20,0.4)]"
               >
                 Play the original
                 <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { ExternalLink } from "lucide-react"
 import { Reveal } from "@/components/reveal"
+import { Tilt } from "@/components/tilt"
 import { SectionHeading } from "@/components/section-heading"
 import { jamStory, releasedGames, type Game } from "@/lib/projects"
 
@@ -62,6 +63,7 @@ export function ProjectsSection() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-6">
           {featured.map((project, i) => (
             <Reveal key={project.title} delay={i * 120}>
+              <Tilt className="rounded-2xl">
               <a
                 href={project.link}
                 target="_blank"
@@ -112,6 +114,7 @@ export function ProjectsSection() {
                   </div>
                 </div>
               </a>
+              </Tilt>
             </Reveal>
           ))}
         </div>
@@ -120,6 +123,7 @@ export function ProjectsSection() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {others.map((project, i) => (
             <Reveal key={project.title} delay={i * 100}>
+              <Tilt className="rounded-2xl">
               <a
                 href={project.link}
                 target="_blank"
@@ -168,6 +172,7 @@ export function ProjectsSection() {
                   </div>
                 </div>
               </a>
+              </Tilt>
             </Reveal>
           ))}
         </div>

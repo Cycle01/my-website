@@ -1,19 +1,26 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Mono, Ma_Shan_Zheng } from 'next/font/google'
+import { Inter, Space_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import { asset } from '@/lib/asset'
 import './globals.css'
 
 const _inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const _spaceMono = Space_Mono({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-space-mono" });
-// Brush calligraphy for the Chinese accents. The CJK glyphs ship as unicode-range
-// slices, so browsers only download the handful of characters the page uses.
-const _maShanZheng = Ma_Shan_Zheng({ weight: "400", subsets: ["latin"], variable: "--font-ma-shan-zheng", preload: false });
+// Brush calligraphy for the Chinese accents, subset to only the characters the
+// site uses (~28 KB instead of ~740 KB). Re-run `node scripts/subset-brush-font.mjs`
+// after adding new Chinese text.
+const _maShanZheng = localFont({
+  src: './fonts/ma-shan-zheng-subset.woff2',
+  variable: '--font-ma-shan-zheng',
+  display: 'swap',
+  preload: false,
+});
 
 export const metadata: Metadata = {
   title: "Cycle's Studios - Cycle01 Game Dev Portfolio",
   description:
-    "Cycle01 is the solo indie developer behind Cycle's Studios: horror games in Unreal Engine 5 and Godot, the mobile game Fling It, and vibe-coded Chrome extensions. Now building Secrets of Sundown 2.",
+    "Cycle01 is the solo indie developer behind Cycle's Studios: horror games in Unreal Engine 5, the mobile game Fling It, and vibe-coded Chrome extensions. Now building Secrets of Sundown 2.",
   generator: 'v0.app',
   icons: {
     icon: [
@@ -28,7 +35,7 @@ export const metadata: Metadata = {
       {
         url: asset('/icon.png'),
         type: 'image/png',
-        sizes: '512x512',
+        sizes: '192x192',
       },
     ],
     apple: asset('/apple-icon.png'),

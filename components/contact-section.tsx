@@ -39,7 +39,7 @@ export function ContactSection() {
 
           <a
             href="mailto:ciclentiu@gmail.com"
-            className="group relative mb-14 inline-flex items-center gap-2.5 overflow-hidden rounded-xl bg-primary px-10 py-4 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_40px_rgba(180,50,20,0.3)]"
+            className="btn-shine group relative mb-14 inline-flex items-center gap-2.5 overflow-hidden rounded-xl bg-primary px-10 py-4 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_40px_rgba(180,50,20,0.3)]"
           >
             <Mail className="h-4 w-4 relative z-10" />
             <span className="relative z-10">Get in Touch</span>

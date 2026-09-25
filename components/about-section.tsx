@@ -15,9 +15,9 @@ const highlights = [
   },
   {
     icon: Code2,
-    title: "UE5 & Godot",
+    title: "Unreal Engine 5",
     description:
-      "Building with C++, Blueprints, and GDScript. From rapid prototypes to polished releases.",
+      "C++ and Blueprints, from rapid prototypes to polished releases. Still early days with Godot.",
     number: "02",
   },
   {
@@ -69,7 +69,7 @@ export function AboutSection() {
             <p>
               {"I go by "}
               <span className="font-semibold text-foreground">Cycle01</span>
-              {", the solo developer and the whole team behind Cycle's Studios. I design, code, light and sound my games myself, mostly in Unreal Engine 5 and Godot."}
+              {", the solo developer and the whole team behind Cycle's Studios. I design, code, light and sound my games myself, almost all of them in Unreal Engine 5."}
             </p>
             <p>
               {"I started with small projects, and every release since has been a step up: better visuals, tighter mechanics, stronger atmosphere. I'm drawn to tension and mystery. Suburbs that feel wrong, dungeons you need to escape, forests you shouldn't walk into alone."}

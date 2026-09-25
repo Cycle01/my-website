@@ -65,8 +65,9 @@ export function CustomCursor() {
       }
     }
 
-    // Smooth trailing animation for outer ring
-    let raf: number
+    // Smooth trailing animation for the outer ring. The loop only runs while
+    // the ring is catching up, so an idle mouse costs nothing.
+    let raf = 0
     const animate = () => {
       const dx = pos.current.x - outerPos.current.x
       const dy = pos.current.y - outerPos.current.y
@@ -76,9 +77,12 @@ export function CustomCursor() {
         const size = hovering.current ? 48 : 36
         outerRef.current.style.transform = `translate(${outerPos.current.x - size / 2}px, ${outerPos.current.y - size / 2}px)`
       }
-      raf = requestAnimationFrame(animate)
+      raf = Math.abs(dx) + Math.abs(dy) > 0.3 ? requestAnimationFrame(animate) : 0
     }
-    raf = requestAnimationFrame(animate)
+    const wake = () => {
+      if (!raf) raf = requestAnimationFrame(animate)
+    }
+    document.addEventListener("mousemove", wake)
 
     document.addEventListener("mousemove", onMove)
     document.addEventListener("mouseleave", onLeave)
@@ -100,6 +104,7 @@ export function CustomCursor() {
 
     return () => {
       cancelAnimationFrame(raf)
+      document.removeEventListener("mousemove", wake)
       document.removeEventListener("mousemove", onMove)
       document.removeEventListener("mouseleave", onLeave)
       document.removeEventListener("mouseenter", onEnter)

@@ -20,10 +20,8 @@ export interface ArchiveProject {
   description: string
   image?: string
   tags: string[]
-  /** Post with the clip (X or Reddit). Opens in an in-page player. */
-  clip: { url: string; embed: string; source: "X" | "Reddit" }
-  /** Local .mp4 in /public/videos. Autoplays on hover once the file exists; ignored if missing. */
-  video?: string
+  /** Post with the clip (X or Reddit). The card links straight to it. */
+  clip: { url: string; source: "X" | "Reddit" }
   note?: string
 }
 
@@ -57,7 +55,7 @@ export const releasedGames: Game[] = [
     title: "Secrets of Sundown",
     description:
       "A first-person psychological horror game set in the strange suburb of Sundown. Explore a semi-open world, make choice-driven decisions, and uncover sinister secrets. Features VHS-style graphics, stalker mechanics, and dynamic environments.",
-    image: asset("/images/secrets-of-sundown.jpg"),
+    image: asset("/images/secrets-of-sundown.webp"),
     tags: ["Unreal Engine 5", "C++", "Blueprints", "Horror"],
     year: "2025",
     link: "https://cycle01.itch.io/secrets-of-sundown",
@@ -69,7 +67,7 @@ export const releasedGames: Game[] = [
     title: "Moonfall: Protocol",
     description:
       "A co-op survival horror for 1 to 4 players. A dream mission to walk on the moon turns into a nightmare: a hidden base, strange astronauts, and a portal into a twisted dimension. Work together to gather evidence, power ten control points and get the generator running to go home.",
-    image: asset("/images/moonfall-protocol.jpg"),
+    image: asset("/images/moonfall-protocol.webp"),
     tags: ["Unreal Engine 5", "Co-op", "Survival Horror", "Sci-Fi"],
     year: "2025",
     link: "https://store.steampowered.com/app/3973560/Moonfall_Protocol/",
@@ -80,7 +78,7 @@ export const releasedGames: Game[] = [
     title: "IronMade",
     description:
       "An action-packed medieval adventure. Play as a nameless knight escaping a dungeon with one goal: finding his daughter Sara. Fight through twisted creatures and haunting ruins in a tale of love, survival, and redemption.",
-    image: asset("/images/ironmade-screenshot.jpg"),
+    image: asset("/images/ironmade-screenshot.webp"),
     tags: ["Unreal Engine 5", "C++", "Action", "Medieval"],
     year: "2024",
     link: "https://cycle01.itch.io/ironmade",
@@ -92,7 +90,7 @@ export const releasedGames: Game[] = [
     title: "Safe Place",
     description:
       "Play as a time traveler stuck in the wrong dimension -- a gray, lifeless place crawling with patrolling robots. Solve five puzzles, avoid traps, and get your travel system back online with help from Bobbie, your AI companion.",
-    image: asset("/images/safe-place.jpg"),
+    image: asset("/images/safe-place.webp"),
     tags: ["Unreal Engine 5", "Blueprints", "Puzzle", "Sci-Fi"],
     year: "2025",
     link: "https://cycle01.itch.io/safe-place",
@@ -102,7 +100,7 @@ export const releasedGames: Game[] = [
     title: "CyborgDash",
     description:
       "2099. The Republic of Gamers rules humanity. As KAEL-7, a maintenance engineer turned rebel, sprint through the ROG Citadel with the stolen Source Code, dodging elite droids and deadly traps. Built in two weeks during my finals.",
-    image: asset("/images/cyborgdash.png"),
+    image: asset("/images/cyborgdash.webp"),
     tags: ["Side-scroller", "Action", "Game Jam"],
     year: "2026",
     link: "https://cycle01.itch.io/cyborgdash",
@@ -113,7 +111,7 @@ export const releasedGames: Game[] = [
     title: "The Way Back Ball",
     description:
       "A gust of wind blew a ball into the dark side of the Republic of Gamers city. Roll, bounce and ricochet it back to its owner through physics puzzles and tricky platforming. Made in a single day, playable in the browser.",
-    image: asset("/images/thewaybackball.png"),
+    image: asset("/images/thewaybackball.webp"),
     tags: ["Unreal Engine 4", "Platformer", "Browser"],
     year: "2024",
     link: "https://cycle01.itch.io/thewaybackball",
@@ -124,7 +122,7 @@ export const releasedGames: Game[] = [
 
 export const sundown2 = {
   title: "Secrets of Sundown 2",
-  image: asset("/images/secrets-of-sundown-2-promo.jpg"),
+  image: asset("/images/secrets-of-sundown-2-promo.webp"),
   original: releasedGames[0],
   facts: [
     { label: "Engine", value: "Unreal Engine 5" },
@@ -137,53 +135,45 @@ export const sundown2 = {
 export const archiveProjects: ArchiveProject[] = [
   {
     title: "Spidey Game",
-    video: asset("/videos/spidey.mp4"),
     description:
       "One very large spider in a checkered test room. A creature experiment built to see how unsettling eight legs could look, and nothing more.",
-    image: asset("/images/spidey-game.jpg"),
+    image: asset("/images/spidey-game.webp"),
     tags: ["Unreal Engine 5", "Blueprints", "Creature"],
     clip: {
       url: "https://x.com/cycledadev/status/2024416945043329456",
-      embed: "https://platform.twitter.com/embed/Tweet.html?id=2024416945043329456&theme=dark&dnt=true",
       source: "X",
     },
   },
   {
     title: "Finding the Moose Man",
-    video: asset("/videos/moose-man.mp4"),
     description:
       "A foggy cryptid hunt through dense wilderness. Abandoned campsites, unsettling encounters, and a legend that may or may not be real.",
-    image: asset("/images/finding-the-moose-man.jpg"),
+    image: asset("/images/finding-the-moose-man.webp"),
     tags: ["Unreal Engine 5", "C++", "Exploration"],
     clip: {
       url: "https://x.com/cycledadev/status/2024786219792568532",
-      embed: "https://platform.twitter.com/embed/Tweet.html?id=2024786219792568532&theme=dark&dnt=true",
       source: "X",
     },
   },
   {
     title: "VORE",
-    video: asset("/videos/vore.mp4"),
     description:
       "A slick, retro-style zombie shooter: fast, simple, arcade-style waves of the undead.",
-    image: asset("/images/vore.jpg"),
+    image: asset("/images/vore.webp"),
     tags: ["Unreal Engine 5", "Blueprints", "Shooter"],
     clip: {
       url: "https://x.com/cycledadev/status/2027083762991845393",
-      embed: "https://platform.twitter.com/embed/Tweet.html?id=2027083762991845393&theme=dark&dnt=true",
       source: "X",
     },
     note: "I took VORE down myself because of the controversy around it. It stays here as an archive project.",
   },
   {
     title: "Undercover: Homefront",
-    video: asset("/videos/undercover-homefront.mp4"),
     description:
       "Born from playing around with ideas in the engine and seeing what stuck. A small experiment that got shared with the IndieDev community.",
     tags: ["Unreal Engine 5", "Experiment"],
     clip: {
       url: "https://www.reddit.com/r/IndieDev/comments/1o5jl4e/i_was_playing_around_with_things_and_made_this/",
-      embed: "https://embed.reddit.com/r/IndieDev/comments/1o5jl4e/i_was_playing_around_with_things_and_made_this/?embed=true&theme=dark",
       source: "Reddit",
     },
   },

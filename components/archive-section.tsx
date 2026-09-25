@@ -1,7 +1,4 @@
-"use client"
-
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
 import { Play, ExternalLink } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
@@ -11,27 +8,6 @@ import { archiveProjects, type ArchiveProject } from "@/lib/projects"
 const tilts = ["-rotate-2", "rotate-[1.5deg]", "-rotate-1", "rotate-[2deg]"]
 
 function Preview({ project }: { project: ArchiveProject }) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-  // Only reveal the clip once it actually loads, so a missing file keeps the still.
-  const [ready, setReady] = useState(false)
-  // Play while the pointer is anywhere over the card, not just the image.
-  useEffect(() => {
-    const v = videoRef.current
-    const card = v?.closest(".group")
-    if (!v || !card) return
-    const play = () => v.play().catch(() => {})
-    const stop = () => {
-      v.pause()
-      v.currentTime = 0
-    }
-    card.addEventListener("mouseenter", play)
-    card.addEventListener("mouseleave", stop)
-    return () => {
-      card.removeEventListener("mouseenter", play)
-      card.removeEventListener("mouseleave", stop)
-    }
-  }, [])
-
   return (
     <div className="relative aspect-[16/10] overflow-hidden bg-black">
       {project.image ? (
@@ -46,20 +22,6 @@ function Preview({ project }: { project: ArchiveProject }) {
         <div className="absolute inset-0 flex flex-col items-center justify-start bg-[radial-gradient(circle_at_30%_30%,#3a2a1e,#0d0a08_70%)] p-4 pt-[14%] text-center">
           <span className="font-bold uppercase tracking-[0.1em] text-[#f4ede1] text-2xl">{project.title}</span>
         </div>
-      )}
-      {project.video && (
-        <video
-          ref={videoRef}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          onLoadedData={() => setReady(true)}
-          className={`absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 ${ready ? "group-hover:opacity-100" : ""}`}
-        >
-          <source src={project.video.replace(/\.mp4$/, ".webm")} type="video/webm" />
-          <source src={project.video} type="video/mp4" />
-        </video>
       )}
       <span className="absolute right-2 top-2 rotate-[6deg] rounded-sm border-2 border-[#c8241b] bg-[#f4ede1]/80 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8241b]">
         For fun
@@ -88,7 +50,7 @@ export function ArchiveSection() {
             title="Made just for fun"
             description={
               <p>
-                {"Not every project needs a launch date. These were built for the joy of it: to try a mechanic, learn a system, or chase a silly idea. Hover to preview, click to watch the full clip."}
+                {"Not every project needs a launch date. These were built for the joy of it: to try a mechanic, learn a system, or chase a silly idea. Click any of them to watch the clip."}
               </p>
             }
           />
@@ -114,9 +76,10 @@ export function ArchiveSection() {
                   aria-label={`Watch the full ${project.title} clip on ${project.clip.source}`}
                 >
                   <Preview project={project} />
-                  <span className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-0">
-                    <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm">
-                      <Play className="ml-0.5 h-6 w-6 fill-current" />
+                  <span className="absolute inset-0 flex items-center justify-center">
+                    <span className="flex items-center gap-2 rounded-full bg-black/60 py-2.5 pl-3 pr-4 font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-white backdrop-blur-sm transition-all duration-300 group-hover:scale-105 group-hover:bg-[#c8241b]">
+                      <Play className="h-4 w-4 fill-current" />
+                      Watch on {project.clip.source}
                     </span>
                   </span>
                 </a>
