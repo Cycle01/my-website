@@ -18,14 +18,6 @@ export function HeroSection() {
 
   return (
     <section id="home" className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-32">
-      {/* Film grain overlay */}
-      <div className="pointer-events-none absolute inset-0 z-20 opacity-[0.03] animate-grain" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 256 256\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noise\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"4\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noise)\" opacity=\"1\"/%3E%3C/svg%3E')" }} />
-
-      {/* Scanline effect */}
-      <div className="pointer-events-none absolute inset-0 z-20 overflow-hidden opacity-[0.02]">
-        <div className="absolute inset-0 animate-scanline" style={{ background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)" }} />
-      </div>
-
       {/* Large radial glow */}
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-primary/[0.06] blur-[150px]" />
       <div className="pointer-events-none absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-accent/[0.05] blur-[120px]" />
@@ -111,10 +103,7 @@ export function HeroSection() {
         </p>
 
         <p className="mx-auto mb-12 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          Solo indie developer crafting immersive worlds in
-          <span className="text-primary font-semibold"> Unreal Engine 5</span> and
-          <span className="text-accent font-semibold"> Godot</span>, building a mobile game about flinging astronauts, and
-          vibe coding tools for the browser.
+          {"I'm Cycle01. I make horror games in Unreal Engine 5, plus whatever else I get curious about. Seven games released so far, and Secrets of Sundown 2 is next."}
         </p>
 
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

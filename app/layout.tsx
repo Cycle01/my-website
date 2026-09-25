@@ -26,8 +26,9 @@ export const metadata: Metadata = {
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: asset('/icon.svg'),
-        type: 'image/svg+xml',
+        url: asset('/icon.png'),
+        type: 'image/png',
+        sizes: '512x512',
       },
     ],
     apple: asset('/apple-icon.png'),
