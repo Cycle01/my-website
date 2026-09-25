@@ -1,8 +1,10 @@
-import { Mail, Youtube, Twitter } from "lucide-react"
+import { Github, Mail, Youtube, Twitter } from "lucide-react"
+import { Reveal } from "@/components/reveal"
 
 const socials = [
   { icon: Youtube, label: "YouTube", href: "https://youtube.com/@cycle01" },
   { icon: Twitter, label: "X / Twitter", href: "https://twitter.com/cycledadev" },
+  { icon: Github, label: "GitHub", href: "https://github.com/Cycle01" },
   { icon: Mail, label: "Email", href: "mailto:ciclentiu@gmail.com" },
 ]
 
@@ -17,11 +19,14 @@ export function ContactSection() {
       <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/[0.03] blur-[120px]" />
 
       <div className="mx-auto max-w-6xl">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex items-center justify-center gap-4 mb-6">
             <span className="h-px w-8 bg-primary/30" />
             <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
               Contact
+            </span>
+            <span lang="zh-Hans" className="font-brush text-lg leading-none text-accent/70">
+              联系
             </span>
             <span className="h-px w-8 bg-primary/30" />
           </div>
@@ -29,7 +34,7 @@ export function ContactSection() {
             {"Let's work together"}
           </h2>
           <p className="mb-14 text-lg leading-relaxed text-muted-foreground">
-            {"Interested in collaborating, have feedback on one of my games, or just want to chat about game dev? Reach out anytime."}
+            {"Interested in collaborating, have feedback on one of my games or extensions, or just want to chat about game dev and vibe coding? Reach out anytime."}
           </p>
 
           <a
@@ -64,7 +69,7 @@ export function ContactSection() {
               <span className="font-mono text-xs font-bold tracking-wide">itch.io</span>
             </a>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

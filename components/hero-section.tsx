@@ -1,17 +1,23 @@
 "use client"
 
-import { ArrowDown } from "lucide-react"
+import { ArrowDown, ArrowRight } from "lucide-react"
 import { useEffect, useState } from "react"
+import { FallingPetals, Lantern, Seal } from "@/components/chinese-decor"
+
+const roles = ["horror games", "a mobile game", "Chrome extensions", "playful prototypes"]
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
+  const [roleIndex, setRoleIndex] = useState(0)
 
   useEffect(() => {
     setMounted(true)
+    const timer = window.setInterval(() => setRoleIndex((i) => (i + 1) % roles.length), 2600)
+    return () => window.clearInterval(timer)
   }, [])
 
   return (
-    <section id="home" className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6">
+    <section id="home" className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 pt-28 pb-32">
       {/* Film grain overlay */}
       <div className="pointer-events-none absolute inset-0 z-20 opacity-[0.03] animate-grain" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\"0 0 256 256\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noise\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"4\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noise)\" opacity=\"1\"/%3E%3C/svg%3E')" }} />
 
@@ -21,8 +27,8 @@ export function HeroSection() {
       </div>
 
       {/* Large radial glow */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-primary/[0.05] blur-[150px]" />
-      <div className="pointer-events-none absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-accent/[0.04] blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-primary/[0.06] blur-[150px]" />
+      <div className="pointer-events-none absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-accent/[0.05] blur-[120px]" />
 
       {/* Grid background */}
       <div
@@ -34,22 +40,33 @@ export function HeroSection() {
         }}
       />
 
-      {/* Decorative corner brackets */}
-      <div className="pointer-events-none absolute top-24 left-8 hidden lg:block">
-        <div className="w-16 h-px bg-primary/30" />
-        <div className="w-px h-16 bg-primary/30" />
+      <FallingPetals />
+
+      {/* Hanging lanterns */}
+      <div className="pointer-events-none absolute top-[190px] left-3 z-10 origin-top scale-[0.6] md:top-0 md:left-[10%] md:scale-100">
+        <Lantern glyph="福" size={52} string={70} />
       </div>
-      <div className="pointer-events-none absolute top-24 right-8 hidden lg:block">
-        <div className="w-16 h-px bg-accent/30 ml-auto" />
-        <div className="w-px h-16 bg-accent/30 ml-auto" />
+      <div className="pointer-events-none absolute top-0 left-[20%] z-10 hidden md:block">
+        <Lantern glyph="安" size={38} string={120} delay={1.2} duration={6} />
       </div>
-      <div className="pointer-events-none absolute bottom-24 left-8 hidden lg:block">
-        <div className="w-px h-16 bg-accent/30" />
-        <div className="w-16 h-px bg-accent/30" />
+      <div className="pointer-events-none absolute top-[190px] right-3 z-10 origin-top scale-[0.6] md:top-0 md:right-[12%] md:scale-100">
+        <Lantern glyph="梦" size={46} string={96} delay={0.6} duration={5.5} />
       </div>
-      <div className="pointer-events-none absolute bottom-24 right-8 hidden lg:block">
-        <div className="w-px h-16 bg-primary/30 ml-auto" />
-        <div className="w-16 h-px bg-primary/30 ml-auto" />
+
+      {/* Vertical calligraphy */}
+      <div
+        lang="zh-Hans"
+        aria-hidden="true"
+        className="pointer-events-none absolute right-8 top-1/2 hidden -translate-y-1/2 font-brush text-4xl tracking-[0.3em] text-accent/25 vertical-text lg:block"
+      >
+        循环工作室
+      </div>
+      <div
+        lang="zh-Hans"
+        aria-hidden="true"
+        className="pointer-events-none absolute left-8 top-1/2 hidden -translate-y-1/2 font-brush text-3xl tracking-[0.3em] text-primary/25 vertical-text lg:block"
+      >
+        创造世界
       </div>
 
       {/* Main content */}
@@ -58,22 +75,46 @@ export function HeroSection() {
           mounted ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
         }`}
       >
+        <a
+          href="#sundown-2"
+          className="group mb-10 inline-flex items-center gap-3 rounded-full border border-primary/30 bg-primary/10 py-1.5 pl-3 pr-4 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground backdrop-blur-md transition-all hover:border-primary/60 hover:bg-primary/20"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+          </span>
+          Now building · Secrets of Sundown 2
+          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+        </a>
+
         {/* Title */}
         <h1 className="mb-8 text-5xl font-bold leading-[1.1] tracking-tight text-foreground md:text-7xl lg:text-8xl text-balance">
           <span>{"Cycle's "}</span>
-          <span
-            className="relative inline-block text-transparent bg-clip-text text-glow"
-            style={{ backgroundImage: "linear-gradient(135deg, var(--primary), var(--accent))" }}
-          >
-            Studios
+          <span className="relative inline-block">
+            <span
+              className="relative inline-block text-transparent bg-clip-text text-glow"
+              style={{ backgroundImage: "linear-gradient(135deg, var(--primary), var(--accent))" }}
+            >
+              Studios
+            </span>
+            <span className="absolute -right-10 -top-6 hidden rotate-[8deg] sm:block">
+              <Seal text="循环" size={40} />
+            </span>
           </span>
         </h1>
 
-        <p className="mx-auto mb-12 max-w-lg text-lg leading-relaxed text-muted-foreground">
-          Indie game developer crafting immersive worlds in
+        <p className="mb-6 font-mono text-sm uppercase tracking-[0.25em] text-muted-foreground md:text-base">
+          I make{" "}
+          <span key={roleIndex} className="inline-block text-accent animate-word-in">
+            {roles[roleIndex]}
+          </span>
+        </p>
+
+        <p className="mx-auto mb-12 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          Solo indie developer crafting immersive worlds in
           <span className="text-primary font-semibold"> Unreal Engine 5</span> and
-          <span className="text-accent font-semibold"> Godot</span>.
-          From horror to action. From concept to launch.
+          <span className="text-accent font-semibold"> Godot</span>, building a mobile game about flinging astronauts, and
+          vibe coding tools for the browser.
         </p>
 
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -81,7 +122,7 @@ export function HeroSection() {
             href="#projects"
             className="group relative inline-flex items-center gap-2 overflow-hidden bg-primary px-8 py-3.5 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_40px_rgba(180,50,20,0.4)] rounded-lg"
           >
-            <span className="relative z-10">View My Games</span>
+            <span className="relative z-10">Explore My Work</span>
             <div className="absolute inset-0 bg-accent/30 translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
           </a>
           <a

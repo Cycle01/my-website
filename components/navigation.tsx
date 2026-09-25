@@ -5,19 +5,42 @@ import Image from "next/image"
 
 const navLinks = [
   { href: "#about", label: "About" },
+  { href: "#sundown-2", label: "Sundown 2" },
   { href: "#projects", label: "Games" },
-  { href: "#skills", label: "Skills" },
+  { href: "#fling-it", label: "Fling It" },
+  { href: "#vibe-coding", label: "Tools" },
+  { href: "#archive", label: "Archive" },
   { href: "#contact", label: "Contact" },
 ]
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [active, setActive] = useState("")
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener("scroll", onScroll)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  // Highlight the link of the section currently crossing the middle of the viewport.
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined") return
+    const sections = navLinks
+      .map((link) => document.querySelector<HTMLElement>(link.href))
+      .filter((el): el is HTMLElement => el !== null)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`)
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    )
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
   return (
@@ -36,7 +59,7 @@ export function Navigation() {
               alt="Cycle's Studios logo"
               width={36}
               height={36}
-              className="relative z-10 transition-transform duration-300 group-hover:scale-110"
+              className="relative z-10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-8deg]"
             />
             <div className="absolute inset-0 bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
@@ -51,17 +74,28 @@ export function Navigation() {
         </a>
 
         {/* Desktop */}
-        <div className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link, i) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="relative px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground transition-all duration-300 hover:text-primary rounded-lg hover:bg-primary/5"
-            >
-              <span className="text-primary/40 mr-1">0{i + 1}.</span>
-              {link.label}
-            </a>
-          ))}
+        <div className="hidden items-center gap-0.5 lg:flex">
+          {navLinks.map((link, i) => {
+            const isActive = active === link.href
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                aria-current={isActive ? "true" : undefined}
+                className={`relative px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-all duration-300 rounded-lg hover:text-primary hover:bg-primary/5 ${
+                  isActive ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                <span className="text-primary/40 mr-1">0{i + 1}.</span>
+                {link.label}
+                <span
+                  className={`absolute bottom-0.5 left-3 right-3 h-px origin-left bg-primary transition-transform duration-300 ${
+                    isActive ? "scale-x-100" : "scale-x-0"
+                  }`}
+                />
+              </a>
+            )
+          })}
           <a
             href="https://cycle01.itch.io"
             target="_blank"
@@ -75,8 +109,9 @@ export function Navigation() {
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex flex-col gap-1.5 p-2 md:hidden"
+          className="flex flex-col gap-1.5 p-2 lg:hidden"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
         >
           <span className={`block h-0.5 w-6 bg-primary transition-all duration-300 ${mobileOpen ? "translate-y-2 rotate-45" : ""}`} />
           <span className={`block h-0.5 w-6 bg-primary transition-all duration-300 ${mobileOpen ? "opacity-0" : ""}`} />
@@ -86,14 +121,16 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="border-b border-primary/10 bg-background/95 backdrop-blur-2xl md:hidden">
+        <div className="border-b border-primary/10 bg-background/95 backdrop-blur-2xl lg:hidden">
           <div className="flex flex-col gap-1 px-6 py-6">
             {navLinks.map((link, i) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 px-4 py-3 font-mono text-sm uppercase tracking-[0.15em] text-muted-foreground transition-all hover:text-primary rounded-lg hover:bg-primary/5"
+                className={`flex items-center gap-3 px-4 py-3 font-mono text-sm uppercase tracking-[0.15em] transition-all hover:text-primary rounded-lg hover:bg-primary/5 ${
+                  active === link.href ? "text-primary" : "text-muted-foreground"
+                }`}
               >
                 <span className="text-primary/40">0{i + 1}</span>
                 {link.label}
