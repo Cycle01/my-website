@@ -60,8 +60,8 @@ export function FlingItSection() {
 
       {/* Space backdrop in the game's own cyan palette */}
       <div className="pointer-events-none absolute inset-0 starfield opacity-60 animate-twinkle" />
-      <div className="pointer-events-none absolute right-[-10%] top-1/4 h-[700px] w-[700px] rounded-full bg-cyan-400/[0.07] blur-[140px]" />
-      <div className="pointer-events-none absolute left-[-10%] bottom-0 h-[500px] w-[500px] rounded-full bg-fuchsia-500/[0.05] blur-[140px]" />
+      <div className="pointer-events-none absolute right-[-10%] top-1/4 h-[700px] w-[700px] glow text-cyan-400/[0.07]" />
+      <div className="pointer-events-none absolute left-[-10%] bottom-0 h-[500px] w-[500px] glow text-fuchsia-500/[0.05]" />
 
       <div className="relative mx-auto max-w-6xl">
         <SectionHeading
@@ -156,7 +156,7 @@ export function FlingItSection() {
 
               {/* Front phone */}
               <div className="relative animate-float" style={{ animationDuration: "6s" }}>
-                <div className="absolute -inset-6 rounded-[3rem] bg-cyan-400/15 blur-3xl" />
+                <div className="glow absolute -inset-10 text-cyan-400/20" />
                 <div className="relative aspect-[9/16] overflow-hidden rounded-[2.5rem] border-[8px] border-[#1b1f2a] bg-black shadow-[0_30px_80px_rgba(0,0,0,0.6)] ring-1 ring-cyan-400/20">
                   <div className="absolute left-1/2 top-2 z-20 h-5 w-24 -translate-x-1/2 rounded-full bg-black" />
                   {shots.map((shot, i) => (

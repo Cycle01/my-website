@@ -25,7 +25,7 @@ export function Lantern({ glyph = "福", size = 64, string = 60, delay = 0, dura
       <div className="mx-auto w-px bg-gradient-to-b from-transparent to-accent/70" style={{ height: string }} />
       <div className="relative" style={{ width: size, height: size * 2.05 }}>
         <div
-          className="absolute left-1/2 top-[20%] -translate-x-1/2 rounded-full bg-primary/50 blur-2xl animate-lantern-glow"
+          className="absolute left-1/2 top-[20%] -translate-x-1/2 glow text-primary/50 animate-lantern-glow"
           style={{ width: size * 1.6, height: size * 1.4, animationDelay: `${delay}s` }}
         />
         <svg viewBox="0 0 60 123" width={size} height={size * 2.05} className="relative">

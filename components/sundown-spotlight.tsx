@@ -9,7 +9,7 @@ export function SundownSpotlight() {
     <section id="sundown-2" className="relative overflow-hidden px-6 py-32">
       <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-border" />
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-primary/50" />
-      <div className="pointer-events-none absolute -left-40 top-1/3 h-[600px] w-[600px] rounded-full bg-accent/[0.04] blur-[140px]" />
+      <div className="pointer-events-none absolute -left-40 top-1/3 h-[600px] w-[600px] glow text-accent/[0.04]" />
 
       <div className="mx-auto max-w-6xl">
         <SectionHeading

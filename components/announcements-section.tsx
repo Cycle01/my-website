@@ -9,7 +9,7 @@ export function AnnouncementsSection() {
     <section id="news" className="relative overflow-hidden px-6 py-32">
       <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-border" />
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-primary/50" />
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/[0.04] blur-[140px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 glow text-primary/[0.04]" />
 
       <div className="relative mx-auto max-w-3xl">
         <SectionHeading kicker="Announcements" zh="公告" title="From the studio" align="center" />

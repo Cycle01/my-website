@@ -7,7 +7,6 @@ import { FallingPetals, Lantern, Seal } from "@/components/chinese-decor"
 const roles = ["horror games", "a mobile game", "Chrome extensions", "playful prototypes"]
 
 export function HeroSection() {
-  const [mounted, setMounted] = useState(false)
   const [roleIndex, setRoleIndex] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
   const spotRef = useRef<HTMLDivElement>(null)
@@ -44,7 +43,6 @@ export function HeroSection() {
   }, [])
 
   useEffect(() => {
-    setMounted(true)
     const timer = window.setInterval(() => setRoleIndex((i) => (i + 1) % roles.length), 2600)
     return () => window.clearInterval(timer)
   }, [])
@@ -59,8 +57,8 @@ export function HeroSection() {
       />
 
       {/* Large radial glow */}
-      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full bg-primary/[0.06] blur-[150px]" />
-      <div className="pointer-events-none absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-accent/[0.05] blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] glow text-primary/[0.06]" />
+      <div className="pointer-events-none absolute top-1/4 right-1/3 w-[500px] h-[500px] glow text-accent/[0.05]" />
 
       {/* Grid background */}
       <div
@@ -103,9 +101,7 @@ export function HeroSection() {
 
       {/* Main content */}
       <div
-        className={`relative z-10 mx-auto max-w-5xl text-center transition-all duration-1000 ease-out ${
-          mounted ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-        }`}
+        className="relative z-10 mx-auto max-w-5xl text-center animate-hero-in"
       >
         <a
           href="#sundown-2"
