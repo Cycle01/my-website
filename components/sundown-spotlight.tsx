@@ -20,7 +20,7 @@ export function SundownSpotlight() {
               Secrets of Sundown <span className="text-primary">2</span>
             </>
           }
-          description="The most important project I'm working on right now."
+          description="S2S. My most important project, and the biggest thing I've built. Bigger than Secrets of Sundown and Moonfall: Protocol."
         />
 
         <Reveal variant="zoom">

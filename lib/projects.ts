@@ -3,20 +3,35 @@ import { asset } from "@/lib/asset"
 export interface Game {
   title: string
   description: string
-  image: string
+  /** Cover image. Without one the card renders a styled title card. */
+  image?: string
   tags: string[]
   year: string
   link: string
   store: "itch.io" | "Steam"
   rating?: string
   featured?: boolean
+  /** Romanian game jam entry: event name and result. */
+  jam?: { event: string; result: string }
 }
 
 export interface ArchiveProject {
   title: string
   description: string
-  image: string
+  image?: string
   tags: string[]
+  /** Post with the clip (X or Reddit). Opens in an in-page player. */
+  clip: { url: string; embed: string; source: "X" | "Reddit" }
+  /** Local .mp4 in /public/videos. Autoplays on hover once the file exists; ignored if missing. */
+  video?: string
+  note?: string
+}
+
+export interface Announcement {
+  date: string
+  title: string
+  body: string[]
+  signoff: string
 }
 
 export interface Screenshot {
@@ -51,6 +66,17 @@ export const releasedGames: Game[] = [
     featured: true,
   },
   {
+    title: "Moonfall: Protocol",
+    description:
+      "A co-op survival horror for 1 to 4 players. A dream mission to walk on the moon turns into a nightmare: a hidden base, strange astronauts, and a portal into a twisted dimension. Work together to gather evidence, power ten control points and get the generator running to go home.",
+    image: asset("/images/moonfall-protocol.jpg"),
+    tags: ["Unreal Engine 5", "Co-op", "Survival Horror", "Sci-Fi"],
+    year: "2025",
+    link: "https://store.steampowered.com/app/3973560/Moonfall_Protocol/",
+    store: "Steam",
+    featured: true,
+  },
+  {
     title: "IronMade",
     description:
       "An action-packed medieval adventure. Play as a nameless knight escaping a dungeon with one goal: finding his daughter Sara. Fight through twisted creatures and haunting ruins in a tale of love, survival, and redemption.",
@@ -60,17 +86,7 @@ export const releasedGames: Game[] = [
     link: "https://cycle01.itch.io/ironmade",
     store: "itch.io",
     rating: "5.0/5",
-    featured: true,
-  },
-  {
-    title: "VORE",
-    description:
-      "A slick, retro-style zombie shooter. Simple, fast, and fun. Jump in and blast through waves of the undead in this arcade-inspired action game with stylized visuals.",
-    image: asset("/images/vore.jpg"),
-    tags: ["Unreal Engine 5", "Blueprints", "Shooter", "Retro"],
-    year: "2026",
-    link: "https://cycle01.itch.io",
-    store: "itch.io",
+    jam: { event: "ROG Challenge 2024", result: "Planned entry" },
   },
   {
     title: "Safe Place",
@@ -83,20 +99,32 @@ export const releasedGames: Game[] = [
     store: "itch.io",
   },
   {
-    title: "Moonfall: Protocol",
+    title: "CyborgDash",
     description:
-      "A co-op survival horror for 1 to 4 players. A dream mission to walk on the moon turns into a nightmare: a hidden base, strange astronauts, and a portal into a twisted dimension. Work together to gather evidence, power ten control points and get the generator running to go home.",
-    image: asset("/images/moonfall-protocol.jpg"),
-    tags: ["Unreal Engine 5", "Co-op", "Survival Horror", "Sci-Fi"],
-    year: "2025",
-    link: "https://store.steampowered.com/app/3973560/Moonfall_Protocol/",
-    store: "Steam",
+      "2099. The Republic of Gamers rules humanity. As KAEL-7, a maintenance engineer turned rebel, sprint through the ROG Citadel with the stolen Source Code, dodging elite droids and deadly traps. Built in two weeks during my finals.",
+    image: asset("/images/cyborgdash.png"),
+    tags: ["Side-scroller", "Action", "Game Jam"],
+    year: "2026",
+    link: "https://cycle01.itch.io/cyborgdash",
+    store: "itch.io",
+    jam: { event: "ROG 20-Year Coding Challenge", result: "6th nationally" },
+  },
+  {
+    title: "The Way Back Ball",
+    description:
+      "A gust of wind blew a ball into the dark side of the Republic of Gamers city. Roll, bounce and ricochet it back to its owner through physics puzzles and tricky platforming. Made in a single day, playable in the browser.",
+    image: asset("/images/thewaybackball.png"),
+    tags: ["Unreal Engine 4", "Platformer", "Browser"],
+    year: "2024",
+    link: "https://cycle01.itch.io/thewaybackball",
+    store: "itch.io",
+    jam: { event: "ROG Challenge 2024", result: "22nd place" },
   },
 ]
 
 export const sundown2 = {
   title: "Secrets of Sundown 2",
-  image: asset("/images/secrets-of-sundown-2.jpg"),
+  image: asset("/images/secrets-of-sundown-2-promo.jpg"),
   original: releasedGames[0],
   facts: [
     { label: "Engine", value: "Unreal Engine 5" },
@@ -109,17 +137,55 @@ export const sundown2 = {
 export const archiveProjects: ArchiveProject[] = [
   {
     title: "Spidey Game",
+    video: asset("/videos/spidey.mp4"),
     description:
       "One very large spider in a checkered test room. A creature experiment built to see how unsettling eight legs could look, and nothing more.",
     image: asset("/images/spidey-game.jpg"),
     tags: ["Unreal Engine 5", "Blueprints", "Creature"],
+    clip: {
+      url: "https://x.com/cycledadev/status/2024416945043329456",
+      embed: "https://platform.twitter.com/embed/Tweet.html?id=2024416945043329456&theme=dark&dnt=true",
+      source: "X",
+    },
   },
   {
     title: "Finding the Moose Man",
+    video: asset("/videos/moose-man.mp4"),
     description:
       "A foggy cryptid hunt through dense wilderness. Abandoned campsites, unsettling encounters, and a legend that may or may not be real.",
     image: asset("/images/finding-the-moose-man.jpg"),
     tags: ["Unreal Engine 5", "C++", "Exploration"],
+    clip: {
+      url: "https://x.com/cycledadev/status/2024786219792568532",
+      embed: "https://platform.twitter.com/embed/Tweet.html?id=2024786219792568532&theme=dark&dnt=true",
+      source: "X",
+    },
+  },
+  {
+    title: "VORE",
+    video: asset("/videos/vore.mp4"),
+    description:
+      "A slick, retro-style zombie shooter: fast, simple, arcade-style waves of the undead.",
+    image: asset("/images/vore.jpg"),
+    tags: ["Unreal Engine 5", "Blueprints", "Shooter"],
+    clip: {
+      url: "https://x.com/cycledadev/status/2027083762991845393",
+      embed: "https://platform.twitter.com/embed/Tweet.html?id=2027083762991845393&theme=dark&dnt=true",
+      source: "X",
+    },
+    note: "I took VORE down myself because of the controversy around it. It stays here as an archive project.",
+  },
+  {
+    title: "Undercover: Homefront",
+    video: asset("/videos/undercover-homefront.mp4"),
+    description:
+      "Born from playing around with ideas in the engine and seeing what stuck. A small experiment that got shared with the IndieDev community.",
+    tags: ["Unreal Engine 5", "Experiment"],
+    clip: {
+      url: "https://www.reddit.com/r/IndieDev/comments/1o5jl4e/i_was_playing_around_with_things_and_made_this/",
+      embed: "https://embed.reddit.com/r/IndieDev/comments/1o5jl4e/i_was_playing_around_with_things_and_made_this/?embed=true&theme=dark",
+      source: "Reddit",
+    },
   },
 ]
 
@@ -210,8 +276,43 @@ export const extensions: Extension[] = [
 ]
 
 export const studioStats = [
-  { value: releasedGames.length, label: "Released games" },
-  { value: 1, label: "Mobile game" },
+  { value: releasedGames.length + 1, label: "Games released", sub: `${releasedGames.length} PC · 1 mobile` },
   { value: extensions.length, label: "Chrome extensions" },
   { value: archiveProjects.length, label: "Archived for fun" },
+  { value: 1, label: "Sequel in the works" },
+]
+
+export const announcements: Announcement[] = [
+  {
+    date: "September 2026",
+    title: "The comeback starts here",
+    body: [
+      "This year has been a hard one. Between my finals and a few personal challenges, games had to take a step back more often than I wanted. I'm also starting my university major now, so life is changing fast.",
+      "But my focus on games isn't going anywhere. I promised you a big comeback, and I meant every word. The Chrome extensions and Fling It are only the beginning.",
+      "Thank you for sticking around through the quiet months. It means more than you know. From now on, keep an eye out for regular S2S (Secrets of Sundown 2) updates. It's going to be the biggest thing I've made.",
+    ],
+    signoff: "Cycle01",
+  },
+]
+
+/** The Romanian game jam run, told in order. */
+export const jamStory = [
+  {
+    year: "2024",
+    title: "IronMade",
+    result: "Planned entry",
+    text: "IronMade was meant to be my first entry to the ROG Challenge, but I couldn't port it to the web in time. I released it anyway.",
+  },
+  {
+    year: "2024",
+    title: "The Way Back Ball",
+    result: "22nd place",
+    text: "So I built a new entry in a single day. It placed 22nd out of 100+ entries.",
+  },
+  {
+    year: "2026",
+    title: "CyborgDash",
+    result: "6th nationally",
+    text: "Two years later I came back and made CyborgDash in two weeks, in the middle of my finals. It finished 6th in the country. The top five each won a laptop, so I missed one by a single place.",
+  },
 ]

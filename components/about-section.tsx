@@ -97,6 +97,7 @@ export function AboutSection() {
                       <CountUp value={stat.value} />
                     </div>
                     <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">{stat.label}</div>
+                    {stat.sub && <div className="mt-0.5 font-mono text-[10px] text-accent/80">{stat.sub}</div>}
                   </div>
                 ))}
               </div>
