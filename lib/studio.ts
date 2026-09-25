@@ -23,6 +23,7 @@ export interface StudioGame {
   link?: { label: string; href: string }
   note?: { label: string; text: string }
   meta?: string
+  status: string
 }
 
 const sundown = game("Secrets of Sundown")
@@ -38,6 +39,7 @@ export const studioGames: StudioGame[] = [
       "First-person psychological horror in a suburb that isn't quite right. Explore Sundown, make choices, and work out what the town is hiding. My best-received game so far.",
     image: sundown.image!,
     meta: `Rated ${sundown.rating} on itch.io`,
+    status: "Released",
     link: { label: "Play on itch.io", href: sundown.link },
   },
   {
@@ -47,6 +49,7 @@ export const studioGames: StudioGame[] = [
     summary:
       "Co-op survival horror for 1 to 4 players. A mission to walk on the moon leads to a hidden base, strange astronauts and a portal into somewhere worse.",
     image: moonfall.image!,
+    status: "No further updates planned",
     link: { label: "View on Steam", href: moonfall.link },
     note: {
       label: "No further updates planned",
@@ -61,6 +64,7 @@ export const studioGames: StudioGame[] = [
       "A nameless knight escapes a dungeon to find his daughter, Sara. Built for a Romanian game jam; I couldn't port it to the web in time, so I released it on its own.",
     image: ironmade.image!,
     meta: `Rated ${ironmade.rating} on itch.io`,
+    status: "Released",
     link: { label: "Play on itch.io", href: ironmade.link },
   },
   {
@@ -71,6 +75,7 @@ export const studioGames: StudioGame[] = [
       "My first mobile game. Pull back, let go, and fling a tiny astronaut as far as your upgrades allow. A lighter game, and my start on mobile.",
     image: asset("/images/fling-it/menu.webp"),
     shape: "portrait",
+    status: "Released",
     link: { label: "See it in my portfolio", href: "/portfolio/#fling-it" },
   },
 ]
