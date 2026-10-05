@@ -1,165 +1,138 @@
-"use client"
-
 import Link from "next/link"
-import { useRef, type ReactNode } from "react"
-import { studioGames, type StudioGame } from "@/lib/studio"
-import { FadeUp, Rise } from "@/components/studio/rise"
+import { ArtImage } from "@/components/studio/art-image"
+import { ExtLink } from "@/components/studio/ext-link"
+import { flingItGame, moonfallGame, sundownGame } from "@/lib/studio"
 
-function GameLink({ game, className, children }: { game: StudioGame; className: string; children: ReactNode }) {
-  if (!game.link) return null
-  if (game.link.href.startsWith("/")) {
-    return (
-      <Link href={game.link.href} className={className}>
-        {children}
-      </Link>
-    )
-  }
+const label = "font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground"
+const linkClass = "s-link inline-flex min-h-11 items-center text-[15px] text-foreground"
+
+/** Platform · year · status line. The status can be highlighted. */
+function Meta({ items, status, warn = false }: { items: string[]; status: string; warn?: boolean }) {
   return (
-    <a href={game.link.href} target="_blank" rel="noopener noreferrer" className={className}>
-      {children}
-    </a>
-  )
-}
-
-const linkClass =
-  "inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.08em] text-foreground underline decoration-white/30 underline-offset-[6px] transition-colors hover:decoration-white"
-
-/** Artwork that leans toward the pointer, with a soft glare. Flat on touch and for reduced motion. */
-function TiltArt({ game }: { game: StudioGame }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const raf = useRef(0)
-
-  const onMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    const el = ref.current
-    if (!el || e.pointerType !== "mouse") return
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
-    const r = el.getBoundingClientRect()
-    const x = (e.clientX - r.left) / r.width
-    const y = (e.clientY - r.top) / r.height
-    cancelAnimationFrame(raf.current)
-    raf.current = requestAnimationFrame(() => {
-      el.style.transform = `perspective(1200px) rotateX(${(0.5 - y) * 6}deg) rotateY(${(x - 0.5) * 8}deg)`
-      el.style.setProperty("--gx", `${x * 100}%`)
-      el.style.setProperty("--gy", `${y * 100}%`)
-    })
-  }
-  const onLeave = () => {
-    cancelAnimationFrame(raf.current)
-    if (ref.current) ref.current.style.transform = ""
-  }
-
-  return (
-    <div
-      ref={ref}
-      onPointerMove={onMove}
-      onPointerLeave={onLeave}
-      className="group/art relative aspect-[16/10] overflow-hidden rounded-md bg-[#111] transition-transform duration-300 ease-out will-change-transform"
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={game.image}
-        alt={`${game.title} artwork`}
-        loading="lazy"
-        decoding="async"
-        className="h-full w-full object-cover transition-transform duration-[1.2s] ease-out group-hover/art:scale-[1.04]"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/art:opacity-100"
-        style={{ background: "radial-gradient(circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.14), transparent 45%)" }}
-      />
-      <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/50 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.08em] text-foreground backdrop-blur-sm">
-        Flagship
-      </span>
-    </div>
-  )
-}
-
-function FlagshipCard({ game, index }: { game: StudioGame; index: number }) {
-  return (
-    <FadeUp delay={index * 0.12} className="flex flex-col">
-      <TiltArt game={game} />
-      <div className="mt-6 flex items-baseline justify-between gap-4">
-        <h3 className="text-3xl font-medium tracking-[-0.035em] text-foreground md:text-4xl">{game.title}</h3>
-        <span className="font-mono text-[12px] text-muted-foreground">0{index + 1}</span>
-      </div>
-      <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-        {game.platform} · {game.year} ·{" "}
-        <span className={game.note ? "text-[#e0b25c]" : "text-foreground/80"}>{game.status}</span>
-      </p>
-      <p className="mt-4 text-[16px] leading-relaxed text-foreground/75">{game.summary}</p>
-      {game.note && <p className="mt-4 border-l border-[#e0b25c]/60 pl-4 text-[15px] leading-relaxed text-foreground/70">{game.note.text}</p>}
-      <div className="mt-auto flex flex-wrap items-center justify-between gap-4 pt-6">
-        {game.meta ? <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{game.meta}</span> : <span />}
-        {game.link && (
-          <GameLink game={game} className={linkClass}>
-            {game.link.label} <span aria-hidden="true">↗</span>
-          </GameLink>
-        )}
-      </div>
-    </FadeUp>
-  )
-}
-
-function UpcomingCard({ game }: { game: StudioGame }) {
-  return (
-    <FadeUp className="mt-16 grid grid-cols-[6.5rem_1fr] items-center gap-6 border-y border-white/[0.08] py-8 md:mt-24 md:grid-cols-[9rem_1fr_auto] md:gap-10">
-      {/* Phone-shaped frame for the portrait screenshot. */}
-      <div className="overflow-hidden rounded-[1.1rem] border border-white/15 bg-[#0d1216] p-1">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={game.image} alt={`${game.title} main menu`} loading="lazy" decoding="async" className="aspect-[9/19] w-full rounded-[0.8rem] object-cover" />
-      </div>
-      <div>
-        <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#e0b25c]" />
-          {game.platform} · {game.status}
-        </p>
-        <h3 className="mt-3 text-3xl font-medium tracking-[-0.035em] text-foreground md:text-4xl">{game.title}</h3>
-        <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-foreground/75">{game.summary}</p>
-      </div>
-      {game.link && (
-        <GameLink game={game} className={`${linkClass} col-span-2 md:col-span-1`}>
-          {game.link.label} <span aria-hidden="true">↗</span>
-        </GameLink>
-      )}
-    </FadeUp>
+    <p className={label}>
+      {items.join(" · ")} · <span className={warn ? "text-[#c9a46a]" : "text-foreground/80"}>{status}</span>
+    </p>
   )
 }
 
 export function GamesIndex() {
-  const flagships = studioGames.filter((g) => g.flagship)
-  const others = studioGames.filter((g) => !g.flagship)
-
   return (
-    <section id="games" className="px-5 pt-32 md:px-10 md:pt-48" aria-labelledby="games-title">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="mb-6 flex items-baseline justify-between font-mono text-[12px] uppercase tracking-[0.08em] text-muted-foreground">
-          <span>Games</span>
-          <span>03</span>
-        </div>
-        <Rise
-          id="games-title"
-          lines={["What I've made", "so far"]}
-          className="mb-12 max-w-3xl text-4xl font-medium leading-[0.95] tracking-[-0.04em] text-foreground md:mb-20 md:text-7xl"
-        />
-
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 md:gap-10 lg:gap-14">
-          {flagships.map((game, i) => (
-            <FlagshipCard key={game.title} game={game} index={i} />
-          ))}
+    <section id="games" className="scroll-mt-16 pt-28 md:pt-44" aria-labelledby="games-title">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-10">
+        <div className="s-reveal flex flex-col gap-3 border-b border-[color:var(--border)] pb-6 lg:flex-row lg:items-end lg:justify-between">
+          <h2 id="games-title" className="text-4xl font-medium tracking-[-0.04em] text-foreground md:text-5xl lg:text-6xl">
+            Selected games
+          </h2>
+          <p className="max-w-sm text-[15px] text-muted-foreground">Artwork and screenshots below are from the games themselves.</p>
         </div>
 
-        {others.map((game) => (
-          <UpcomingCard key={game.title} game={game} />
-        ))}
+        {/* Secrets of Sundown: large key art, text beside it, screenshots below. */}
+        <article className="mt-12 md:mt-16" aria-labelledby="sos-title">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
+            <ExtLink href={sundownGame.link.href} className="s-reveal block lg:col-span-8">
+              <span className="s-art block aspect-[16/10] overflow-hidden bg-[#13110f] sm:aspect-[2/1]">
+                <ArtImage art={sundownGame.keyArt} />
+              </span>
+              <span className="sr-only">{sundownGame.link.label}</span>
+            </ExtLink>
+            <div className="s-reveal flex flex-col lg:col-span-4 lg:pt-2" style={{ transitionDelay: "80ms" }}>
+              <Meta items={[sundownGame.platform, sundownGame.year]} status={sundownGame.status} />
+              <h3 id="sos-title" className="mt-3 text-3xl font-medium tracking-[-0.035em] text-foreground md:text-4xl">
+                {sundownGame.title}
+              </h3>
+              <p className="mt-4 text-[16px] leading-relaxed text-foreground/80">{sundownGame.summary}</p>
+              <p className="mt-4 text-[14px] text-muted-foreground">Rated {sundownGame.rating} on itch.io</p>
+              <div className="mt-4 lg:mt-auto lg:pt-6">
+                <ExtLink href={sundownGame.link.href} className={linkClass}>
+                  {sundownGame.link.short}&nbsp;<span className="s-arrow" aria-hidden="true">↗</span>
+                </ExtLink>
+              </div>
+            </div>
+          </div>
 
-        <p className="mt-10 text-[15px] text-muted-foreground">
-          CyborgDash, The Way Back Ball, Safe Place and smaller projects live in{" "}
-          <Link href="/portfolio/#projects" className="text-foreground underline decoration-white/30 underline-offset-[6px] hover:decoration-white">
-            my portfolio
-          </Link>
-          .
-        </p>
+          <figure className="mt-6 md:mt-10">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-12 md:gap-4">
+              {sundownGame.screenshots.map((shot, i) => (
+                <div
+                  key={shot.src}
+                  className={`s-reveal overflow-hidden bg-[#13110f] ${
+                    i === 0 ? "col-span-2 aspect-[16/9] md:col-span-6 md:aspect-auto md:min-h-full" : "aspect-[4/3] md:col-span-3 md:aspect-[3/4]"
+                  }`}
+                  style={{ transitionDelay: `${i * 60}ms` }}
+                >
+                  <ArtImage art={shot} />
+                </div>
+              ))}
+            </div>
+            <figcaption className={`mt-3 ${label}`}>Secrets of Sundown · In-game screenshots</figcaption>
+          </figure>
+        </article>
+
+        {/* Moonfall: Protocol: text first, art on the right, crew art below. */}
+        <article className="mt-20 md:mt-32" aria-labelledby="moonfall-title">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-10">
+            <ExtLink href={moonfallGame.link.href} className="s-reveal block lg:order-2 lg:col-span-8">
+              <span className="s-art block aspect-[16/10] overflow-hidden bg-[#13110f] sm:aspect-[1232/706]">
+                <ArtImage art={moonfallGame.keyArt} />
+              </span>
+              <span className="sr-only">{moonfallGame.link.label}</span>
+            </ExtLink>
+            <div className="s-reveal flex flex-col lg:order-1 lg:col-span-4 lg:pt-2" style={{ transitionDelay: "80ms" }}>
+              <Meta items={[moonfallGame.platform, moonfallGame.year]} status={moonfallGame.status} warn />
+              <h3 id="moonfall-title" className="mt-3 text-3xl font-medium tracking-[-0.035em] text-foreground md:text-4xl">
+                {moonfallGame.title}
+              </h3>
+              <p className="mt-4 text-[16px] leading-relaxed text-foreground/80">{moonfallGame.summary}</p>
+              <p className="mt-4 text-[14px] text-muted-foreground">{moonfallGame.players}</p>
+              <details className="group mt-5 border-y border-[color:var(--border)]">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-[15px] text-foreground transition-colors duration-150 hover:text-[#c9a46a] [&::-webkit-details-marker]:hidden">
+                  Why there are no further updates
+                  <span aria-hidden="true" className="text-muted-foreground transition-transform duration-200 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="pb-4 text-[15px] leading-relaxed text-foreground/75">{moonfallGame.note}</p>
+              </details>
+              <div className="mt-4 lg:mt-auto lg:pt-6">
+                <ExtLink href={moonfallGame.link.href} className={linkClass}>
+                  {moonfallGame.link.short}&nbsp;<span className="s-arrow" aria-hidden="true">↗</span>
+                </ExtLink>
+              </div>
+            </div>
+          </div>
+
+          <figure className="s-reveal mt-6 md:mt-10">
+            <div className="aspect-[16/9] overflow-hidden bg-[#13110f] sm:aspect-[3/1]">
+              <ArtImage art={moonfallGame.crewArt} />
+            </div>
+            <figcaption className={`mt-3 ${label}`}>Moonfall: Protocol · Store art</figcaption>
+          </figure>
+        </article>
+
+        {/* Fling It: portrait phone screenshots, a smaller treatment. */}
+        <article className="mt-20 grid grid-cols-1 gap-8 border-t border-[color:var(--border)] pt-12 md:mt-32 md:grid-cols-12 md:gap-10 md:pt-16" aria-labelledby="fling-title">
+          <div className="s-reveal md:col-span-5">
+            <Meta items={[flingItGame.platform]} status={flingItGame.status} />
+            <h3 id="fling-title" className="mt-3 text-3xl font-medium tracking-[-0.035em] text-foreground md:text-4xl">
+              {flingItGame.title}
+            </h3>
+            <p className="mt-4 max-w-md text-[16px] leading-relaxed text-foreground/80">{flingItGame.summary}</p>
+            <Link href={flingItGame.link.href} className={`${linkClass} mt-4`}>
+              {flingItGame.link.short}&nbsp;<span className="s-arrow s-arrow-r" aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <figure className="s-reveal md:col-span-7" style={{ transitionDelay: "80ms" }}>
+            <div className="grid max-w-xl grid-cols-3 gap-3 md:ml-auto md:gap-4">
+              {flingItGame.screenshots.map((shot) => (
+                <div key={shot.src} className="aspect-[9/16] overflow-hidden rounded-[14px] border border-[color:var(--border)] bg-[#0d1216]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={shot.src} alt={shot.alt} loading="lazy" decoding="async" width={720} height={1280} className="h-full w-full object-cover" />
+                </div>
+              ))}
+            </div>
+            <figcaption className={`mt-3 md:text-right ${label}`}>Fling It · In-game screenshots</figcaption>
+          </figure>
+        </article>
       </div>
     </section>
   )

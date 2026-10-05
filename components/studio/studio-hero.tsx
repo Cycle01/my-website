@@ -1,67 +1,57 @@
 "use client"
 
 import { useRef } from "react"
-import { KineticWordmark } from "@/components/studio/kinetic-wordmark"
 import { MoonScene } from "@/components/studio/moon-scene"
 import { StudioBadge } from "@/components/studio/studio-badge"
 
-const facts = [
-  { label: "Founded by", value: "Bogdan (Cycle01)" },
-  { label: "Focus", value: "Atmospheric horror" },
-  { label: "Platforms", value: "PC & mobile" },
-  { label: "Released", value: "6 games" },
-]
-
 export function StudioHero() {
-  // The moon in the scene is drawn right behind the badge, so the coin eclipses it.
-  const badgeRef = useRef<HTMLDivElement>(null)
+  // The moon in the scene is drawn right behind the emblem, so the coin eclipses it.
+  const emblemRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section id="top" className="relative isolate flex min-h-svh flex-col overflow-hidden" aria-label="Cycle's Studios">
-      <MoonScene anchor={badgeRef} className="-z-10" />
-      {/* Fade the scene into the page below. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/3 bg-gradient-to-b from-transparent to-[#0a0a0a]" />
+    <section id="top" className="relative isolate overflow-hidden" aria-labelledby="studio-title">
+      <MoonScene anchor={emblemRef} className="-z-10" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#0b0a09]" />
 
-      <div className="mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-5 pb-10 pt-24 md:px-10 md:pb-14 md:pt-28">
-        <div className="relative flex flex-1 flex-col md:flex-row md:items-center md:justify-between md:gap-10">
-          <div className="order-1 flex justify-center py-6 md:order-2 md:py-0">
-            <div ref={badgeRef} className="animate-hero-in w-[54vw] max-w-[440px] md:w-[30vw]" style={{ animationDelay: "0.35s" }}>
-              <StudioBadge />
-            </div>
-          </div>
-
-          <div className="order-2 mt-auto md:order-1 md:mt-0">
-            <div
-              className="animate-hero-in mb-8 flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.08em] text-muted-foreground md:mb-12"
-              style={{ animationDelay: "0.1s" }}
-            >
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#7dd97d] opacity-60" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#7dd97d]" />
-              </span>
-              Now building Secrets of Sundown 2
-            </div>
-            <KineticWordmark lines={["Cycle's", "Studios"]} />
+      <div className="mx-auto grid min-h-[min(100svh,880px)] max-w-[1440px] grid-cols-1 content-center gap-8 px-4 pb-16 pt-24 sm:px-6 md:grid-cols-[1.25fr_0.75fr] md:items-center md:gap-10 md:px-10 md:pb-20 md:pt-28">
+        <div className="flex justify-center md:order-2">
+          <div ref={emblemRef} className="s-in w-[44vw] max-w-[380px] md:w-[28vw]" style={{ animationDelay: "0.15s" }}>
+            <StudioBadge />
           </div>
         </div>
 
-        <div
-          className="animate-hero-in mt-10 grid grid-cols-1 gap-10 border-t border-white/[0.1] pt-8 md:mt-14 md:grid-cols-[1.2fr_2fr] md:gap-16"
-          style={{ animationDelay: "0.6s" }}
-        >
-          <p className="max-w-md text-lg leading-snug text-foreground md:text-xl">
-            An independent game studio of one. I make atmospheric horror games for PC and mobile.
+        <div className="md:order-1">
+          <h1
+            id="studio-title"
+            className="s-in text-[16vw] font-medium leading-[0.9] tracking-[-0.045em] text-foreground sm:text-[13vw] md:text-[9vw] xl:text-[8.5rem]"
+          >
+            Cycle&apos;s{" "}
+            <br />
+            Studios
+          </h1>
+          <p className="s-in mt-6 max-w-md text-lg leading-snug text-foreground/85 md:mt-8 md:text-xl" style={{ animationDelay: "0.08s" }}>
+            Independent games by Bogdan / Cycle01.
+            <br />
+            <span className="text-muted-foreground">Atmospheric horror, strange places, and occasional experiments.</span>
           </p>
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
-            {facts.map((f) => (
-              <div key={f.label}>
-                <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{f.label}</dt>
-                <dd className="mt-2 text-[15px] text-foreground">{f.value}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="s-in mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-10" style={{ animationDelay: "0.16s" }}>
+            <a
+              href="#games"
+              className="inline-flex min-h-12 items-center justify-center gap-2 bg-foreground px-6 text-[15px] font-medium text-background transition-colors duration-150 hover:bg-[#c9a46a]"
+            >
+              Explore games <span className="s-arrow s-arrow-d" aria-hidden="true">↓</span>
+            </a>
+            <a
+              href="#sundown-2"
+              className="inline-flex min-h-12 items-center justify-center gap-2 border border-[color:var(--border)] px-6 text-[15px] text-foreground transition-colors duration-150 hover:border-foreground/60"
+            >
+              See Secrets of Sundown 2 <span className="s-arrow s-arrow-r" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
+
+      <p className="absolute bottom-4 right-4 font-mono text-[11px] text-foreground/60 sm:right-6 md:right-10">Site illustration, not game footage</p>
     </section>
   )
 }

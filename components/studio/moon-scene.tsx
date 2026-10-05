@@ -53,7 +53,7 @@ void main() {
   vec2 sp = vec2(hash2(cell + 7.1), hash2(cell + 3.3)) * 0.8 + 0.1;
   float star = smoothstep(0.1, 0.0, length(fract(sg) - sp)) * step(0.965, rnd);
   float tw = 0.55 + 0.45 * sin(t * (1.0 + rnd * 3.0) + rnd * 40.0);
-  col += vec3(0.85, 0.9, 1.0) * 1.4 * star * tw * smoothstep(R * 1.4, R * 3.0, d) * smoothstep(-0.2, 0.15, p.y);
+  col += vec3(0.85, 0.9, 1.0) * 0.9 * star * tw * smoothstep(R * 1.4, R * 3.0, d) * smoothstep(-0.2, 0.15, p.y);
 
   // Halo.
   col += vec3(0.5, 0.6, 0.78) * exp(-max(d - R, 0.0) * 5.0) * 0.16;

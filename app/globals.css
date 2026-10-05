@@ -213,99 +213,93 @@ html {
 }
 .tilt:hover .tilt-glare { opacity: 1; }
 
-/* "Yours" teaser: the lit copy of the title only shows inside a small light. */
-/* Yours key art: dimmed scene with a flashlight that follows the pointer.
-   Touch and reduced-motion visitors see the art fully lit instead. */
-.yours-art-lit {
-  -webkit-mask-image: radial-gradient(circle at var(--lx, 50%) var(--ly, 32%), #000 0, #000 12%, rgba(0, 0, 0, 0.5) 22%, transparent 36%);
-  mask-image: radial-gradient(circle at var(--lx, 50%) var(--ly, 32%), #000 0, #000 12%, rgba(0, 0, 0, 0.5) 22%, transparent 36%);
-}
-@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .yours-art-base {
-    filter: brightness(0.3) saturate(0.75);
-  }
-}
-@media (pointer: coarse), (prefers-reduced-motion: reduce) {
-  .yours-art-lit {
-    display: none;
-  }
-}
-
 /* ── Studio theme ──────────────────────────────────────────
-   The studio page is its own brand: black, white and one typeface family
-   (Geist), nothing shared with the portfolio's warm palette. Scoped to
-   .studio-theme so the portfolio is untouched. */
+   The studio homepage (app/page.tsx) has its own identity: near-black, warm
+   off-white type and one muted amber accent. Everything below is scoped to
+   .studio-theme or uses s- prefixed classes, so the portfolio is untouched. */
 .studio-theme {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --card: #111111;
-  --card-foreground: #ededed;
-  --primary: #ededed;
-  --primary-foreground: #0a0a0a;
-  --accent: #ededed;
-  --accent-foreground: #0a0a0a;
-  --muted-foreground: #8a8a8a;
-  --border: #222222;
+  --background: #0b0a09;
+  --foreground: #ece6db;
+  --card: #13110f;
+  --card-foreground: #ece6db;
+  --primary: #ece6db;
+  --primary-foreground: #0b0a09;
+  --accent: #c9a46a;
+  --accent-foreground: #0b0a09;
+  --muted-foreground: #9d9487;
+  --border: rgba(236, 230, 219, 0.12);
   --font-inter: var(--font-geist);
   --font-space-mono: var(--font-geist-mono);
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist), system-ui, sans-serif;
 }
-body:has(.studio-theme) { background: #0a0a0a; }
-.studio-theme ::selection { background: #ededed; color: #0a0a0a; }
+body:has(.studio-theme) { background: #0b0a09; }
+.studio-theme ::selection { background: #c9a46a; color: #0b0a09; }
+.studio-theme :focus-visible { outline: 2px solid #c9a46a; outline-offset: 4px; border-radius: 2px; }
 
-/* Kinetic wordmark: letters swell in weight near the pointer. */
-.kinetic-letter { display: inline-block; font-weight: 300; transition: font-weight 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
-@keyframes weight-wave {
-  0%, 100% { font-weight: 250; }
-  50% { font-weight: 800; }
+/* Motion system. One hero entrance (CSS only, done by ~800ms), one-time
+   reveals (JS adds .s-motion to the page root, so content stays visible if
+   scripts never run), and quick hover feedback. */
+@keyframes s-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
 }
-.kinetic-wave .kinetic-letter { animation: weight-wave 3.2s ease-in-out infinite; }
+.s-in { animation: s-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.s-reveal { transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 1, 0.36, 1); }
+.s-motion .s-reveal:not(.is-in) { opacity: 0; transform: translateY(16px); }
 
-/* Cursor-following preview in the games list. */
+.s-link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(236, 230, 219, 0.35);
+  text-underline-offset: 6px;
+  transition: text-decoration-color 0.18s ease, color 0.18s ease;
+}
+.s-link:hover, a:hover .s-link { text-decoration-color: #c9a46a; }
+/* Arrows nudge 2px in the direction they point. */
+.s-arrow { display: inline-block; transition: transform 0.18s ease; }
+a:hover .s-arrow, a:focus-visible .s-arrow { transform: translate(2px, -2px); }
+a:hover .s-arrow-r, a:focus-visible .s-arrow-r { transform: translateX(3px); }
+a:hover .s-arrow-d, a:focus-visible .s-arrow-d { transform: translateY(2px); }
+.s-art img { transition: transform 0.22s ease-out; }
+a:hover .s-art img, .s-art:hover img { transform: scale(1.02); }
 
-/* Studio badge (components/studio/studio-badge.tsx): moonlit silver. */
+/* Studio emblem (components/studio/studio-badge.tsx): a moonlit silver coin. */
 .badge-stage { --badge-scale: 1; }
 @media (max-width: 640px) { .badge-stage { --badge-scale: 0.6; } }
-.badge-coin { transform-style: preserve-3d; transform: rotateX(6deg) rotateY(-20deg); }
+.badge-coin { transform-style: preserve-3d; transform: rotateX(4deg) rotateY(-16deg); transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
 .badge-edge {
-  background: linear-gradient(90deg, #3a3f47, #9aa3ae 28%, #4a5059 52%, #c9d0d8 74%, #3a3f47);
+  background: linear-gradient(90deg, #3d3a36, #a39d93 28%, #4d4943 52%, #cfc8bc 74%, #3d3a36);
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
 }
 .badge-face {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   overflow: hidden;
-  background: radial-gradient(circle at 42% 34%, #2a3038 0%, #151a20 55%, #0b0e12 100%);
+  background: radial-gradient(circle at 42% 34%, #2b2926 0%, #171513 55%, #0d0c0b 100%);
   box-shadow:
-    inset 0 0 0 3px #aab3be,
-    inset 0 0 0 5px #2c3139,
-    inset 0 0 0 9px #7d8792,
+    inset 0 0 0 3px #b3ab9e,
+    inset 0 0 0 5px #2e2b27,
+    inset 0 0 0 9px #857d71,
     inset 0 0 44px rgba(0, 0, 0, 0.8),
-    inset 0 2px 1px rgba(255, 255, 255, 0.22);
+    inset 0 2px 1px rgba(255, 255, 255, 0.2);
 }
 .badge-emboss { filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.9)) drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.14)); }
 .badge-sheen {
   pointer-events: none;
-  background: linear-gradient(105deg, transparent 35%, rgba(220, 232, 255, 0.18) 48%, transparent 60%);
+  background: linear-gradient(105deg, transparent 35%, rgba(255, 244, 225, 0.14) 48%, transparent 60%);
   background-size: 250% 100%;
-  background-position: var(--sheen, 50%) 0;
+  background-position: var(--sheen, 40%) 0;
   mix-blend-mode: screen;
 }
 
-/* Studio ticker strip. */
-@keyframes ticker { to { transform: translateX(-50%); } }
-.animate-ticker { animation: ticker 40s linear infinite; }
-
-/* Headings rise out of a mask when they scroll into view (components/studio/rise.tsx). */
-.rise-line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
-.rise-inner { display: block; transform: translateY(105%); transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1); }
-.rise-in .rise-inner { transform: none; }
-
-/* Content fades up on reveal. */
-.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
-.fade-up.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .s-in { animation: none; }
+  .s-reveal, .badge-coin, .s-art img, .s-arrow, .s-arrow-r, .s-arrow-d { transition: none; }
+  .s-motion .s-reveal:not(.is-in) { opacity: 1; transform: none; }
+  a:hover .s-art img, .s-art:hover img { transform: none; }
+}
 
 /* Short fade between the studio and the portfolio (app/template.tsx). */
 @keyframes page-fade {
@@ -454,13 +448,9 @@ body:has(.studio-theme) { background: #0a0a0a; }
   .btn-shine::after { display: none; }
   .animate-lantern, .animate-lantern-glow, .animate-petal, .animate-marquee, .animate-word-in,
   .animate-ken-burns, .animate-rec, .animate-radar, .animate-blip, .animate-cloud, .animate-moon::after,
-  .animate-twinkle, .animate-shimmer, .animate-float, .animate-letter, .animate-hero-in, .animate-page-fade, .kinetic-wave .kinetic-letter, .animate-ticker, .animate-pulse-glow, .animate-scanline,
+  .animate-twinkle, .animate-shimmer, .animate-float, .animate-letter, .animate-hero-in, .animate-page-fade, .animate-pulse-glow, .animate-scanline,
   .animate-grain, .animate-bounce, .animate-ping, .animate-pulse {
     animation: none !important;
   }
   .animate-petal { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rise-inner, .fade-up { opacity: 1; transform: none; transition: none; }
 }

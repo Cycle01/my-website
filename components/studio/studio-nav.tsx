@@ -3,13 +3,10 @@
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { asset } from "@/lib/asset"
-import { LocalTime } from "@/components/studio/local-time"
-import { Scramble } from "@/components/studio/scramble"
 
 const links = [
-  { href: "#work", label: "Work" },
   { href: "#games", label: "Games" },
-  { href: "#studio", label: "Studio" },
+  { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ]
 
@@ -25,35 +22,38 @@ export function StudioNav() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "border-b border-white/[0.06] bg-[#0a0a0a]/90 md:bg-[#0a0a0a]/70 md:backdrop-blur-lg" : "border-b border-transparent"
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200 ${
+        scrolled ? "border-[color:var(--border)] bg-[#0b0a09]/95" : "border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-5 py-4 md:px-10" aria-label="Studio">
-        <a href="#top" className="flex items-center gap-2.5 text-[15px] font-semibold tracking-[-0.02em] text-foreground">
+      <nav className="mx-auto flex h-14 max-w-[1440px] items-center justify-between gap-4 px-4 sm:px-6 md:h-16 md:px-10" aria-label="Studio">
+        <a href="#top" className="flex min-h-11 items-center gap-2.5 text-[15px] font-semibold tracking-[-0.01em] text-foreground">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={asset("/images/studio/logo-figure.webp")} alt="" width={133} height={281} className="h-7 w-auto" />
-          Cycle&apos;s Studios
+          <span className="hidden sm:inline">Cycle&apos;s Studios</span>
+          <span className="sr-only sm:hidden">Cycle&apos;s Studios, back to top</span>
         </a>
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="font-mono text-[12px] uppercase tracking-[0.08em] text-muted-foreground transition-colors hover:text-foreground">
-                <Scramble text={l.label} />
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-6">
-          <LocalTime className="hidden font-mono text-[12px] uppercase tracking-[0.08em] text-muted-foreground lg:inline" />
+        <div className="flex items-center gap-1 sm:gap-2">
+          <ul className="flex items-center">
+            {links.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className="flex min-h-11 items-center px-2 text-[13px] text-muted-foreground transition-colors duration-150 hover:text-foreground sm:px-3 sm:text-[14px]"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <span aria-hidden="true" className="mx-1 h-4 w-px bg-[color:var(--border)] sm:mx-2" />
           <Link
             href="/portfolio"
-            className="group inline-flex items-center gap-1.5 whitespace-nowrap font-mono text-[12px] uppercase tracking-[0.08em] text-foreground"
+            className="flex min-h-11 items-center px-2 text-[13px] text-muted-foreground transition-colors duration-150 hover:text-foreground sm:text-[14px]"
           >
-            <Scramble text="Personal Portfolio" />
-            <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+            <span className="sm:hidden">Portfolio</span>
+            <span className="hidden sm:inline">Personal portfolio</span>
           </Link>
         </div>
       </nav>

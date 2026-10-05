@@ -9,7 +9,7 @@ import { useEffect, useRef, useState, type RefObject } from "react"
 
   Uniforms every scene gets:
     uRes    canvas size in pixels
-    uTime   seconds (frozen for reduced motion)
+    uTime   seconds (frozen when the scene is still)
     uMouse  eased pointer position, -1..1 (desktop only)
     uScroll 0 while the scene's top is in view, rising to 1 as it scrolls a
             full height out of view
@@ -111,8 +111,10 @@ export function ShaderScene({ frag, poster, posterMobile, background, priority =
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     const finePointer = window.matchMedia("(pointer: fine)").matches
+    // Reduced motion and touch devices get one still frame instead of an
+    // animation: a deliberate static composition that costs no battery.
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches || !finePointer
     const small = window.matchMedia("(max-width: 768px)").matches
     let raf = 0
     let running = false
@@ -219,6 +221,9 @@ export function ShaderScene({ frag, poster, posterMobile, background, priority =
       draw(performance.now())
       setLive(true)
       setRunning(onScreen && !document.hidden)
+      // A still scene is drawn once more after the page's entrance settles,
+      // so anything lined up with an anchor lands in its final place.
+      const settle = reduced ? window.setTimeout(() => draw(performance.now()), 900) : 0
 
       const io = new IntersectionObserver(([entry]) => {
         onScreen = entry.isIntersecting
@@ -231,6 +236,7 @@ export function ShaderScene({ frag, poster, posterMobile, background, priority =
       window.addEventListener("resize", onResize)
 
       cleanupGl = () => {
+        window.clearTimeout(settle)
         setRunning(false)
         io.disconnect()
         document.removeEventListener("visibilitychange", onVis)
