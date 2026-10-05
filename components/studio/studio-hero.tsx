@@ -1,57 +1,39 @@
-"use client"
-
-import { useRef } from "react"
-import { MoonScene } from "@/components/studio/moon-scene"
-import { StudioBadge } from "@/components/studio/studio-badge"
+import { DevNote } from "@/components/studio/dev-note"
+import { HeroShot } from "@/components/studio/hero-shot"
 
 export function StudioHero() {
-  // The moon in the scene is drawn right behind the emblem, so the coin eclipses it.
-  const emblemRef = useRef<HTMLDivElement>(null)
-
   return (
-    <section id="top" className="relative isolate overflow-hidden" aria-labelledby="studio-title">
-      <MoonScene anchor={emblemRef} className="-z-10" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-[#0b0a09]" />
+    <section id="top" aria-labelledby="studio-title" className="mx-auto max-w-[1440px] px-4 pb-16 pt-10 sm:px-6 md:px-10 md:pb-20 md:pt-12">
+      <h1
+        id="studio-title"
+        className="text-[clamp(4rem,19vw,7rem)] font-medium leading-[0.86] tracking-[-0.055em] md:text-[clamp(6rem,10.5vw,11rem)]"
+      >
+        <span className="s-line">
+          <span>Cycle&rsquo;s</span>
+        </span>{" "}
+        <span className="s-line pl-[0.9em] md:pl-[1.55em]">
+          <span style={{ animationDelay: "90ms" }}>Studios</span>
+        </span>
+      </h1>
 
-      <div className="mx-auto grid min-h-[min(100svh,880px)] max-w-[1440px] grid-cols-1 content-center gap-8 px-4 pb-16 pt-24 sm:px-6 md:grid-cols-[1.25fr_0.75fr] md:items-center md:gap-10 md:px-10 md:pb-20 md:pt-28">
-        <div className="flex justify-center md:order-2">
-          <div ref={emblemRef} className="s-in w-[44vw] max-w-[380px] md:w-[28vw]" style={{ animationDelay: "0.15s" }}>
-            <StudioBadge />
-          </div>
-        </div>
-
-        <div className="md:order-1">
-          <h1
-            id="studio-title"
-            className="s-in text-[16vw] font-medium leading-[0.9] tracking-[-0.045em] text-foreground sm:text-[13vw] md:text-[9vw] xl:text-[8.5rem]"
-          >
-            Cycle&apos;s{" "}
-            <br />
-            Studios
-          </h1>
-          <p className="s-in mt-6 max-w-md text-lg leading-snug text-foreground/85 md:mt-8 md:text-xl" style={{ animationDelay: "0.08s" }}>
+      <div className="mt-10 grid grid-cols-1 gap-12 md:mt-12 md:grid-cols-12 md:gap-10">
+        <div className="flex flex-col md:col-span-5 lg:col-span-4">
+          <p className="s-fade max-w-sm text-xl leading-snug tracking-[-0.01em]" style={{ animationDelay: "260ms" }}>
             Independent games by Bogdan / Cycle01.
-            <br />
-            <span className="text-muted-foreground">Atmospheric horror, strange places, and occasional experiments.</span>
           </p>
-          <div className="s-in mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-10" style={{ animationDelay: "0.16s" }}>
-            <a
-              href="#games"
-              className="inline-flex min-h-12 items-center justify-center gap-2 bg-foreground px-6 text-[15px] font-medium text-background transition-colors duration-150 hover:bg-[#c9a46a]"
-            >
-              Explore games <span className="s-arrow s-arrow-d" aria-hidden="true">↓</span>
-            </a>
-            <a
-              href="#sundown-2"
-              className="inline-flex min-h-12 items-center justify-center gap-2 border border-[color:var(--border)] px-6 text-[15px] text-foreground transition-colors duration-150 hover:border-foreground/60"
-            >
-              See Secrets of Sundown 2 <span className="s-arrow s-arrow-r" aria-hidden="true">→</span>
-            </a>
+          <p className="s-fade mt-3 max-w-sm text-[16px] leading-relaxed text-muted-foreground" style={{ animationDelay: "320ms" }}>
+            Atmospheric horror for PC and mobile, built in Unreal Engine 5, with the occasional lighter experiment.
+          </p>
+          <a href="#games" className="s-fade mt-6 inline-flex min-h-11 w-fit items-center text-[16px]" style={{ animationDelay: "380ms" }}>
+            <span className="s-link">Explore the games</span>&nbsp;<span className="s-arrow s-arrow-d" aria-hidden="true">↓</span>
+          </a>
+          <div className="s-fade mt-10 md:mt-auto md:pt-10" style={{ animationDelay: "440ms" }}>
+            <DevNote />
           </div>
         </div>
-      </div>
 
-      <p className="absolute bottom-4 right-4 font-mono text-[11px] text-foreground/60 sm:right-6 md:right-10">Site illustration, not game footage</p>
+        <HeroShot className="md:col-span-7 md:col-start-6 lg:col-span-6 lg:col-start-7" />
+      </div>
     </section>
   )
 }

@@ -4,46 +4,52 @@ import { studioEmail, studioLinks } from "@/lib/studio"
 
 export function StudioContact() {
   return (
-    <footer id="contact" className="scroll-mt-16 pt-28 md:pt-44" aria-labelledby="contact-title">
-      <div className="mx-auto max-w-[1440px] px-4 pb-10 sm:px-6 md:px-10">
-        <div className="s-reveal border-t border-[color:var(--border)] pt-10 md:pt-14">
-          <h2 id="contact-title" className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-            Contact
-          </h2>
+    <footer id="contact" aria-labelledby="contact-heading" className="border-t border-[color:var(--border)]">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-4 px-4 pt-16 sm:px-6 md:grid-cols-12 md:gap-10 md:px-10 md:pt-24">
+        <h2 id="contact-heading" className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground md:col-span-3 md:pt-2">
+          Contact
+        </h2>
+        <div className="md:col-span-9">
+          <p className="max-w-md text-[16px] leading-relaxed text-muted-foreground">
+            Get in touch about the games, press, or working together.
+          </p>
           <a
             href={`mailto:${studioEmail}`}
-            className="s-link mt-4 inline-block break-all text-3xl font-medium tracking-[-0.035em] text-foreground sm:text-5xl md:text-6xl"
+            className="mt-2 inline-block break-all py-1.5 text-[clamp(1.9rem,6vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.045em]"
           >
-            {studioEmail}
+            <span className="s-link [text-decoration-thickness:2px] [text-underline-offset:10px]">{studioEmail}</span>
           </a>
-          <p className="mt-4 max-w-md text-[15px] text-muted-foreground">For questions about the games, press, or working together.</p>
+
+          <ul className="mt-10 flex flex-wrap gap-x-10 gap-y-2">
+            {studioLinks.map((l) => (
+              <li key={l.label}>
+                <ExtLink href={l.href} className="flex min-h-11 flex-col justify-center">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{l.label}</span>
+                  <span className="text-[16px]">
+                    <span className="s-link">{l.handle}</span>&nbsp;
+                    <span className="s-arrow" aria-hidden="true">
+                      ↗
+                    </span>
+                  </span>
+                </ExtLink>
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
 
-        <ul className="mt-12 grid grid-cols-2 gap-x-6 gap-y-2 border-t border-[color:var(--border)] pt-6 sm:grid-cols-4">
-          {studioLinks.map((l) => (
-            <li key={l.label}>
-              <ExtLink href={l.href} className="group flex min-h-14 flex-col justify-center">
-                <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{l.label}</span>
-                <span className="s-link mt-1 text-[15px] text-foreground">
-                  {l.handle}&nbsp;<span className="s-arrow" aria-hidden="true">↗</span>
-                </span>
-              </ExtLink>
-            </li>
-          ))}
-          <li>
-            <Link href="/portfolio" className="group flex min-h-14 flex-col justify-center">
-              <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">Personal</span>
-              <span className="s-link mt-1 text-[15px] text-foreground">
-                Personal portfolio&nbsp;<span className="s-arrow s-arrow-r" aria-hidden="true">→</span>
-              </span>
+      <div className="mx-auto mt-16 max-w-[1440px] px-4 sm:px-6 md:mt-24 md:px-10">
+        <div className="flex flex-col gap-1 border-t border-[color:var(--border)] py-5 text-[13px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Cycle&rsquo;s Studios · Bogdan / Cycle01</p>
+          <div className="flex gap-6">
+            <Link href="/portfolio" className="inline-flex min-h-11 items-center hover:text-foreground">
+              <span className="s-link">Personal portfolio</span>&nbsp;<span className="s-arrow s-arrow-r" aria-hidden="true">→</span>
             </Link>
-          </li>
-        </ul>
-
-        <p className="mt-12 flex flex-wrap justify-between gap-2 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-          <span>© {new Date().getFullYear()} Cycle&apos;s Studios</span>
-          <span>Made by Bogdan / Cycle01</span>
-        </p>
+            <a href="#top" className="inline-flex min-h-11 items-center hover:text-foreground">
+              <span className="s-link">Back to top</span>
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   )
