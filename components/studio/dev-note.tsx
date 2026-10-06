@@ -11,17 +11,17 @@ export function DevNote() {
   const panelId = useId()
 
   return (
-    <div className="border-t border-[color:var(--border)]">
+    <div className="rounded-2xl border border-[color:var(--border)] bg-white/[0.03] px-5 transition-colors duration-300 hover:border-foreground/25 md:backdrop-blur-sm">
       <button
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
-        className="group block min-h-14 w-full py-3 text-left"
+        className="group block min-h-16 w-full py-4 text-left"
       >
-        <span className="flex items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
+        <span className="s-label flex items-center justify-between gap-4">
           <span className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" aria-hidden="true" />
+            <span className="s-pulse h-1.5 w-1.5 rounded-full bg-[color:var(--accent)]" aria-hidden="true" />
             Currently building
           </span>
           <span className="flex items-center gap-2 transition-colors duration-150 group-hover:text-foreground">
@@ -31,12 +31,12 @@ export function DevNote() {
             </span>
           </span>
         </span>
-        <span className="mt-1.5 block text-[16px] text-foreground">Currently developing {currentBuild.title}.</span>
+        <span className="mt-2 block text-[17px] text-foreground">Currently developing {currentBuild.title}.</span>
       </button>
 
       <div id={panelId} className="s-collapse" data-open={open} inert={!open} aria-hidden={!open}>
         <div>
-          <div className="border-l border-[color:var(--accent)] pb-2 pl-4">
+          <div className="mb-4 border-l border-[color:var(--accent)] pl-4">
             <p className="text-[15px] leading-relaxed text-foreground/85">{currentBuild.summary}</p>
             <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
               {currentBuild.facts.map((f) => (

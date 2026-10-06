@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState, type PointerEvent } from "react"
 import { stills } from "@/lib/studio"
 
-const pad = (n: number) => String(n).padStart(2, "0")
-
 /**
  * A horizontal reel of large frames from the games. Native horizontal scroll
  * with snapping (swipe, trackpad, Shift+wheel), mouse drag, and prev/next
@@ -93,20 +91,16 @@ export function StillsReel() {
   }
 
   const btn =
-    "flex h-11 w-11 items-center justify-center border border-[color:var(--border)] text-foreground transition-colors duration-150 hover:border-foreground/50 disabled:opacity-30 disabled:hover:border-[color:var(--border)]"
+    "flex h-12 w-12 items-center justify-center rounded-full border border-[color:var(--border)] text-foreground transition-colors duration-200 hover:border-foreground/50 hover:bg-white/[0.05] disabled:opacity-30 disabled:hover:border-[color:var(--border)] disabled:hover:bg-transparent"
 
   return (
-    <section aria-labelledby="stills-title" className="pt-24 md:pt-36">
-      <div className="mx-auto flex max-w-[1440px] items-end justify-between gap-6 px-4 sm:px-6 md:px-10">
-        <h2 id="stills-title" className="flex items-baseline gap-4">
-          <span aria-hidden="true" className="font-mono text-[12px] text-[color:var(--accent)]">02</span>
-          <span className="s-serif text-[clamp(3rem,7vw,6rem)] leading-[0.9]">Stills</span>
-        </h2>
-        <div className="flex items-center gap-4 pb-1">
-          <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground" aria-live="polite">
-            <span className="text-foreground">{pad(index + 1)}</span> / {pad(stills.length)}
-          </p>
-          <div className="hidden gap-2 sm:flex">
+    <section id="stills" aria-labelledby="stills-title" className="scroll-mt-4 pt-24 md:pt-40">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-10">
+        <div className="flex items-end justify-between gap-6">
+          <h2 id="stills-title" data-sr className="s-serif s-h2">
+            Stills
+          </h2>
+          <div className="hidden gap-2 pb-2 sm:flex">
             <button type="button" onClick={() => go(-1)} disabled={ends.start} className={btn} aria-label="Previous still">
               ←
             </button>
@@ -115,6 +109,7 @@ export function StillsReel() {
             </button>
           </div>
         </div>
+        <div data-sr className="s-rule mt-6 md:mt-8" aria-hidden="true" />
       </div>
 
       <div
@@ -125,12 +120,12 @@ export function StillsReel() {
         onPointerCancel={onUp}
         tabIndex={0}
         aria-label="Stills from the games. Scroll sideways or use the buttons."
-        className="s-reel mt-8 flex cursor-grab gap-4 overflow-x-auto md:gap-6"
+        className="s-reel mt-8 flex cursor-grab gap-4 overflow-x-auto pb-1 md:mt-10 md:gap-6"
       >
         {stills.map((s, i) => (
-          <figure key={s.src} className="shrink-0" aria-label={`${pad(i + 1)} of ${pad(stills.length)}`}>
+          <figure key={s.src} className="shrink-0" aria-label={`${i + 1} of ${stills.length}`}>
             <div
-              className="s-mask aspect-[4/3] w-[84vw] overflow-hidden bg-[color:var(--card)] sm:aspect-auto sm:h-[min(58vh,560px)] sm:w-auto"
+              className="s-mask aspect-[4/3] w-[84vw] overflow-hidden rounded-[1.1rem] border border-[color:var(--border)] bg-[color:var(--card)] sm:aspect-auto sm:h-[min(58vh,560px)] sm:w-auto"
               style={{ ["--ar" as string]: `${s.width} / ${s.height}` }}
             >
               <picture>
@@ -149,10 +144,8 @@ export function StillsReel() {
                 />
               </picture>
             </div>
-            <figcaption className="mt-3 flex justify-between gap-6 font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">
-              <span>
-                <span className="text-foreground/80">{pad(i + 1)}</span>&ensp;{s.game}
-              </span>
+            <figcaption className="s-label mt-3 flex justify-between gap-6">
+              <span className="text-foreground/80">{s.game}</span>
               <span>{s.kind}</span>
             </figcaption>
           </figure>
@@ -161,7 +154,7 @@ export function StillsReel() {
 
       <div className="mx-auto mt-6 max-w-[1440px] px-4 sm:px-6 md:px-10">
         <div className="h-px bg-[color:var(--border)]">
-          <div ref={barRef} className="h-px origin-left bg-foreground/70" style={{ transform: "scaleX(0.04)" }} />
+          <div ref={barRef} className="h-px origin-left bg-[color:var(--accent)]" style={{ transform: "scaleX(0.04)" }} />
         </div>
       </div>
     </section>

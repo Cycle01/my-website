@@ -1,5 +1,5 @@
 import { asset } from "@/lib/asset"
-import { announcements, releasedGames, type Game } from "@/lib/projects"
+import { announcements, archiveProjects, extensions, releasedGames, type Game } from "@/lib/projects"
 
 /*
   Studio homepage content. Titles, years, ratings and store links come from the
@@ -27,7 +27,7 @@ export interface Artwork {
 export interface StudioProject {
   id: string
   title: string
-  /** Short facts shown in the index row, e.g. "PC · 2025". */
+  /** Short facts shown above the title, e.g. "PC · 2025". */
   meta: string
   status: string
   /** "live" = released, "dev" = in development, "paused" = no further updates. */
@@ -35,9 +35,9 @@ export interface StudioProject {
   summary: string
   /** Extra facts listed under the summary. */
   facts?: string[]
-  /** Real artwork for the shared preview. Projects without any get a text panel. */
+  /** Promo, key or store art, or screenshots. Shown in the same 16:9 frame for every game. */
   art?: Artwork
-  /** Shown in place of artwork when there is none. */
+  /** A line about what has (not) been shown, listed with the facts. */
   noArt?: string
   /** Portrait phone screenshots, shown instead of landscape artwork. */
   phones?: { src: string; alt: string }[]
@@ -50,16 +50,27 @@ const moonfall = game("Moonfall: Protocol")
 
 const X_URL = "https://twitter.com/cycledadev"
 
-export const heroShot: Artwork = {
-  src: asset("/images/studio/games/sos-moon-tower.webp"),
-  srcSmall: asset("/images/studio/games/sos-moon-tower-sm.webp"),
-  width: 1973,
-  height: 1100,
-  alt: "Secrets of Sundown, in-game: the fire lookout tower at night between dark pines, one bright light shining from its cabin",
-  position: "55% 45%",
-}
-
 export const projects: StudioProject[] = [
+  {
+    id: "secrets-of-sundown-2",
+    title: "Secrets of Sundown 2",
+    meta: "Unreal Engine 5",
+    status: "In development",
+    tone: "dev",
+    summary:
+      "The sequel to Secrets of Sundown, and the biggest project I've taken on. I'll share more when there's something real to show.",
+    facts: ["Psychological horror", "Release date not announced"],
+    noArt: "Nothing from the game has been shown yet.",
+    art: {
+      src: asset("/images/studio/games/sos2-promo.webp"),
+      srcSmall: asset("/images/studio/games/sos2-promo-sm.webp"),
+      width: 1600,
+      height: 800,
+      alt: "Secrets of Sundown 2 promo art: the title above a lookout tower and pines under a golden sky, a crow perched on the tower's roof",
+      position: "50% 55%",
+    },
+    action: { label: "Follow development on X", href: X_URL, external: true },
+  },
   {
     id: "secrets-of-sundown",
     title: sundown.title,
@@ -100,18 +111,6 @@ export const projects: StudioProject[] = [
       text: "Moonfall: Protocol was released, but I didn't finish it the way I intended. When my final year of school began, I had to put my studies first, and the game wasn't the success I hoped for. It stays part of my history, and I'd rather be upfront with anyone thinking of playing it.",
     },
     action: { label: "View on Steam", href: moonfall.link, external: true },
-  },
-  {
-    id: "secrets-of-sundown-2",
-    title: "Secrets of Sundown 2",
-    meta: "Unreal Engine 5",
-    status: "In development",
-    tone: "dev",
-    summary:
-      "The sequel to Secrets of Sundown, and the biggest project I've taken on. I'll share more when there's something real to show.",
-    facts: ["Psychological horror", "Release date not announced"],
-    noArt: "Nothing from the game has been shown yet.",
-    action: { label: "Follow development on X", href: X_URL, external: true },
   },
   {
     id: "fling-it",
@@ -167,9 +166,6 @@ export const stills = [
   still("sos-dusk", 1920, 922, "Secrets of Sundown", "In-game", "The lookout tower's cabin at dusk under pink clouds, a bright light at its side", "35% 55%"),
 ]
 
-/** Index of the project selected when the page loads: a released game with artwork. */
-export const defaultProject = 0
-
 const latestNote = announcements[0]
 
 /** The "Currently building" developer note in the hero. Existing facts only. */
@@ -195,3 +191,78 @@ export const studioLinks = [
 ]
 
 export const studioEmail = "ciclentiu@gmail.com"
+
+/*
+  Skills. The names and groups are the portfolio's last Skills section (its
+  self-rating percentages are dropped in favour of text); every note below is
+  taken from the portfolio's own wording or from the project data above.
+*/
+export interface Skill {
+  name: string
+  note?: string
+}
+
+export interface SkillGroup {
+  id: string
+  title: string
+  summary?: string
+  skills: Skill[]
+}
+
+export const skillsIntro = [
+  "Handling everything from concept art and level design to programming and sound design.",
+  "C++ and Blueprints, from rapid prototypes to polished releases. Still early days with Godot.",
+]
+
+export const skillsFocus = "Specializing in psychological horror, atmospheric tension, and visceral medieval combat."
+
+export const skillGroups: SkillGroup[] = [
+  {
+    id: "engines",
+    title: "Engines",
+    skills: [
+      { name: "Unreal Engine 5", note: "Secrets of Sundown, Moonfall: Protocol and Secrets of Sundown 2" },
+      { name: "UE5 Blueprints", note: "From rapid prototypes to polished releases" },
+      { name: "Godot", note: "Still early days" },
+    ],
+  },
+  {
+    id: "languages",
+    title: "Languages",
+    skills: [
+      { name: "C++", note: "Secrets of Sundown, IronMade and Finding the Moose Man" },
+      { name: "GDScript" },
+      { name: "HLSL / GLSL" },
+    ],
+  },
+  {
+    id: "design",
+    title: "Design",
+    summary: "Creating immersive gameplay loops, choice-driven mechanics, and player-centric horror experiences.",
+    skills: [{ name: "Level Design" }, { name: "UI/UX Design" }, { name: "3D Modeling" }, { name: "VFX / Shaders" }],
+  },
+  {
+    id: "tools",
+    title: "Tools",
+    skills: [{ name: "Blender" }, { name: "Substance Painter" }, { name: "Perforce / Git" }, { name: "JIRA / Notion" }],
+  },
+]
+
+export const alsoShipping: Skill[] = [
+  { name: "Chrome Extensions (Manifest V3)", note: extensions.map((e) => e.name).join(", ") },
+  { name: "JavaScript" },
+  { name: "HTML & CSS" },
+  { name: "AI-assisted coding" },
+  { name: "Mobile game dev", note: "Fling It" },
+]
+
+function made(title: string) {
+  const g = releasedGames.find((x) => x.title === title)
+  if (g) return { title: g.title, image: g.image as string, tags: g.tags }
+  const a = archiveProjects.find((x) => x.title === title)
+  if (!a) throw new Error(`Unknown project: ${title}`)
+  return { title: a.title, image: a.image as string, tags: a.tags }
+}
+
+/** Existing project images, shown beside the skills as proof of use. */
+export const skillsInUse = ["Secrets of Sundown", "Moonfall: Protocol", "IronMade", "Safe Place", "Finding the Moose Man", "Spidey Game"].map(made)
