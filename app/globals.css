@@ -214,64 +214,95 @@ html {
 .tilt:hover .tilt-glare { opacity: 1; }
 
 /* ── Studio theme ──────────────────────────────────────────
-   The studio homepage (app/page.tsx): flat charcoal, off-white type and one
-   accent. Everything here is scoped to .studio-theme or uses s- prefixed
-   classes, so the portfolio is untouched. */
+   The studio homepage (app/page.tsx): deep black, warm off-white type, one
+   ember accent and a static film grain. Everything here is scoped to
+   .studio-theme or uses s- prefixed classes, so the portfolio is untouched. */
 .studio-theme {
-  --background: #181716;
-  --foreground: #eeeae3;
-  --card: #201e1c;
-  --card-foreground: #eeeae3;
-  --primary: #eeeae3;
-  --primary-foreground: #181716;
-  --accent: #e0703f;
-  --accent-foreground: #181716;
-  --muted-foreground: #a09a90;
-  --border: rgba(238, 234, 227, 0.14);
+  --background: #080808;
+  --foreground: #ede9e2;
+  --card: #111110;
+  --card-foreground: #ede9e2;
+  --primary: #ede9e2;
+  --primary-foreground: #080808;
+  --accent: #e2683c;
+  --accent-foreground: #080808;
+  --muted-foreground: #96918a;
+  --border: rgba(237, 233, 226, 0.12);
   --font-inter: var(--font-geist);
   --font-space-mono: var(--font-geist-mono);
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist), system-ui, sans-serif;
 }
-body:has(.studio-theme) { background: #181716; }
-.studio-theme ::selection { background: #e0703f; color: #181716; }
-.studio-theme :focus-visible { outline: 2px solid #e0703f; outline-offset: 3px; }
+body:has(.studio-theme) { background: #080808; }
+.studio-theme ::selection { background: #e2683c; color: #080808; }
+.studio-theme :focus-visible { outline: 2px solid #e2683c; outline-offset: 3px; }
+.s-serif { font-family: var(--font-instrument-serif), Georgia, serif; font-weight: 400; font-style: italic; letter-spacing: -0.02em; }
+
+/* Static film grain over the whole page (no animation, ignores the pointer). */
+.studio-theme::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 /* Motion: hero lines rise out of a mask once; supporting text and nav fade
    up with a short stagger. CSS only, finished within ~0.9s. */
 @keyframes s-rise { from { transform: translateY(102%); } to { transform: none; } }
 @keyframes s-fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-.s-line { display: block; overflow: hidden; padding-bottom: 0.06em; margin-bottom: -0.06em; }
-.s-line > span { display: block; animation: s-rise 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-.s-fade { animation: s-fade 0.45s ease-out both; }
+.s-line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.s-line > span { display: block; animation: s-rise 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.s-fade { animation: s-fade 0.5s ease-out both; }
 
-/* Selected-project swap in the game index. */
+/* Selected-project swap in the game stage. */
 @keyframes s-swap { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.s-swap { animation: s-swap 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.s-swap { animation: s-swap 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 
 /* Links: crisp underline and a small arrow nudge. */
 .s-link {
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
-  text-decoration-color: rgba(238, 234, 227, 0.35);
+  text-decoration-color: rgba(237, 233, 226, 0.35);
   text-underline-offset: 5px;
   transition: text-decoration-color 0.18s ease, color 0.18s ease;
 }
-.s-link:hover, a:hover .s-link, button:hover .s-link { text-decoration-color: #e0703f; }
+.s-link:hover, a:hover .s-link, button:hover .s-link { text-decoration-color: #e2683c; }
 .s-arrow { display: inline-block; transition: transform 0.18s ease; }
 a:hover .s-arrow, a:focus-visible .s-arrow { transform: translate(2px, -2px); }
 a:hover .s-arrow-r, a:focus-visible .s-arrow-r { transform: translateX(3px); }
 a:hover .s-arrow-d, a:focus-visible .s-arrow-d { transform: translateY(2px); }
 
-/* The hero screenshot opens from a smaller rectangle once it scrolls into
-   view. Only when scripts run (they add .is-in); a delayed fallback opens it
+/* Large images open from a smaller rectangle once they scroll into view.
+   Only when scripts run (they add .is-in); a delayed fallback opens them
    anyway if they never do. */
 @keyframes s-open { to { clip-path: inset(0 0 0 0); } }
-.s-mask { transition: clip-path 0.55s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.s-mask { transition: clip-path 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
-  .s-mask:not(.is-in) { clip-path: inset(10% 12% 10% 12%); animation: s-open 0.55s 2.5s forwards; }
+  .s-mask:not(.is-in) { clip-path: inset(8% 10% 8% 10%); animation: s-open 0.8s 2.5s forwards; }
 }
+
+/* Game stage: artwork fades into the black on its left and bottom edges. */
+.s-stage-art {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 26%), linear-gradient(to top, transparent 0, #000 30%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0, #000 26%), linear-gradient(to top, transparent 0, #000 30%);
+  mask-composite: intersect;
+}
+.s-layer { transition: opacity 0.7s ease, transform 1.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.s-pan { transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); transform: translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -10px), 0); }
+
+/* Stills reel: native horizontal scrolling with snap, no visible scrollbar. */
+.s-reel { --edge: 1rem; padding-inline: var(--edge); scroll-padding-inline: var(--edge); scrollbar-width: none; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; }
+@media (min-width: 640px) { .s-reel { --edge: 1.5rem; } }
+@media (min-width: 768px) { .s-reel { --edge: max(2.5rem, calc((100vw - 1440px) / 2 + 2.5rem)); } }
+.s-reel::-webkit-scrollbar { display: none; }
+.s-reel > * { scroll-snap-align: start; }
+.s-reel.is-dragging { scroll-snap-type: none; cursor: grabbing; }
+.s-reel.is-dragging * { pointer-events: none; }
 
 /* Accordion and developer-note panels: animate height via grid rows. */
 .s-collapse { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
@@ -280,7 +311,8 @@ a:hover .s-arrow-d, a:focus-visible .s-arrow-d { transform: translateY(2px); }
 
 @media (prefers-reduced-motion: reduce) {
   .s-line > span, .s-fade, .s-swap { animation: none; }
-  .s-mask, .s-collapse, .s-arrow, .s-link, .s-ease { transition: none !important; }
+  .s-mask, .s-collapse, .s-arrow, .s-link, .s-ease, .s-layer, .s-pan { transition: none !important; }
+  .s-pan { transform: none; }
 }
 
 /* Short fade between the studio and the portfolio (app/template.tsx). */

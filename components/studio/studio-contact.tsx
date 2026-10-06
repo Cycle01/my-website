@@ -4,18 +4,19 @@ import { studioEmail, studioLinks } from "@/lib/studio"
 
 export function StudioContact() {
   return (
-    <footer id="contact" aria-labelledby="contact-heading" className="border-t border-[color:var(--border)]">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-4 px-4 pt-16 sm:px-6 md:grid-cols-12 md:gap-10 md:px-10 md:pt-24">
-        <h2 id="contact-heading" className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground md:col-span-3 md:pt-2">
-          Contact
+    <footer id="contact" aria-labelledby="contact-heading" className="mt-24 border-t border-[color:var(--border)] md:mt-36">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 px-4 pt-16 sm:px-6 md:grid-cols-12 md:gap-10 md:px-10 md:pt-24">
+        <h2 id="contact-heading" className="flex items-baseline gap-4 md:col-span-4">
+          <span aria-hidden="true" className="font-mono text-[12px] text-[color:var(--accent)]">04</span>
+          <span className="s-serif text-[clamp(3rem,7vw,6rem)] leading-[0.9]">Contact</span>
         </h2>
-        <div className="md:col-span-9">
+        <div className="md:col-span-8 md:pt-4">
           <p className="max-w-md text-[16px] leading-relaxed text-muted-foreground">
             Get in touch about the games, press, or working together.
           </p>
           <a
             href={`mailto:${studioEmail}`}
-            className="mt-2 inline-block break-all py-1.5 text-[clamp(1.9rem,6vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.045em]"
+            className="mt-2 inline-block break-all py-2 text-[clamp(1.9rem,6vw,4.5rem)] font-medium leading-[1.05] tracking-[-0.045em]"
           >
             <span className="s-link [text-decoration-thickness:2px] [text-underline-offset:10px]">{studioEmail}</span>
           </a>

@@ -39,6 +39,8 @@ export interface StudioProject {
   art?: Artwork
   /** Shown in place of artwork when there is none. */
   noArt?: string
+  /** Portrait phone screenshots, shown instead of landscape artwork. */
+  phones?: { src: string; alt: string }[]
   notice?: { title: string; text: string }
   action?: { label: string; href: string; external: boolean }
 }
@@ -51,8 +53,8 @@ const X_URL = "https://twitter.com/cycledadev"
 export const heroShot: Artwork = {
   src: asset("/images/studio/games/sos-moon-tower.webp"),
   srcSmall: asset("/images/studio/games/sos-moon-tower-sm.webp"),
-  width: 1600,
-  height: 892,
+  width: 1973,
+  height: 1100,
   alt: "Secrets of Sundown, in-game: the fire lookout tower at night between dark pines, one bright light shining from its cabin",
   position: "55% 45%",
 }
@@ -70,8 +72,8 @@ export const projects: StudioProject[] = [
     art: {
       src: asset("/images/studio/games/sos-key.webp"),
       srcSmall: asset("/images/studio/games/sos-key-sm.webp"),
-      width: 1600,
-      height: 800,
+      width: 2400,
+      height: 1200,
       alt: "Secrets of Sundown key art: the game's title beside a lookout tower and pines under a violet sky",
       position: "62% 50%",
     },
@@ -102,12 +104,12 @@ export const projects: StudioProject[] = [
   {
     id: "secrets-of-sundown-2",
     title: "Secrets of Sundown 2",
-    meta: "Psychological horror · Unreal Engine 5",
+    meta: "Unreal Engine 5",
     status: "In development",
     tone: "dev",
     summary:
       "The sequel to Secrets of Sundown, and the biggest project I've taken on. I'll share more when there's something real to show.",
-    facts: ["Release date not announced"],
+    facts: ["Psychological horror", "Release date not announced"],
     noArt: "Nothing from the game has been shown yet.",
     action: { label: "Follow development on X", href: X_URL, external: true },
   },
@@ -119,7 +121,11 @@ export const projects: StudioProject[] = [
     tone: "dev",
     summary:
       "My first mobile game. Pull back, let go, and fling a tiny astronaut as far as your upgrades allow. A lighter game, and my start on mobile.",
-    noArt: "Phone screenshots are in my portfolio.",
+    phones: [
+      { src: asset("/images/fling-it/menu.webp"), alt: "Fling It main menu with the Neon planet selected" },
+      { src: asset("/images/fling-it/launch.webp"), alt: "Fling It: the astronaut on the launch ramp" },
+      { src: asset("/images/fling-it/flight.webp"), alt: "Fling It: the astronaut boosting through the Exosphere" },
+    ],
     action: { label: "See it in my portfolio", href: "/portfolio/#fling-it", external: false },
   },
   {
@@ -140,6 +146,25 @@ export const projects: StudioProject[] = [
     },
     action: { label: "Follow updates on X", href: X_URL, external: true },
   },
+]
+
+const still = (name: string, width: number, height: number, game: string, kind: string, alt: string, position = "50% 50%") => ({
+  src: asset(`/images/studio/games/${name}.webp`),
+  srcSmall: asset(`/images/studio/games/${name}-sm.webp`),
+  width,
+  height,
+  game,
+  kind,
+  alt,
+  position,
+})
+
+/** The stills reel: real frames from the games, none repeated elsewhere on the page. */
+export const stills = [
+  still("sos-flashlight", 1920, 922, "Secrets of Sundown", "In-game", "A flashlight beam catches a bear at the edge of the forest at night", "45% 60%"),
+  still("moonfall-crew", 2400, 775, "Moonfall: Protocol", "Store art", "Four astronauts in orange suits walk down a lit base corridor", "50% 55%"),
+  still("sos-day-tower", 1662, 783, "Secrets of Sundown", "In-game", "The lookout tower rising above the pines, mountains behind it", "60% 45%"),
+  still("sos-dusk", 1920, 922, "Secrets of Sundown", "In-game", "The lookout tower's cabin at dusk under pink clouds, a bright light at its side", "35% 55%"),
 ]
 
 /** Index of the project selected when the page loads: a released game with artwork. */
