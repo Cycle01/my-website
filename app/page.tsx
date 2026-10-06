@@ -1,4 +1,5 @@
 import { Instrument_Serif } from "next/font/google"
+import "./studio.css"
 import { AmbientBackground } from "@/components/studio/ambient-background"
 import { StudioNav } from "@/components/studio/studio-nav"
 import { StudioHero } from "@/components/studio/studio-hero"

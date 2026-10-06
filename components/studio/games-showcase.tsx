@@ -17,7 +17,7 @@ const toneDot: Record<StudioProject["tone"], string> = {
 
 function Frame({ p, eager = false }: { p: StudioProject; eager?: boolean }) {
   return (
-    <div className="s-frame s-mask">
+    <div className="s-frame s-mask" style={{ position: "relative", overflow: "hidden", aspectRatio: "16 / 9" }}>
       {p.art && (
         <picture>
           <source media="(max-width: 767px)" srcSet={p.art.srcSmall} />
@@ -43,7 +43,7 @@ function Frame({ p, eager = false }: { p: StudioProject; eager?: boolean }) {
                 "radial-gradient(60% 80% at 22% 100%, rgba(0,224,255,0.22), transparent 70%), radial-gradient(55% 80% at 82% 0%, rgba(150,70,255,0.28), transparent 70%), #070a12",
             }}
           />
-          <div className="s-phones" role="group" aria-label={`${p.title} screenshots`}>
+          <div className="s-phones" style={{ position: "absolute", inset: 0 }} role="group" aria-label={`${p.title} screenshots`}>
             {p.phones.map((ph) => (
               <div key={ph.src} className="s-phone">
                 <div className="s-float h-full w-full">

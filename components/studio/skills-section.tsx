@@ -73,7 +73,7 @@ export function SkillsSection() {
             {skillsInUse.map((p, i) => (
               <li key={p.title} data-sr style={{ ["--d" as string]: (i % 3) * 90 }}>
                 <figure className="s-card p-2.5">
-                  <div className="s-frame">
+                  <div className="s-frame" style={{ position: "relative", overflow: "hidden", aspectRatio: "16 / 9" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={p.image} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" />
                   </div>

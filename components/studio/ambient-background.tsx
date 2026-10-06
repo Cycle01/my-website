@@ -172,11 +172,17 @@ export function AmbientBackground() {
   }, [])
 
   return (
-    <div className="s-bg" aria-hidden="true">
+    // The essential layout is inline too: even if the stylesheet fails to load,
+    // the background stays fixed behind the page instead of pushing it down.
+    <div
+      className="s-bg"
+      aria-hidden="true"
+      style={{ position: "fixed", inset: 0, zIndex: 0, overflow: "hidden", pointerEvents: "none", background: "#050506" }}
+    >
       <div className="s-orb s-orb-a" />
       <div className="s-orb s-orb-b" />
       <div className="s-orb s-orb-c" />
-      <canvas ref={canvasRef} />
+      <canvas ref={canvasRef} style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }} />
       <div ref={spotRef} className="s-spot" />
       <div className="s-vignette" />
     </div>

@@ -7,7 +7,7 @@ import { asset } from "@/lib/asset"
  */
 export function OrbitArt({ className = "" }: { className?: string }) {
   return (
-    <div className={`s-orbit pointer-events-none ${className}`} aria-hidden="true">
+    <div className={`s-orbit pointer-events-none ${className}`} style={{ position: "absolute" }} aria-hidden="true">
       <svg viewBox="-300 -300 600 600" className="h-full w-full overflow-visible">
         <defs>
           <radialGradient id="orbit-core" r="50%">
