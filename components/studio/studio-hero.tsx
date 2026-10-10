@@ -40,7 +40,7 @@ export function StudioHero() {
         {/* A short line over the title, in the page's one typeface. */}
         <p className="s-fade mb-6 flex items-center gap-3 text-[12px] font-medium uppercase tracking-[0.18em] text-foreground/70 md:mb-8 md:text-[13px]" style={{ animationDelay: "80ms" }}>
           <span className="h-px w-8 bg-[color:var(--accent)]" aria-hidden="true" />
-          Game studio by Bogdan / Cycle01
+          Game studio by Bogdan (Cycle01)
         </p>
 
         {/* Both words share one typeface, weight and tracking. */}

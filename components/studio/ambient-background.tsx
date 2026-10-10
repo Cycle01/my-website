@@ -93,7 +93,7 @@ export function AmbientBackground() {
         const y = wrap(m.y - scrollY * m.z * 0.28 + py * m.z * 18, h + 20) - 10
         const tw = still ? 0.75 : 0.55 + 0.45 * Math.sin(t * 0.001 * m.speed + m.phase)
         // Dust close to the cursor catches its light.
-        const near = lit ? Math.max(0, 1 - Math.hypot(x - sx, y - sy) / 220) : 0
+        const near = lit ? Math.max(0, 1 - Math.hypot(x - sx, y - sy) / 150) : 0
         const a = Math.min(1, (0.12 + m.z * 0.5) * tw + near * 0.55)
         ctx.fillStyle = `rgba(${m.tint},${a.toFixed(3)})`
         ctx.beginPath()
@@ -135,32 +135,39 @@ export function AmbientBackground() {
       raf = 0
     }
 
+    // The glow only lights up over the header, the hero and the games, not the whole page.
+    let hasPointer = false
+    const setGlow = (on: boolean) => {
+      lit = on
+      spot.classList.toggle("is-on", on)
+    }
+    const updateGlow = () => {
+      if (!hasPointer || !finePointer.matches || reduced.matches) return setGlow(false)
+      const el = document.elementFromPoint(stx, sty)
+      setGlow(!!el?.closest("header, #top, #games"))
+    }
     const onPointer = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return
       tx = (e.clientX / window.innerWidth) * 2 - 1
       ty = (e.clientY / window.innerHeight) * 2 - 1
       stx = e.clientX
       sty = e.clientY
-      if (finePointer.matches && !reduced.matches) {
-        spot.classList.add("is-on")
-        lit = true
-      }
+      hasPointer = true
+      updateGlow()
     }
     const onLeave = () => {
-      spot.classList.remove("is-on")
-      lit = false
+      hasPointer = false
+      setGlow(false)
     }
     const onScroll = () => {
       scrollY = window.scrollY
+      updateGlow() // the section under a resting cursor changes as the page scrolls
       if (!raf) draw(performance.now(), true) // reduced motion: keep the parallax honest
     }
     const onVisibility = () => (document.hidden ? stop() : start())
     const onMotionChange = () => {
       stop()
-      if (reduced.matches) {
-        spot.classList.remove("is-on")
-        lit = false
-      }
+      if (reduced.matches) setGlow(false)
       draw(performance.now(), true)
       start()
     }
