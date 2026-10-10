@@ -265,13 +265,6 @@ export const extensions: Extension[] = [
   },
 ]
 
-export const studioStats = [
-  { value: releasedGames.length, label: "Games released", sub: "PC · Fling It coming to mobile" },
-  { value: extensions.length, label: "Chrome extensions" },
-  { value: archiveProjects.length, label: "Archived for fun" },
-  { value: 1, label: "Sequel in the works" },
-]
-
 export const announcements: Announcement[] = [
   {
     date: "September 2026",

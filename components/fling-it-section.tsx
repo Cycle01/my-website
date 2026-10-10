@@ -2,38 +2,9 @@
 
 import Image from "next/image"
 import { useCallback, useEffect, useState } from "react"
-import { Flame, Orbit, Rocket, Smartphone, TrendingUp, Users } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { flingIt } from "@/lib/projects"
-
-const features = [
-  {
-    icon: Rocket,
-    title: "Pull back & let go",
-    text: "A slingshot launch with a timing window. Nail a Perfect Launch for a x1.25 bonus.",
-  },
-  {
-    icon: Flame,
-    title: "Boost & style",
-    text: "Burn boost fuel mid-flight and fly stylish to stack up a style multiplier.",
-  },
-  {
-    icon: Orbit,
-    title: "Planets to unlock",
-    text: "Mars, Neon, Ice and more, climbing from the Dunes all the way to the Exosphere.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Upgrade & rebirth",
-    text: "Eight upgrade tracks, then rebirth for a permanent multiplier and go even further.",
-  },
-  {
-    icon: Users,
-    title: "Crew, gear, missions, daily spin",
-    text: "Missions to clear, crew and gear to kit out, and a daily spin to come back for.",
-  },
-]
 
 const SLIDE_MS = 3600
 
@@ -88,55 +59,40 @@ export function FlingItSection() {
               </p>
             </Reveal>
 
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {features.map((feature, i) => (
-                <Reveal key={feature.title} delay={i * 80} className={i === features.length - 1 ? "sm:col-span-2" : ""}>
-                  <div className="group flex h-full gap-4 rounded-2xl border border-border bg-card/60 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-400/40">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10 text-cyan-300 transition-transform duration-300 group-hover:scale-110">
-                      <feature.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="mb-1 text-sm font-semibold text-foreground">{feature.title}</h3>
-                      <p className="text-xs leading-relaxed text-muted-foreground">{feature.text}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal delay={200} className="mt-8">
-              <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">Upgrade tracks</p>
-              <div className="flex flex-wrap gap-2">
-                {flingIt.upgrades.map((upgrade) => (
-                  <span
-                    key={upgrade}
-                    className="rounded-lg border border-cyan-400/20 bg-cyan-400/5 px-2.5 py-1 font-mono text-[11px] text-cyan-200"
-                  >
-                    {upgrade}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <div className="rounded-2xl border border-lime-300/30 bg-lime-300/5 px-5 py-3">
-                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">My best run</div>
-                  <div className="text-2xl font-bold text-lime-300">30.0 km</div>
+            {/* How a run works, as a plain list instead of feature cards. */}
+            <Reveal delay={100}>
+              <p className="text-sm font-semibold text-foreground">How a run works</p>
+              <ol className="mt-3 list-decimal space-y-2 pl-5 leading-relaxed text-muted-foreground marker:text-muted-foreground">
+                <li>Pull back and let go. Release inside the timing window for a Perfect Launch, worth a ×1.25 bonus.</li>
+                <li>Mid-flight, burn boost fuel. Flying with style stacks up a style multiplier.</li>
+                <li>
+                  Every flight pays out. The money goes into eight upgrade tracks: {flingIt.upgrades.slice(0, -1).join(", ").toLowerCase()} and{" "}
+                  {flingIt.upgrades[flingIt.upgrades.length - 1].toLowerCase()}.
+                </li>
+                <li>Then rebirth for a permanent multiplier, and go even further.</li>
+              </ol>
+              <p className="mt-6 leading-relaxed text-muted-foreground">
+                Planets unlock as you go (Mars, Neon, Ice and more), climbing from the Dunes to the Exosphere. There are also missions,
+                crew and gear, and a daily spin.
+              </p>
+              <p className="mt-6 text-sm text-muted-foreground">
+                My best run so far: <span className="font-semibold text-foreground">30.0 km</span>. Portrait, built solo, out later this year.
+              </p>
+              {flingIt.storeLinks.length > 0 && (
+                <div className="mt-6 flex flex-wrap gap-4">
+                  {flingIt.storeLinks.map((store) => (
+                    <a
+                      key={store.href}
+                      href={store.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-foreground underline decoration-border underline-offset-[6px] hover:decoration-primary"
+                    >
+                      {store.label}
+                    </a>
+                  ))}
                 </div>
-                <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  <Smartphone className="h-4 w-4 text-cyan-300" />
-                  Portrait · Built solo · Out later this year
-                </div>
-                {flingIt.storeLinks.map((store) => (
-                  <a
-                    key={store.href}
-                    href={store.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-xl bg-cyan-400 px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-background transition-all hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]"
-                  >
-                    {store.label}
-                  </a>
-                ))}
-              </div>
+              )}
             </Reveal>
           </div>
 

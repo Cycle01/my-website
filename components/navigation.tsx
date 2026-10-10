@@ -6,6 +6,7 @@ import Link from "next/link"
 import { asset } from "@/lib/asset"
 
 const navLinks = [
+  { href: "#work", label: "Work", zh: "作品" },
   { href: "#about", label: "About", zh: "关于" },
   { href: "#news", label: "Announcements", zh: "公告" },
   { href: "#sundown-2", label: "Sundown 2", zh: "新作" },
@@ -115,7 +116,7 @@ export function Navigation() {
       {/* Menu overlay */}
       {open && (
         <div id="site-menu" className="border-t border-primary/10 bg-background">
-          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-2 px-6 py-6 sm:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl grid-cols-2 gap-2 px-6 py-6 sm:grid-cols-3">
             <Link
               href="/"
               className="col-span-2 rounded-xl border border-accent/40 bg-accent/10 px-4 py-3 text-center font-mono text-xs uppercase tracking-[0.15em] text-accent sm:hidden"
