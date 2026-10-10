@@ -1,35 +1,33 @@
-import { Navigation } from "@/components/navigation"
-import { HeroSection } from "@/components/hero-section"
-import { Marquee } from "@/components/marquee"
-import { AboutSection } from "@/components/about-section"
-import { SundownSpotlight } from "@/components/sundown-spotlight"
-import { AnnouncementsSection } from "@/components/announcements-section"
-import { ProjectsSection } from "@/components/projects-section"
-import { FlingItSection } from "@/components/fling-it-section"
-import { VibeCodingSection } from "@/components/vibe-coding-section"
-import { ArchiveSection } from "@/components/archive-section"
-import { DedicationSection } from "@/components/dedication-section"
-import { ContactSection } from "@/components/contact-section"
-import { Footer } from "@/components/footer"
-import { CustomCursor } from "@/components/custom-cursor"
+import "./studio.css"
+import { AmbientBackground } from "@/components/studio/ambient-background"
+import { StudioNav } from "@/components/studio/studio-nav"
+import { StudioHero } from "@/components/studio/studio-hero"
+import { GamesShowcase } from "@/components/studio/games-showcase"
+import { StillsGallery } from "@/components/studio/stills-gallery"
+import { SkillsSection } from "@/components/studio/skills-section"
+import { StudioIntro } from "@/components/studio/studio-intro"
+import { StudioContact } from "@/components/studio/studio-contact"
+import { StudioMotion } from "@/components/studio/studio-motion"
+import { HashRedirect } from "@/components/studio/hash-redirect"
 
-export default function HomePage() {
+export default function StudioPage() {
   return (
-    <main>
-      <CustomCursor />
-      <Navigation />
-      <HeroSection />
-      <Marquee />
-      <AboutSection />
-      <AnnouncementsSection />
-      <SundownSpotlight />
-      <ProjectsSection />
-      <FlingItSection />
-      <VibeCodingSection />
-      <ArchiveSection />
-      <DedicationSection />
-      <ContactSection />
-      <Footer />
-    </main>
+    <div id="studio-root" className="studio-theme relative min-h-screen">
+      <HashRedirect />
+      <StudioMotion />
+      <AmbientBackground />
+      <a href="#games" className="sr-only z-[80] bg-foreground px-4 py-3 text-background focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+        Skip to games
+      </a>
+      <StudioNav />
+      <main className="relative z-10">
+        <StudioHero />
+        <GamesShowcase />
+        <StillsGallery />
+        <SkillsSection />
+        <StudioIntro />
+      </main>
+      <StudioContact />
+    </div>
   )
 }

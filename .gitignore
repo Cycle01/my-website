@@ -10,3 +10,4 @@ node_modules/
 .DS_Store
 # Static export (GitHub Pages)
 out/
+*.tsbuildinfo

@@ -86,6 +86,9 @@ export function VibeCodingSection() {
                 {"I started vibe coding because I want to stay in step with where the industry is going. AI is changing how software gets made, and I'd rather learn it by shipping real things than watch from the side."}
               </p>
               <p className="mt-4">
+                {"Along the way I've learned a lot about AI itself: how it actually works, where it's strong, where it breaks, and how to get the most out of it. With every project I'm getting better at using its full capabilities."}
+              </p>
+              <p className="mt-4">
                 {"Outside the game engine, this is how I build now. I describe what I want in plain language, pair with AI to write and refactor the code, and spend my own time on what actually matters: the idea, how it feels, testing it in a real browser, and polishing it until it's worth publishing."}
               </p>
               <p className="mt-4">

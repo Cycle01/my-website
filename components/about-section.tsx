@@ -62,14 +62,14 @@ export function AboutSection() {
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-primary/50" />
 
       <div className="mx-auto max-w-6xl">
-        <SectionHeading kicker="About Me" zh="关于我" title={"The developer behind Cycle's Studios"} />
+        <SectionHeading kicker="About Me" zh="关于我" title={"The developer behind Cycle's Studio"} />
 
         <div className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
           <Reveal className="space-y-5 text-lg leading-relaxed text-muted-foreground">
             <p>
               {"I go by "}
               <span className="font-semibold text-foreground">Cycle01</span>
-              {", the solo developer and the whole team behind Cycle's Studios. I design, code, light and sound my games myself, almost all of them in Unreal Engine 5."}
+              {", the solo developer and the whole team behind Cycle's Studio. I design, code, light and sound my games myself, almost all of them in Unreal Engine 5."}
             </p>
             <p>
               {"I started with small projects, and every release since has been a step up: better visuals, tighter mechanics, stronger atmosphere. I'm drawn to tension and mystery. Suburbs that feel wrong, dungeons you need to escape, forests you shouldn't walk into alone."}
@@ -155,10 +155,10 @@ export function AboutSection() {
                   <Seal text="志向" size={34} className="rotate-[-6deg]" />
                 </div>
                 <h3 className="mb-5 text-2xl font-bold leading-tight text-foreground md:text-4xl text-balance">
-                  {"Where Cycle's Studios is headed"}
+                  {"Where Cycle's Studio is headed"}
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
-                  {"Grow Cycle's Studios from a one-person studio into an independent studio people recognise, known for atmospheric games that stay with you after you close them."}
+                  {"Grow Cycle's Studio from a one-person studio into an independent studio people recognise, known for atmospheric games that stay with you after you close them."}
                 </p>
               </div>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
