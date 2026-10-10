@@ -1,4 +1,5 @@
 import "./studio.css"
+import { AmbientBackground } from "@/components/studio/ambient-background"
 import { StudioNav } from "@/components/studio/studio-nav"
 import { StudioHero } from "@/components/studio/studio-hero"
 import { GamesShowcase } from "@/components/studio/games-showcase"
@@ -14,6 +15,7 @@ export default function StudioPage() {
     <div id="studio-root" className="studio-theme relative min-h-screen">
       <HashRedirect />
       <StudioMotion />
+      <AmbientBackground />
       <a href="#games" className="sr-only z-[80] bg-foreground px-4 py-3 text-background focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
         Skip to games
       </a>

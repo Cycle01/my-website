@@ -4,8 +4,9 @@
 */
 
 /* ── Studio theme ──────────────────────────────────────────
-   The studio homepage (app/page.tsx): a solid black page, warm off-white type
-   in one typeface (Geist) and one ember accent. Everything here is scoped to
+   The studio homepage (app/page.tsx): a near-black page with a quiet living
+   background (drifting light, dust and a cursor glow), warm off-white type in
+   one typeface (Geist) and one ember accent. Everything here is scoped to
    .studio-theme or uses s- prefixed classes, so the portfolio is untouched. */
 .studio-theme {
   --background: #050506;
@@ -31,6 +32,39 @@ html:has(.studio-theme) { scroll-behavior: smooth; }
 .studio-theme ::selection { background: #e2683c; color: #050506; }
 .studio-theme :focus-visible { outline: 2px solid #e2683c; outline-offset: 3px; }
 .s-label { font-family: var(--font-geist), system-ui, sans-serif; font-size: 11.5px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-foreground); }
+
+/* ── Living background (components/studio/ambient-background.tsx) ── */
+.s-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; background: #050506; }
+.s-bg canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.s-orb { position: absolute; border-radius: 50%; will-change: transform; }
+.s-orb-a {
+  width: 72vmax; height: 72vmax; left: 50%; top: -32vmax;
+  background: radial-gradient(closest-side, rgba(226, 104, 60, 0.19), rgba(226, 104, 60, 0.055) 55%, transparent 72%);
+  animation: s-drift-a 38s ease-in-out infinite alternate;
+}
+.s-orb-b {
+  width: 84vmax; height: 84vmax; left: -42vmax; top: 30%;
+  background: radial-gradient(closest-side, rgba(88, 100, 226, 0.16), rgba(88, 100, 226, 0.045) 55%, transparent 72%);
+  animation: s-drift-b 46s ease-in-out infinite alternate;
+}
+.s-orb-c {
+  width: 56vmax; height: 56vmax; left: 38%; top: 62%;
+  background: radial-gradient(closest-side, rgba(226, 104, 60, 0.1), transparent 70%);
+  animation: s-drift-c 52s ease-in-out infinite alternate;
+}
+@keyframes s-drift-a { to { transform: translate3d(-14vmax, 12vmax, 0) scale(1.12); } }
+@keyframes s-drift-b { to { transform: translate3d(16vmax, -10vmax, 0) scale(1.08); } }
+@keyframes s-drift-c { to { transform: translate3d(-18vmax, -14vmax, 0) scale(1.18); } }
+/* Cursor glow: a soft white halo with a warm ember core. */
+.s-spot {
+  position: absolute; left: 0; top: 0; width: 760px; height: 760px; margin: -380px 0 0 -380px; opacity: 0;
+  background:
+    radial-gradient(closest-side, rgba(226, 104, 60, 0.11), rgba(226, 104, 60, 0.03) 45%, transparent 62%),
+    radial-gradient(closest-side, rgba(237, 233, 226, 0.075), transparent 72%);
+  transition: opacity 0.6s ease; will-change: transform;
+}
+.s-spot.is-on { opacity: 1; }
+.s-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, transparent 50%, rgba(0, 0, 0, 0.55) 100%); }
 
 /* ── Scroll progress ────────────────────────────────────── */
 .s-progress { position: absolute; inset: auto 0 0 0; height: 1px; background: transparent; }
@@ -180,9 +214,9 @@ a:hover .s-arrow-d, a:focus-visible .s-arrow-d { transform: translateY(3px); }
 .s-collapse > div { overflow: hidden; min-height: 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  .s-letter, .s-fade, .s-menu, .s-spin, .s-pulse, .s-float, .s-cue::after, .s-lightbox[open], .s-lb-img { animation: none !important; }
+  .s-letter, .s-fade, .s-menu, .s-orb, .s-spin, .s-pulse, .s-float, .s-cue::after, .s-lightbox[open], .s-lb-img { animation: none !important; }
   .s-letter { transform: none; }
-  .s-arrow, .s-link, .s-card, .s-card::before, .s-frame img, .s-phone, .s-orbit, .s-collapse, .s-btn, .s-btn::before, .s-word, .s-shot img, .s-shot-zoom { transition: none !important; }
+  .s-arrow, .s-link, .s-card, .s-card::before, .s-frame img, .s-phone, .s-orbit, .s-collapse, .s-btn, .s-btn::before, .s-spot, .s-word, .s-shot img, .s-shot-zoom { transition: none !important; }
   .s-orbit { transform: none; }
   .s-word { opacity: 1; }
 }

@@ -33,10 +33,16 @@ export function StudioHero() {
   }
 
   return (
-    <section ref={ref} onPointerMove={onPointer} id="top" aria-labelledby="studio-title" className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden pb-6 pt-28 md:pb-10">
-      <OrbitArt className="right-[-34vw] top-[12svh] h-[min(112vw,72svh)] w-[min(112vw,72svh)] opacity-60 sm:right-[-14vw] md:right-[-4vw] md:top-1/2 md:h-[min(60vw,86svh)] md:w-[min(60vw,86svh)] md:-translate-y-[54%] md:opacity-100" />
+    <section ref={ref} onPointerMove={onPointer} id="top" aria-labelledby="studio-title" className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pb-12 pt-28 md:pb-16 md:pt-32">
+      <OrbitArt className="right-[-30vw] top-[-5svh] h-[min(88vw,50svh)] w-[min(88vw,50svh)] opacity-50 sm:right-[-14vw] sm:top-[6svh] sm:h-[min(80vw,60svh)] sm:w-[min(80vw,60svh)] md:right-[-4vw] md:top-1/2 md:h-[min(60vw,86svh)] md:w-[min(60vw,86svh)] md:-translate-y-[54%] md:opacity-100" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-10">
+        {/* A short line over the title, in the page's one typeface. */}
+        <p className="s-fade mb-6 flex items-center gap-3 text-[12px] font-medium uppercase tracking-[0.18em] text-foreground/70 md:mb-8 md:text-[13px]" style={{ animationDelay: "80ms" }}>
+          <span className="h-px w-8 bg-[color:var(--accent)]" aria-hidden="true" />
+          Game studio by Bogdan / Cycle01
+        </p>
+
         {/* Both words share one typeface, weight and tracking. */}
         <h1 id="studio-title" className="text-[clamp(4.25rem,min(21vw,24svh),12.5rem)] font-medium leading-[0.86] tracking-[-0.055em] md:text-[clamp(5.5rem,min(13vw,24svh),13.5rem)]">
           <span className="s-line">
