@@ -38,7 +38,7 @@ export function DevNote() {
         <div>
           <div className="mb-4 border-l border-[color:var(--accent)] pl-4">
             <p className="text-[15px] leading-relaxed text-foreground/85">{currentBuild.summary}</p>
-            <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground">
+            <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11.5px] font-medium uppercase tracking-[0.1em] text-muted-foreground">
               {currentBuild.facts.map((f) => (
                 <li key={f}>{f}</li>
               ))}

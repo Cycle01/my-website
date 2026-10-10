@@ -60,7 +60,6 @@ export const projects: StudioProject[] = [
     summary:
       "The sequel to Secrets of Sundown, and the biggest project I've taken on. I'll share more when there's something real to show.",
     facts: ["Psychological horror", "Release date not announced"],
-    noArt: "Nothing from the game has been shown yet.",
     art: {
       src: asset("/images/studio/games/sos2-promo.webp"),
       srcSmall: asset("/images/studio/games/sos2-promo-sm.webp"),
@@ -162,7 +161,7 @@ const still = (name: string, width: number, height: number, game: string, kind: 
 export const stills = [
   still("sos-flashlight", 1920, 922, "Secrets of Sundown", "In-game", "A flashlight beam catches a bear at the edge of the forest at night", "45% 60%"),
   still("moonfall-crew", 2400, 775, "Moonfall: Protocol", "Store art", "Four astronauts in orange suits walk down a lit base corridor", "50% 55%"),
-  still("sos-day-tower", 1662, 783, "Secrets of Sundown", "In-game", "The lookout tower rising above the pines, mountains behind it", "60% 45%"),
+  still("sos-day-tower", 1642, 771, "Secrets of Sundown", "In-game", "The lookout tower rising above the pines, mountains behind it", "60% 45%"),
   still("sos-dusk", 1920, 922, "Secrets of Sundown", "In-game", "The lookout tower's cabin at dusk under pink clouds, a bright light at its side", "35% 55%"),
 ]
 
@@ -244,7 +243,15 @@ export const skillGroups: SkillGroup[] = [
   {
     id: "tools",
     title: "Tools",
-    skills: [{ name: "Blender" }, { name: "Substance Painter" }, { name: "Perforce / Git" }, { name: "JIRA / Notion" }],
+    skills: [
+      { name: "Blender" },
+      { name: "Substance Painter" },
+      { name: "Character Creator", note: "Characters" },
+      { name: "iClone", note: "Characters" },
+      { name: "Marvelous Designer", note: "Clothing" },
+      { name: "Perforce / Git" },
+      { name: "JIRA / Notion" },
+    ],
   },
 ]
 

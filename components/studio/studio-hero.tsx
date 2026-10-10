@@ -37,18 +37,13 @@ export function StudioHero() {
       <OrbitArt className="right-[-34vw] top-[12svh] h-[min(112vw,72svh)] w-[min(112vw,72svh)] opacity-60 sm:right-[-14vw] md:right-[-4vw] md:top-1/2 md:h-[min(60vw,86svh)] md:w-[min(60vw,86svh)] md:-translate-y-[54%] md:opacity-100" />
 
       <div className="relative z-10 mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-10">
-        <p className="s-fade s-serif mb-4 max-w-md text-balance text-[1.5rem] leading-[1.15] md:mb-6 md:text-[1.9rem]" style={{ animationDelay: "120ms" }}>
-          Independent games by Bogdan / Cycle01.
-        </p>
-
+        {/* Both words share one typeface, weight and tracking. */}
         <h1 id="studio-title" className="text-[clamp(4.25rem,min(21vw,24svh),12.5rem)] font-medium leading-[0.86] tracking-[-0.055em] md:text-[clamp(5.5rem,min(13vw,24svh),13.5rem)]">
           <span className="s-line">
             <Letters text="Cycle’s" />
           </span>
           <span className="s-line pl-[0.5em] md:pl-[1.1em]">
-            <span className="s-serif tracking-[-0.035em]">
-              <Letters text="Studios" offset={7} />
-            </span>
+            <Letters text="Studios" offset={7} />
           </span>
         </h1>
 

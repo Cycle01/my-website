@@ -5,7 +5,7 @@ export function StudioIntro() {
   return (
     <section id="studio" aria-labelledby="studio-heading" className="scroll-mt-4 pt-24 md:pt-40">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-10">
-        <h2 id="studio-heading" data-sr className="s-serif s-h2">
+        <h2 id="studio-heading" data-sr className="s-h2">
           Studio
         </h2>
         <div data-sr className="s-rule mt-6 md:mt-8" aria-hidden="true" />

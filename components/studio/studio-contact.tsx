@@ -6,7 +6,7 @@ export function StudioContact() {
   return (
     <footer id="contact" aria-labelledby="contact-heading" className="relative z-10 mt-24 border-t border-[color:var(--border)] md:mt-40">
       <div className="mx-auto max-w-[1440px] px-4 pt-16 sm:px-6 md:px-10 md:pt-24">
-        <h2 id="contact-heading" data-sr className="s-serif s-h2">
+        <h2 id="contact-heading" data-sr className="s-h2">
           Contact
         </h2>
         <div data-sr className="s-rule mt-6 md:mt-8" aria-hidden="true" />

@@ -126,7 +126,7 @@ export function GamesShowcase() {
   return (
     <section id="games" aria-labelledby="games-title" className="scroll-mt-4 pt-20 md:pt-32">
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-10">
-        <h2 id="games-title" data-sr className="s-serif s-h2">
+        <h2 id="games-title" data-sr className="s-h2">
           Games
         </h2>
         <div data-sr className="s-rule mt-6 md:mt-8" aria-hidden="true" />
