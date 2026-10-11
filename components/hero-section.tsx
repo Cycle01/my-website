@@ -150,7 +150,7 @@ export function HeroSection() {
 
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
           <a
-            href="#work"
+            href="#projects"
             className="btn-shine group relative inline-flex items-center gap-2 overflow-hidden bg-primary px-8 py-3.5 font-mono text-sm font-bold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-[0_0_40px_rgba(180,50,20,0.4)] rounded-lg"
           >
             <span className="relative z-10">Explore My Work</span>
@@ -169,7 +169,7 @@ export function HeroSection() {
 
       {/* Scroll indicator - pinned to bottom of viewport */}
       <a
-        href="#work"
+        href="#about"
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
         aria-label="Scroll down"
       >
