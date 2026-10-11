@@ -1,56 +1,34 @@
-import { Code2, Gamepad2, Palette, Skull } from "lucide-react"
 import { CountUp } from "@/components/count-up"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { Seal } from "@/components/chinese-decor"
 import { studioStats } from "@/lib/projects"
 
-const highlights = [
-  {
-    icon: Gamepad2,
-    title: "Game Design",
-    description:
-      "Creating immersive gameplay loops, choice-driven mechanics, and player-centric horror experiences.",
-    number: "01",
-  },
-  {
-    icon: Code2,
-    title: "Unreal Engine 5",
-    description:
-      "C++ and Blueprints, from rapid prototypes to polished releases. Still early days with Godot.",
-    number: "02",
-  },
-  {
-    icon: Skull,
-    title: "Horror & Action",
-    description:
-      "Specializing in psychological horror, atmospheric tension, and visceral medieval combat.",
-    number: "03",
-  },
-  {
-    icon: Palette,
-    title: "Solo Dev",
-    description:
-      "Handling everything from concept art and level design to programming and sound design.",
-    number: "04",
-  },
-]
-
 const pillars = [
   {
-    title: "Atmosphere first",
+    title: "Develop more and extend",
+    zh: "拓展",
+    text: "Keep releasing, and extend what Cycle's Studios makes: horror on PC, games on mobile, tools in the browser.",
+  },
+  {
+    title: "Improve the atmosphere",
     zh: "氛围",
-    text: "Every game should have a mood you can feel in the first minute. Horror, action or a silly launch game, the world comes first.",
+    text: "Raise the quality of the atmosphere with every release: the lighting, the sound, the mood you feel in the first minute.",
   },
   {
-    title: "Ship, learn, repeat",
-    zh: "学习",
-    text: "Games, a mobile game, browser tools. Every release teaches me something the next one uses. Finishing things is the skill.",
+    title: "Make bigger things",
+    zh: "宏大",
+    text: "Take on bigger projects. Secrets of Sundown 2 is the biggest one yet.",
   },
   {
-    title: "Stay independent",
-    zh: "独立",
-    text: "Own the ideas, own the tools, build at my own pace. Secrets of Sundown 2 is the next big step.",
+    title: "Grow",
+    zh: "成长",
+    text: "Grow as a developer with each game, and grow Cycle's Studios with it.",
+  },
+  {
+    title: "Own the idea",
+    zh: "原创",
+    text: "Every game starts as my own idea, built independently and at my own pace.",
   },
 ]
 
@@ -67,23 +45,23 @@ export function AboutSection() {
         <div className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
           <Reveal className="space-y-5 text-lg leading-relaxed text-muted-foreground">
             <p>
-              {"I go by "}
-              <span className="font-semibold text-foreground">Cycle01</span>
-              {", the solo developer and the whole team behind Cycle's Studios. I design, code, light and sound my games myself, almost all of them in Unreal Engine 5."}
+              {"Hi, my name is "}
+              <span className="font-semibold text-foreground">Bogdan</span>
+              {", the solo developer and the whole team behind Cycle's Studios. I design, code, light and style my games myself, almost all of them in Unreal Engine 5."}
             </p>
             <p>
-              {"I started with small projects, and every release since has been a step up: better visuals, tighter mechanics, stronger atmosphere. I'm drawn to tension and mystery. Suburbs that feel wrong, dungeons you need to escape, forests you shouldn't walk into alone."}
+              {"I started with small projects, and every release since has been a step up: better visuals, tighter mechanics, stronger atmosphere. I'm drawn to the classic horror atmosphere."}
             </p>
             <p>
               {"Lately I've been widening the net. I built my first mobile game, "}
               <a href="#fling-it" className="font-semibold text-accent underline-offset-4 hover:underline">
                 Fling It
               </a>
-              {", and I've been "}
-              <a href="#vibe-coding" className="font-semibold text-primary underline-offset-4 hover:underline">
-                vibe coding
+              {", and I've been experimenting with "}
+              <a href="#tools" className="font-semibold text-primary underline-offset-4 hover:underline">
+                browser tools
               </a>
-              {" browser tools, with three Chrome extensions live on the Chrome Web Store. Different formats, same rule: it has to feel good to use."}
+              {", with three Chrome extensions live on the Chrome Web Store."}
             </p>
           </Reveal>
 
@@ -114,32 +92,8 @@ export function AboutSection() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((item, i) => (
-            <Reveal key={item.title} delay={i * 90}>
-              <div className="group relative h-full rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-card/80 hover:shadow-[0_0_40px_rgba(180,50,20,0.06)]">
-                <span className="absolute top-4 right-4 font-mono text-xs text-primary/20 group-hover:text-primary/40 transition-colors">
-                  {item.number}
-                </span>
-
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 border border-primary/10 transition-colors group-hover:bg-primary/15 group-hover:border-primary/20">
-                  <item.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="mb-2 font-semibold text-card-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {item.description}
-                </p>
-
-                <div className="absolute bottom-0 left-6 right-6 h-px bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300" />
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
         {/* The goal */}
-        <Reveal className="mt-24">
+        <Reveal>
           <div className="relative overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-card via-card to-primary/[0.07] p-8 md:p-12">
             <div
               lang="zh-Hans"
@@ -161,9 +115,9 @@ export function AboutSection() {
                   {"Grow Cycle's Studios from a one-person studio into an independent studio people recognise, known for atmospheric games that stay with you after you close them."}
                 </p>
               </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
                 {pillars.map((pillar, i) => (
-                  <div key={pillar.title} className="rounded-2xl border border-border/70 bg-background/40 p-5 backdrop-blur-sm">
+                  <div key={pillar.title} className="rounded-2xl border border-border/70 bg-background/40 p-5 backdrop-blur-sm sm:last:col-span-2 lg:last:col-span-1">
                     <div className="mb-3 flex items-baseline justify-between">
                       <span className="font-mono text-xs text-primary">0{i + 1}</span>
                       <span lang="zh-Hans" className="font-brush text-2xl text-accent/60">

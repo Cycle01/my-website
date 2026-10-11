@@ -1,6 +1,6 @@
 "use client"
 
-import { ArrowDown, ArrowRight } from "lucide-react"
+import { ArrowDown } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import { FallingPetals, Lantern, Seal } from "@/components/chinese-decor"
 
@@ -103,18 +103,6 @@ export function HeroSection() {
       <div
         className="relative z-10 mx-auto max-w-5xl text-center animate-hero-in"
       >
-        <a
-          href="#sundown-2"
-          className="group mb-10 inline-flex items-center gap-3 rounded-full border border-primary/30 bg-primary/10 py-1.5 pl-3 pr-4 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground backdrop-blur-md transition-all hover:border-primary/60 hover:bg-primary/20"
-        >
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-          </span>
-          Now building · Secrets of Sundown 2
-          <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-        </a>
-
         {/* Title */}
         <h1 className="mb-8 text-5xl font-bold leading-[1.1] tracking-tight text-foreground md:text-7xl lg:text-8xl text-balance">
           <span aria-label="Cycle's" className="whitespace-nowrap">
@@ -145,7 +133,7 @@ export function HeroSection() {
         </p>
 
         <p className="mx-auto mb-12 max-w-xl text-lg leading-relaxed text-muted-foreground">
-          {"I'm Cycle01. I make horror games in Unreal Engine 5, plus whatever else I get curious about. Seven games released so far, and Secrets of Sundown 2 is next."}
+          {"I'm Bogdan (Cycle01). I make horror games in Unreal Engine 5, plus whatever else I get curious about. Six games released so far, Fling It is coming to mobile, and Secrets of Sundown 2 is next."}
         </p>
 
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">

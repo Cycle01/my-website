@@ -34,7 +34,7 @@ export function ContactSection() {
             {"Let's work together"}
           </h2>
           <p className="mb-14 text-lg leading-relaxed text-muted-foreground">
-            {"Interested in collaborating, have feedback on one of my games or extensions, or just want to chat about game dev and vibe coding? Reach out anytime."}
+            {"Interested in collaborating, have feedback on one of my games or extensions, or just want to chat about game dev and AI-assisted tools? Reach out anytime."}
           </p>
 
           <a

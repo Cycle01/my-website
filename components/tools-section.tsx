@@ -1,32 +1,9 @@
 import Image from "next/image"
-import { ArrowUpRight, Bug, Lightbulb, MessageSquare, Rocket, Check } from "lucide-react"
+import { ArrowUpRight, Check } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { AdBlockPreview, IndieRadarPreview, ScreenshotGallery, TabGrouperPreview } from "@/components/extension-previews"
 import { extensions, type Extension } from "@/lib/projects"
-
-const steps = [
-  {
-    icon: Lightbulb,
-    title: "Spot the itch",
-    text: "Start from a problem I actually have: ads everywhere, forty open tabs, no time to research a genre.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Describe the vibe",
-    text: "Plain-language prompts: what it should do, how it should look, how it should feel to click.",
-  },
-  {
-    icon: Bug,
-    title: "Test it for real",
-    text: "Load it unpacked, break it on real sites, feed every bug straight back into the loop.",
-  },
-  {
-    icon: Rocket,
-    title: "Polish & ship",
-    text: "Icons, UI passes, a proper store listing, then publish it to the Chrome Web Store.",
-  },
-]
 
 function ExtensionVisual({ extension }: { extension: Extension }) {
   if (extension.slug === "ai-tab-grouper-pro" && extension.screenshots.length > 0) {
@@ -58,17 +35,17 @@ const accents: Record<Extension["slug"], { text: string; border: string; bg: str
   },
 }
 
-export function VibeCodingSection() {
+export function ToolsSection() {
   return (
-    <section id="vibe-coding" className="relative overflow-hidden px-6 py-32">
+    <section id="tools" className="relative overflow-hidden px-6 py-32">
       <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-border" />
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-primary/50" />
       <div className="pointer-events-none absolute left-1/2 top-40 h-[500px] w-[900px] -translate-x-1/2 glow text-violet-500/[0.04]" />
 
       <div className="relative mx-auto max-w-6xl">
         <SectionHeading
-          kicker="Vibe Coding"
-          zh="氛围编程"
+          kicker="Other tools"
+          zh="其他工具"
           title={
             <>
               From an idea to the{" "}
@@ -81,38 +58,11 @@ export function VibeCodingSection() {
             </>
           }
           description={
-            <>
-              <p>
-                {"I started vibe coding because I want to stay in step with where the industry is going. AI is changing how software gets made, and I'd rather learn it by shipping real things than watch from the side."}
-              </p>
-              <p className="mt-4">
-                {"Outside the game engine, this is how I build now. I describe what I want in plain language, pair with AI to write and refactor the code, and spend my own time on what actually matters: the idea, how it feels, testing it in a real browser, and polishing it until it's worth publishing."}
-              </p>
-              <p className="mt-4">
-                {"It turns \"I wish this existed\" into a shipped tool in a fraction of the time. Three of them are live right now."}
-              </p>
-            </>
+            <p>
+              {"I build Chrome extensions to solve my own problems. AdBlock Pro, AI Tab Grouper Pro and Indie Radar are live on the Chrome Web Store. I thought about what bothered me and realized we live in an era where we can solve our problems, so I began using AI-assisted tools to refactor the code, so I can focus on the UI and getting each tool live."}
+            </p>
           }
         />
-
-        {/* Process */}
-        <div className="relative mb-28 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="pointer-events-none absolute left-0 right-0 top-[38px] hidden h-px bg-gradient-to-r from-primary/0 via-primary/40 to-accent/0 lg:block" />
-          {steps.map((step, i) => (
-            <Reveal key={step.title} delay={i * 110}>
-              <div className="group relative h-full rounded-2xl border border-border bg-card/70 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30">
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-primary/20 bg-background text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                    <step.icon className="h-5 w-5" />
-                  </div>
-                  <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
-                </div>
-                <h3 className="mb-2 font-semibold text-foreground">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{step.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
 
         {/* Shipped extensions */}
         <div className="space-y-28">
