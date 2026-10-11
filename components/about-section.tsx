@@ -17,21 +17,21 @@ const highlights = [
     icon: Code2,
     title: "Unreal Engine 5",
     description:
-      "C++ and Blueprints, from rapid prototypes to polished releases. Still early days with Godot.",
+      "Writing C++ algorithms, fixing light leaks, and optimizing GPU performance. Still early days with Godot.",
     number: "02",
   },
   {
     icon: Skull,
     title: "Horror & Action",
     description:
-      "Specializing in psychological horror, atmospheric tension, and visceral medieval combat.",
+      "Building psychological horror and managing scene optimization for Secrets of Sundown 2.",
     number: "03",
   },
   {
     icon: Palette,
     title: "Solo Dev",
     description:
-      "Handling everything from concept art and level design to programming and sound design.",
+      "Operating as Cycle's Studios, handling everything from level and UI design to publishing.",
     number: "04",
   },
 ]

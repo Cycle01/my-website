@@ -81,20 +81,9 @@ export function ToolsSection() {
             </>
           }
           description={
-            <>
-              <p>
-                {"I started experimenting with AI-assisted software because I want to stay in step with where the industry is going. AI is changing how software gets made, and I'd rather learn it by shipping real things than watch from the side."}
-              </p>
-              <p className="mt-4">
-                {"Along the way I've learned a lot about AI itself: how it actually works, where it's strong, where it breaks, and how to get the most out of it. With every project I'm getting better at using its full capabilities."}
-              </p>
-              <p className="mt-4">
-                {"Outside the game engine, this is how I experiment with software now. I describe what I want in plain language, pair with AI to write and refactor the code, and spend my own time on what actually matters: the idea, how it feels, testing it in a real browser, and polishing it until it's worth publishing."}
-              </p>
-              <p className="mt-4">
-                {"It turns \"I wish this existed\" into a shipped tool in a fraction of the time. Three of them are live right now."}
-              </p>
-            </>
+            <p>
+              {"I build Chrome extensions to solve my own problems. AdBlock Pro, AI Tab Grouper Pro and Indie Radar are live on the Chrome Web Store. I use AI coding tools to speed up writing and refactoring the code, so I can focus on the UI and getting each tool live."}
+            </p>
           }
         />
 
