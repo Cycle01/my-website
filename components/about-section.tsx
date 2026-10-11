@@ -1,40 +1,8 @@
-import { Code2, Gamepad2, Palette, Skull } from "lucide-react"
 import { CountUp } from "@/components/count-up"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { Seal } from "@/components/chinese-decor"
 import { studioStats } from "@/lib/projects"
-
-const highlights = [
-  {
-    icon: Gamepad2,
-    title: "Game Design",
-    description:
-      "Fling It's slingshot launch has a timing window: let go at the right moment for a Perfect Launch and a x1.25 bonus.",
-    number: "01",
-  },
-  {
-    icon: Code2,
-    title: "Unreal Engine 5",
-    description:
-      "Writing C++ algorithms, fixing light leaks, and optimizing GPU performance. Still early days with Godot.",
-    number: "02",
-  },
-  {
-    icon: Skull,
-    title: "Horror & Action",
-    description:
-      "Building psychological horror and managing scene optimization for Secrets of Sundown 2.",
-    number: "03",
-  },
-  {
-    icon: Palette,
-    title: "Solo Dev",
-    description:
-      "Operating as Cycle's Studios, handling everything from level and UI design to publishing.",
-    number: "04",
-  },
-]
 
 const pillars = [
   {
@@ -124,32 +92,8 @@ export function AboutSection() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {highlights.map((item, i) => (
-            <Reveal key={item.title} delay={i * 90}>
-              <div className="group relative h-full rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-card/80 hover:shadow-[0_0_40px_rgba(180,50,20,0.06)]">
-                <span className="absolute top-4 right-4 font-mono text-xs text-primary/20 group-hover:text-primary/40 transition-colors">
-                  {item.number}
-                </span>
-
-                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 border border-primary/10 transition-colors group-hover:bg-primary/15 group-hover:border-primary/20">
-                  <item.icon className="h-5 w-5 text-primary" />
-                </div>
-                <h3 className="mb-2 font-semibold text-card-foreground">
-                  {item.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {item.description}
-                </p>
-
-                <div className="absolute bottom-0 left-6 right-6 h-px bg-primary/0 group-hover:bg-primary/20 transition-colors duration-300" />
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
         {/* The goal */}
-        <Reveal className="mt-24">
+        <Reveal>
           <div className="relative overflow-hidden rounded-3xl border border-accent/20 bg-gradient-to-br from-card via-card to-primary/[0.07] p-8 md:p-12">
             <div
               lang="zh-Hans"

@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowUpRight, Bug, Lightbulb, MessageSquare, Rocket, Check } from "lucide-react"
+import { ArrowUpRight, Check, Code2, Compass, Lightbulb, Rocket } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { AdBlockPreview, IndieRadarPreview, ScreenshotGallery, TabGrouperPreview } from "@/components/extension-previews"
@@ -12,18 +12,18 @@ const steps = [
     text: "Start from a problem I actually have: ads everywhere, forty open tabs, no time to research a genre.",
   },
   {
-    icon: MessageSquare,
-    title: "Describe the idea",
-    text: "Plain-language prompts: what it should do, how it should look, how it should feel to click.",
+    icon: Compass,
+    title: "Explore the idea",
+    text: "Work out what it should do, how it should look and how it should feel to click.",
   },
   {
-    icon: Bug,
-    title: "Test it for real",
-    text: "Load it unpacked, break it on real sites, feed every bug straight back into the loop.",
+    icon: Code2,
+    title: "Develop it",
+    text: "Build it with AI-assisted tools, load it unpacked, break it on real sites and fix every bug.",
   },
   {
     icon: Rocket,
-    title: "Polish & ship",
+    title: "Polish and ship",
     text: "Icons, UI passes, a proper store listing, then publish it to the Chrome Web Store.",
   },
 ]
@@ -67,8 +67,8 @@ export function ToolsSection() {
 
       <div className="relative mx-auto max-w-6xl">
         <SectionHeading
-          kicker="AI-Assisted Tools"
-          zh="辅助编程"
+          kicker="Other tools"
+          zh="其他工具"
           title={
             <>
               From an idea to the{" "}
@@ -82,7 +82,7 @@ export function ToolsSection() {
           }
           description={
             <p>
-              {"I build Chrome extensions to solve my own problems. AdBlock Pro, AI Tab Grouper Pro and Indie Radar are live on the Chrome Web Store. I use AI coding tools to speed up writing and refactoring the code, so I can focus on the UI and getting each tool live."}
+              {"I build Chrome extensions to solve my own problems. AdBlock Pro, AI Tab Grouper Pro and Indie Radar are live on the Chrome Web Store. I thought about what bothered me and realized we live in an era where we can solve our problems, so I began using AI-assisted tools to refactor the code, so I can focus on the UI and getting each tool live."}
             </p>
           }
         />
