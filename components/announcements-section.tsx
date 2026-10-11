@@ -12,7 +12,7 @@ export function AnnouncementsSection() {
       <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[700px] -translate-x-1/2 -translate-y-1/2 glow text-primary/[0.04]" />
 
       <div className="relative mx-auto max-w-3xl">
-        <SectionHeading kicker="Announcements" zh="公告" title="From the studio" align="center" />
+        <SectionHeading kicker="Announcements" zh="公告" title="From the dev" align="center" />
 
         <div className="space-y-8">
           {announcements.map((post) => (

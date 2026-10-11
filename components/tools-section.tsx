@@ -13,7 +13,7 @@ const steps = [
   },
   {
     icon: MessageSquare,
-    title: "Describe the vibe",
+    title: "Describe the idea",
     text: "Plain-language prompts: what it should do, how it should look, how it should feel to click.",
   },
   {
@@ -58,17 +58,17 @@ const accents: Record<Extension["slug"], { text: string; border: string; bg: str
   },
 }
 
-export function VibeCodingSection() {
+export function ToolsSection() {
   return (
-    <section id="vibe-coding" className="relative overflow-hidden px-6 py-32">
+    <section id="tools" className="relative overflow-hidden px-6 py-32">
       <div className="pointer-events-none absolute top-0 left-0 right-0 h-px bg-border" />
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-primary/50" />
       <div className="pointer-events-none absolute left-1/2 top-40 h-[500px] w-[900px] -translate-x-1/2 glow text-violet-500/[0.04]" />
 
       <div className="relative mx-auto max-w-6xl">
         <SectionHeading
-          kicker="Vibe Coding"
-          zh="氛围编程"
+          kicker="AI-Assisted Tools"
+          zh="辅助编程"
           title={
             <>
               From an idea to the{" "}
@@ -83,13 +83,13 @@ export function VibeCodingSection() {
           description={
             <>
               <p>
-                {"I started vibe coding because I want to stay in step with where the industry is going. AI is changing how software gets made, and I'd rather learn it by shipping real things than watch from the side."}
+                {"I started experimenting with AI-assisted software because I want to stay in step with where the industry is going. AI is changing how software gets made, and I'd rather learn it by shipping real things than watch from the side."}
               </p>
               <p className="mt-4">
                 {"Along the way I've learned a lot about AI itself: how it actually works, where it's strong, where it breaks, and how to get the most out of it. With every project I'm getting better at using its full capabilities."}
               </p>
               <p className="mt-4">
-                {"Outside the game engine, this is how I build now. I describe what I want in plain language, pair with AI to write and refactor the code, and spend my own time on what actually matters: the idea, how it feels, testing it in a real browser, and polishing it until it's worth publishing."}
+                {"Outside the game engine, this is how I experiment with software now. I describe what I want in plain language, pair with AI to write and refactor the code, and spend my own time on what actually matters: the idea, how it feels, testing it in a real browser, and polishing it until it's worth publishing."}
               </p>
               <p className="mt-4">
                 {"It turns \"I wish this existed\" into a shipped tool in a fraction of the time. Three of them are live right now."}

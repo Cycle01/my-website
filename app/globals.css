@@ -257,11 +257,6 @@ html {
   100% { transform: translate3d(-20px, 110vh, 0) rotate(420deg); opacity: 0; }
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 @keyframes word-in {
   from { opacity: 0; transform: translateY(0.4em); filter: blur(6px); }
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -310,7 +305,6 @@ html {
 .animate-lantern { animation: lantern-sway 5s ease-in-out infinite; transform-origin: 50% 0; }
 .animate-lantern-glow { animation: lantern-glow 3s ease-in-out infinite; }
 .animate-petal { animation: petal-fall linear infinite; }
-.animate-marquee { animation: marquee 40s linear infinite; }
 .animate-word-in { animation: word-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
 .animate-ken-burns { animation: ken-burns 18s ease-in-out infinite alternate; }
 .animate-rec { animation: rec-blink 1.2s steps(1) infinite; }
@@ -334,10 +328,6 @@ html {
   animation: shimmer 6s linear infinite;
 }
 
-.marquee-mask {
-  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-}
-
 .vertical-text {
   writing-mode: vertical-rl;
   text-orientation: upright;
@@ -358,7 +348,7 @@ html {
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .js [data-reveal] .heading-line { transform: none; }
   .btn-shine::after { display: none; }
-  .animate-lantern, .animate-lantern-glow, .animate-petal, .animate-marquee, .animate-word-in,
+  .animate-lantern, .animate-lantern-glow, .animate-petal, .animate-word-in,
   .animate-ken-burns, .animate-rec, .animate-radar, .animate-blip, .animate-cloud, .animate-moon::after,
   .animate-twinkle, .animate-shimmer, .animate-float, .animate-letter, .animate-hero-in, .animate-page-fade, .animate-pulse-glow, .animate-scanline,
   .animate-grain, .animate-bounce, .animate-ping, .animate-pulse {

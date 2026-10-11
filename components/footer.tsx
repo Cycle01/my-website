@@ -8,13 +8,13 @@ export function Footer() {
         <div className="flex items-center gap-2.5 text-muted-foreground">
           <Image
             src={asset("/images/studio-logo.png")}
-            alt="Cycle's Studio"
+            alt="Cycle's Studios"
             width={20}
             height={20}
             className="rounded-sm"
           />
           <span className="font-mono text-xs uppercase tracking-[0.15em]">
-            Cycle<span className="text-primary">01</span>{" / Cycle's Studio"}
+            Cycle<span className="text-primary">01</span>{" / Cycle's Studios"}
           </span>
         </div>
         <a href="#for-mom" className="group flex items-center gap-2 text-muted-foreground/70 transition-colors hover:text-primary">

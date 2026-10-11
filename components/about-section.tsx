@@ -10,7 +10,7 @@ const highlights = [
     icon: Gamepad2,
     title: "Game Design",
     description:
-      "Creating immersive gameplay loops, choice-driven mechanics, and player-centric horror experiences.",
+      "Fling It's slingshot launch has a timing window: let go at the right moment for a Perfect Launch and a x1.25 bonus.",
     number: "01",
   },
   {
@@ -38,19 +38,29 @@ const highlights = [
 
 const pillars = [
   {
-    title: "Atmosphere first",
+    title: "Develop more and extend",
+    zh: "拓展",
+    text: "Keep releasing, and extend what Cycle's Studios makes: horror on PC, games on mobile, tools in the browser.",
+  },
+  {
+    title: "Improve the atmosphere",
     zh: "氛围",
-    text: "Every game should have a mood you can feel in the first minute. Horror, action or a silly launch game, the world comes first.",
+    text: "Raise the quality of the atmosphere with every release: the lighting, the sound, the mood you feel in the first minute.",
   },
   {
-    title: "Ship, learn, repeat",
-    zh: "学习",
-    text: "Games, a mobile game, browser tools. Every release teaches me something the next one uses. Finishing things is the skill.",
+    title: "Make bigger things",
+    zh: "宏大",
+    text: "Take on bigger projects. Secrets of Sundown 2 is the biggest one yet.",
   },
   {
-    title: "Stay independent",
-    zh: "独立",
-    text: "Own the ideas, own the tools, build at my own pace. Secrets of Sundown 2 is the next big step.",
+    title: "Grow",
+    zh: "成长",
+    text: "Grow as a developer with each game, and grow Cycle's Studios with it.",
+  },
+  {
+    title: "Own the idea",
+    zh: "原创",
+    text: "Every game starts as my own idea, built independently and at my own pace.",
   },
 ]
 
@@ -62,28 +72,28 @@ export function AboutSection() {
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-32 h-px bg-primary/50" />
 
       <div className="mx-auto max-w-6xl">
-        <SectionHeading kicker="About Me" zh="关于我" title={"The developer behind Cycle's Studio"} />
+        <SectionHeading kicker="About Me" zh="关于我" title={"The developer behind Cycle's Studios"} />
 
         <div className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr]">
           <Reveal className="space-y-5 text-lg leading-relaxed text-muted-foreground">
             <p>
-              {"I go by "}
-              <span className="font-semibold text-foreground">Cycle01</span>
-              {", the solo developer and the whole team behind Cycle's Studio. I design, code, light and sound my games myself, almost all of them in Unreal Engine 5."}
+              {"Hi, my name is "}
+              <span className="font-semibold text-foreground">Bogdan</span>
+              {", the solo developer and the whole team behind Cycle's Studios. I design, code, light and style my games myself, almost all of them in Unreal Engine 5."}
             </p>
             <p>
-              {"I started with small projects, and every release since has been a step up: better visuals, tighter mechanics, stronger atmosphere. I'm drawn to tension and mystery. Suburbs that feel wrong, dungeons you need to escape, forests you shouldn't walk into alone."}
+              {"I started with small projects, and every release since has been a step up: better visuals, tighter mechanics, stronger atmosphere. I'm drawn to the classic horror atmosphere."}
             </p>
             <p>
               {"Lately I've been widening the net. I built my first mobile game, "}
               <a href="#fling-it" className="font-semibold text-accent underline-offset-4 hover:underline">
                 Fling It
               </a>
-              {", and I've been "}
-              <a href="#vibe-coding" className="font-semibold text-primary underline-offset-4 hover:underline">
-                vibe coding
+              {", and I've been experimenting with "}
+              <a href="#tools" className="font-semibold text-primary underline-offset-4 hover:underline">
+                browser tools
               </a>
-              {" browser tools, with three Chrome extensions live on the Chrome Web Store. Different formats, same rule: it has to feel good to use."}
+              {", with three Chrome extensions live on the Chrome Web Store."}
             </p>
           </Reveal>
 
@@ -155,15 +165,15 @@ export function AboutSection() {
                   <Seal text="志向" size={34} className="rotate-[-6deg]" />
                 </div>
                 <h3 className="mb-5 text-2xl font-bold leading-tight text-foreground md:text-4xl text-balance">
-                  {"Where Cycle's Studio is headed"}
+                  {"Where Cycle's Studios is headed"}
                 </h3>
                 <p className="leading-relaxed text-muted-foreground">
-                  {"Grow Cycle's Studio from a one-person studio into an independent studio people recognise, known for atmospheric games that stay with you after you close them."}
+                  {"Grow Cycle's Studios from a one-person studio into an independent studio people recognise, known for atmospheric games that stay with you after you close them."}
                 </p>
               </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
                 {pillars.map((pillar, i) => (
-                  <div key={pillar.title} className="rounded-2xl border border-border/70 bg-background/40 p-5 backdrop-blur-sm">
+                  <div key={pillar.title} className="rounded-2xl border border-border/70 bg-background/40 p-5 backdrop-blur-sm sm:last:col-span-2 lg:last:col-span-1">
                     <div className="mb-3 flex items-baseline justify-between">
                       <span className="font-mono text-xs text-primary">0{i + 1}</span>
                       <span lang="zh-Hans" className="font-brush text-2xl text-accent/60">

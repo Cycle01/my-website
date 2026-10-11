@@ -11,7 +11,7 @@ const navLinks = [
   { href: "#sundown-2", label: "Sundown 2", zh: "新作" },
   { href: "#projects", label: "Games", zh: "游戏" },
   { href: "#fling-it", label: "Fling It", zh: "手游" },
-  { href: "#vibe-coding", label: "Tools", zh: "工具" },
+  { href: "#tools", label: "Tools", zh: "工具" },
   { href: "#archive", label: "Archive", zh: "档案" },
   { href: "#contact", label: "Contact", zh: "联系" },
 ]
@@ -65,7 +65,7 @@ export function Navigation() {
         <a href="#" className="group flex items-center gap-3" onClick={() => setOpen(false)}>
           <Image
             src={asset("/images/studio-logo-transparent.png")}
-            alt="Cycle's Studio logo"
+            alt="Cycle's Studios logo"
             width={36}
             height={36}
             className="transition-transform duration-300 group-hover:scale-110"
@@ -75,7 +75,7 @@ export function Navigation() {
               Cycle<span className="text-primary">01</span>
             </span>
             <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-muted-foreground leading-tight">
-              {"Cycle's Studio"}
+              {"Cycle's Studios"}
             </span>
           </div>
         </a>
