@@ -1,32 +1,9 @@
 import Image from "next/image"
-import { ArrowUpRight, Check, Code2, Compass, Lightbulb, Rocket } from "lucide-react"
+import { ArrowUpRight, Check } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
 import { AdBlockPreview, IndieRadarPreview, ScreenshotGallery, TabGrouperPreview } from "@/components/extension-previews"
 import { extensions, type Extension } from "@/lib/projects"
-
-const steps = [
-  {
-    icon: Lightbulb,
-    title: "Spot the itch",
-    text: "Start from a problem I actually have: ads everywhere, forty open tabs, no time to research a genre.",
-  },
-  {
-    icon: Compass,
-    title: "Explore the idea",
-    text: "Work out what it should do, how it should look and how it should feel to click.",
-  },
-  {
-    icon: Code2,
-    title: "Develop it",
-    text: "Build it with AI-assisted tools, load it unpacked, break it on real sites and fix every bug.",
-  },
-  {
-    icon: Rocket,
-    title: "Polish and ship",
-    text: "Icons, UI passes, a proper store listing, then publish it to the Chrome Web Store.",
-  },
-]
 
 function ExtensionVisual({ extension }: { extension: Extension }) {
   if (extension.slug === "ai-tab-grouper-pro" && extension.screenshots.length > 0) {
@@ -86,25 +63,6 @@ export function ToolsSection() {
             </p>
           }
         />
-
-        {/* Process */}
-        <div className="relative mb-28 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="pointer-events-none absolute left-0 right-0 top-[38px] hidden h-px bg-gradient-to-r from-primary/0 via-primary/40 to-accent/0 lg:block" />
-          {steps.map((step, i) => (
-            <Reveal key={step.title} delay={i * 110}>
-              <div className="group relative h-full rounded-2xl border border-border bg-card/70 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30">
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-primary/20 bg-background text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                    <step.icon className="h-5 w-5" />
-                  </div>
-                  <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
-                </div>
-                <h3 className="mb-2 font-semibold text-foreground">{step.title}</h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">{step.text}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
 
         {/* Shipped extensions */}
         <div className="space-y-28">
